@@ -10,6 +10,7 @@ interface FheOps {
     function add(bytes memory input) external pure returns (bytes memory);
     function verify(bytes memory input) external pure returns (bytes memory);
     function reencrypt(bytes memory input) external pure returns (bytes memory);
+    function decrypt(bytes memory input) external pure returns (uint256);
     function lte(bytes memory input) external pure returns (bytes memory);
     function sub(bytes memory input) external pure returns (bytes memory);
     function mul(bytes memory input) external pure returns (bytes memory);
@@ -31,4 +32,5 @@ interface FheOps {
     function max(bytes memory input) external pure returns (bytes memory);
     function shl(bytes memory input) external pure returns (bytes memory);
     function shr(bytes memory input) external pure returns (bytes memory);
+    function not(bytes memory input) external pure returns (bytes memory);
 }

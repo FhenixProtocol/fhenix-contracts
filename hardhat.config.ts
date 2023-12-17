@@ -5,33 +5,6 @@ import type { HardhatUserConfig } from "hardhat/config";
 import type { NetworkUserConfig } from "hardhat/types";
 import { resolve } from "path";
 
-import "./tasks/add";
-import "./tasks/and";
-import "./tasks/asEbool";
-import "./tasks/asEuint8";
-import "./tasks/asEuint16";
-import "./tasks/asEuint32";
-import "./tasks/cmux";
-import "./tasks/eq";
-import "./tasks/gasUsage";
-import "./tasks/ge";
-import "./tasks/gt";
-import "./tasks/le";
-import "./tasks/lt";
-import "./tasks/max";
-import "./tasks/min";
-import "./tasks/mul";
-import "./tasks/ne";
-import "./tasks/neg";
-import "./tasks/not";
-import "./tasks/optReq";
-import "./tasks/or";
-import "./tasks/reencrypt";
-import "./tasks/shl";
-import "./tasks/shr";
-import "./tasks/sub";
-import "./tasks/xor";
-
 const dotenvConfigPath: string = process.env.DOTENV_CONFIG_PATH || "./.env";
 dotenvConfig({ path: resolve(__dirname, dotenvConfigPath) });
 
@@ -108,8 +81,8 @@ const config: HardhatUserConfig = {
   networks: {
     nitroTestnode: {
       accounts: { mnemonic },
-      chainId: 1337,
-      url: "https://localhost:8545",
+      chainId: 412346,
+      url: "http://localhost:8545",
     },
     tom: {
       accounts: { mnemonic },
@@ -156,7 +129,7 @@ const config: HardhatUserConfig = {
   paths: {
     artifacts: "./artifacts",
     cache: "./cache",
-    sources: "./contracts",
+    sources: "./test/contracts",
     tests: "./test",
   },
   solidity: {

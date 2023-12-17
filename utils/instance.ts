@@ -18,11 +18,12 @@ export async function createFheInstance(hre: HardhatRuntimeEnvironment, contract
   // workaround for call not working the first time on a fresh chain
   let fhePublicKey;
   try {
-    fhePublicKey = await ethers.provider.call({ to: "0x0000000000000000000000000000000000000044" });
+    fhePublicKey = await ethers.provider.send('eth_getNetworkPublicKey');
   } catch (_) {
     await waitForBlock(hre);
-    fhePublicKey = await ethers.provider.call({ to: "0x0000000000000000000000000000000000000044" });
+    fhePublicKey = await ethers.provider.send('eth_getNetworkPublicKey');
   }
+
   const instance = createInstance({ chainId: Number(chainId), publicKey: fhePublicKey });
   const genTokenResponse = instance.then((ins) => {
     return ins.generateToken({ verifyingContract: contractAddress });
