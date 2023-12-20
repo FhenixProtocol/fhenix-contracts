@@ -1,5 +1,5 @@
 {
-  "name": "@Cashmaney/fhnx-contracts",
+  "name": "@fhenixprotocol/fhnx-contracts",
   "description": "",
   "version": "1.0.0",
   "author": {
@@ -7,86 +7,29 @@
     "url": "https://github.com/Cashmaney"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
-    "@nomicfoundation/hardhat-ethers": "^3.0.0",
-    "@nomicfoundation/hardhat-network-helpers": "^1.0.6",
-    "@nomicfoundation/hardhat-toolbox": "^3.0.0",
-    "@nomicfoundation/hardhat-verify": "^1.0.0",
-    "@openzeppelin/contracts": "^4.9.2",
-    "@trivago/prettier-plugin-sort-imports": "^4.0.0",
-    "@typechain/ethers-v6": "^0.4.0",
-    "@typechain/hardhat": "^8.0.0",
-    "@types/chai": "^4.3.4",
-    "@types/fs-extra": "^9.0.13",
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "axios": "^1.4.0",
-    "chai": "^4.3.7",
-    "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "ethers": "^6.4.0",
-    "fhevm": "0.1.6",
-    "fhevmjs": "^0.0.5",
-    "fs-extra": "^10.1.0",
-    "hardhat": "^2.12.2",
-    "hardhat-deploy": "^0.11.29",
-    "hardhat-gas-reporter": "^1.0.9",
-    "lodash": "^4.17.21",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.1",
-    "mocha": "^10.1.0",
     "prettier": "^2.8.4",
     "prettier-plugin-solidity": "^1.1.2",
     "rimraf": "^4.1.2",
     "solhint": "^3.4.0",
-    "solhint-plugin-prettier": "^0.0.5",
-    "solidity-coverage": "^0.8.2",
-    "ts-generator": "^0.1.1",
-    "ts-node": "^10.9.1",
-    "typechain": "^8.2.0",
-    "typescript": "^4.9.3"
+    "solhint-plugin-prettier": "^0.0.5"
   },
   "files": [
     "contracts"
   ],
   "keywords": [
     "blockchain",
-    "ethers",
     "ethereum",
-    "hardhat",
     "smart-contracts",
-    "solidity",
-    "template",
-    "typescript",
-    "typechain"
+    "solidity"
   ],
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf ./artifacts ./cache ./coverage ./types ./coverage.json ./deployments/localfhenix && pnpm typechain",
-    "compile": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat compile",
     "lint": "pnpm lint:sol && pnpm lint:ts && pnpm prettier:check",
     "lint:sol": "solhint --max-warnings 0 \"contracts/**/*.sol\"",
-    "lint:ts": "eslint --ignore-path ./.eslintignore --ext .js,.ts .",
     "postinstall": "DOTENV_CONFIG_PATH=./.env.example pnpm typechain",
     "prettier:check": "prettier --check \"**/*.{js,json,sol,ts,yml}\"",
     "prettier:write": "prettier --write \"**/*.{js,json,md,sol,ts,yml}\"",
-    "hardhat": "hardhat",
-    "task:gasUsage": "hardhat task:gasUsage",
-    "test": "hardhat test --network nitroTestnode",
-    "ci-test": "hardhat test --network ci_localfhenix",
-    "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain",
-    "start:localfhenix": "docker rm -f localfhenix && docker run -p 8545:8547 -p 8548:8548 -p 3000:3000 -it --name localfhenix ghcr.io/fhenixprotocol/fhenix-node-dev:v0.0.6-standalone",
-    "stop:localfhenix": "docker stop localfhenix && docker rm -f localfhenix",
-    "restart:localfhenix": "stop:localfhenix && start:localfhenix",
-    "faucet": "node getFromFaucet.js"
-  },
-  "dependencies": {
-    "ganache-cli": "^6.12.2"
   }
 }
