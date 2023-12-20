@@ -33,4 +33,5 @@ interface FheOps {
 	function shl(bytes memory input) external pure returns (bytes memory);
 	function shr(bytes memory input) external pure returns (bytes memory);
 	function not(bytes memory input) external pure returns (bytes memory);
+	function getNetworkPublicKey() external pure returns (bytes memory);
 }
