@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: '20.x'
         registry-url: 'https://registry.npmjs.org'
-    - uses: Install deps
+    - name: Install deps
       run: |
         npm install -g pnpm
         pnpm install
