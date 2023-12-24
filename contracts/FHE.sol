@@ -94,13 +94,13 @@ library Impl {
         result = getValue(output);
     }
     
-    function cmux(uint256 control, uint256 ifTrue, uint256 ifFalse) internal pure returns (uint256 result) {
+    function select(uint256 control, uint256 ifTrue, uint256 ifFalse) internal pure returns (uint256 result) {
         bytes memory input = bytes.concat(bytes32(control), bytes32(ifTrue), bytes32(ifFalse));
 
         bytes memory output;
 
         // Call the trivialEncrypt precompile.
-        output = FheOps(Precompiles.Fheos).cmux(input);
+        output = FheOps(Precompiles.Fheos).select(input);
 
         result = getValue(output);
     }
@@ -381,7 +381,7 @@ function lt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
     return ebool.wrap(result);
 
 }
-function cmux(ebool input1, ebool input2, ebool input3) internal pure returns (ebool) {
+function select(ebool input1, ebool input2, ebool input3) internal pure returns (ebool) {
     if(!isInitialized(input1) || !isInitialized(input2) || !isInitialized(input3)) {
         revert("One or more inputs are not initialized.");
     }
@@ -390,10 +390,10 @@ function cmux(ebool input1, ebool input2, ebool input3) internal pure returns (e
     uint256 unwrappedInput2 = ebool.unwrap(input2);
     uint256 unwrappedInput3 = ebool.unwrap(input3);
 
-    uint256 result = Impl.cmux(unwrappedInput1, unwrappedInput2, unwrappedInput3);
+    uint256 result = Impl.select(unwrappedInput1, unwrappedInput2, unwrappedInput3);
     return ebool.wrap(result);
     }
-function cmux(ebool input1, euint8 input2, euint8 input3) internal pure returns (euint8) {
+function select(ebool input1, euint8 input2, euint8 input3) internal pure returns (euint8) {
     if(!isInitialized(input1) || !isInitialized(input2) || !isInitialized(input3)) {
         revert("One or more inputs are not initialized.");
     }
@@ -402,10 +402,10 @@ function cmux(ebool input1, euint8 input2, euint8 input3) internal pure returns 
     uint256 unwrappedInput2 = euint8.unwrap(input2);
     uint256 unwrappedInput3 = euint8.unwrap(input3);
 
-    uint256 result = Impl.cmux(unwrappedInput1, unwrappedInput2, unwrappedInput3);
+    uint256 result = Impl.select(unwrappedInput1, unwrappedInput2, unwrappedInput3);
     return euint8.wrap(result);
     }
-function cmux(ebool input1, euint16 input2, euint16 input3) internal pure returns (euint16) {
+function select(ebool input1, euint16 input2, euint16 input3) internal pure returns (euint16) {
     if(!isInitialized(input1) || !isInitialized(input2) || !isInitialized(input3)) {
         revert("One or more inputs are not initialized.");
     }
@@ -414,10 +414,10 @@ function cmux(ebool input1, euint16 input2, euint16 input3) internal pure return
     uint256 unwrappedInput2 = euint16.unwrap(input2);
     uint256 unwrappedInput3 = euint16.unwrap(input3);
 
-    uint256 result = Impl.cmux(unwrappedInput1, unwrappedInput2, unwrappedInput3);
+    uint256 result = Impl.select(unwrappedInput1, unwrappedInput2, unwrappedInput3);
     return euint16.wrap(result);
     }
-function cmux(ebool input1, euint32 input2, euint32 input3) internal pure returns (euint32) {
+function select(ebool input1, euint32 input2, euint32 input3) internal pure returns (euint32) {
     if(!isInitialized(input1) || !isInitialized(input2) || !isInitialized(input3)) {
         revert("One or more inputs are not initialized.");
     }
@@ -426,7 +426,7 @@ function cmux(ebool input1, euint32 input2, euint32 input3) internal pure return
     uint256 unwrappedInput2 = euint32.unwrap(input2);
     uint256 unwrappedInput3 = euint32.unwrap(input3);
 
-    uint256 result = Impl.cmux(unwrappedInput1, unwrappedInput2, unwrappedInput3);
+    uint256 result = Impl.select(unwrappedInput1, unwrappedInput2, unwrappedInput3);
     return euint32.wrap(result);
     }
 function req(ebool input1) internal pure {

@@ -15,7 +15,7 @@ interface FheOps {
 	function sub(bytes memory input) external pure returns (bytes memory);
 	function mul(bytes memory input) external pure returns (bytes memory);
 	function lt(bytes memory input) external pure returns (bytes memory);
-	function cmux(bytes memory input) external pure returns (bytes memory);
+	function select(bytes memory input) external pure returns (bytes memory);
 	function req(bytes memory input) external pure returns (bytes memory);
 	function cast(bytes memory input) external pure returns (bytes memory);
 	function trivialEncrypt(bytes memory input) external pure returns (bytes memory);
