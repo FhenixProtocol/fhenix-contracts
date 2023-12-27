@@ -114,27 +114,27 @@ library TFHE {
     euint16 public constant NIL16 = euint16.wrap(0);
     euint32 public constant NIL32 = euint32.wrap(0);
 
-    // Return true if the enrypted integer is initialized and false otherwise.
+    // Return true if the encrypted integer is initialized and false otherwise.
     function isInitialized(ebool v) internal pure returns (bool) {
         return ebool.unwrap(v) != 0;
     }
 
-    // Return true if the enrypted integer is initialized and false otherwise.
+    // Return true if the encrypted integer is initialized and false otherwise.
     function isInitialized(euint8 v) internal pure returns (bool) {
         return euint8.unwrap(v) != 0;
     }
 
-    // Return true if the enrypted integer is initialized and false otherwise.
+    // Return true if the encrypted integer is initialized and false otherwise.
     function isInitialized(euint16 v) internal pure returns (bool) {
         return euint16.unwrap(v) != 0;
     }
 
-    // Return true if the enrypted integer is initialized and false otherwise.
+    // Return true if the encrypted integer is initialized and false otherwise.
     function isInitialized(euint32 v) internal pure returns (bool) {
         return euint32.unwrap(v) != 0;
     }
 
-    function getValue(bytes memory a) internal pure returns (uint256 value) {
+    function getValue(bytes memory a) private pure returns (uint256 value) {
         assembly {
             value := mload(add(a, 0x20))
         }
@@ -153,7 +153,12 @@ library TFHE {
         output = impl(input);
         result = getValue(output);
     }
-
+    /// @notice This functions performs the add operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function add(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -164,7 +169,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).add);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the add operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function add(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -175,7 +185,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).add);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the add operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function add(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -186,31 +201,49 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).add);
         return euint32.wrap(result);
     }
-
+    /// @notice performs the reencrypt function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param value Ciphertext to decrypt and seal
+    /// @param publicKey Public Key that will receive the sealed plaintext
+    /// @return Plaintext input, sealed for the owner of `publicKey`
     function reencrypt(ebool value, bytes32 publicKey) internal pure returns (bytes memory) {
         uint256 unwrapped = ebool.unwrap(value);
 
         return Impl.reencrypt(unwrapped, publicKey);
     }
-
+    /// @notice performs the reencrypt function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param value Ciphertext to decrypt and seal
+    /// @param publicKey Public Key that will receive the sealed plaintext
+    /// @return Plaintext input, sealed for the owner of `publicKey`
     function reencrypt(euint8 value, bytes32 publicKey) internal pure returns (bytes memory) {
         uint256 unwrapped = euint8.unwrap(value);
 
         return Impl.reencrypt(unwrapped, publicKey);
     }
-
+    /// @notice performs the reencrypt function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param value Ciphertext to decrypt and seal
+    /// @param publicKey Public Key that will receive the sealed plaintext
+    /// @return Plaintext input, sealed for the owner of `publicKey`
     function reencrypt(euint16 value, bytes32 publicKey) internal pure returns (bytes memory) {
         uint256 unwrapped = euint16.unwrap(value);
 
         return Impl.reencrypt(unwrapped, publicKey);
     }
-
+    /// @notice performs the reencrypt function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param value Ciphertext to decrypt and seal
+    /// @param publicKey Public Key that will receive the sealed plaintext
+    /// @return Plaintext input, sealed for the owner of `publicKey`
     function reencrypt(euint32 value, bytes32 publicKey) internal pure returns (bytes memory) {
         uint256 unwrapped = euint32.unwrap(value);
 
         return Impl.reencrypt(unwrapped, publicKey);
     }
-
+    /// @notice Performs the decrypt operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function decrypt(ebool input1) internal pure returns (bool) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -220,7 +253,9 @@ library TFHE {
         uint256 result = FheOps(Precompiles.Fheos).decrypt(inputAsBytes);
         return Common.bigIntToBool(result);
     }
-
+    /// @notice Performs the decrypt operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function decrypt(euint8 input1) internal pure returns (uint8) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -230,7 +265,9 @@ library TFHE {
         uint256 result = FheOps(Precompiles.Fheos).decrypt(inputAsBytes);
         return Common.bigIntToUint8(result);
     }
-
+    /// @notice Performs the decrypt operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function decrypt(euint16 input1) internal pure returns (uint16) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -240,7 +277,9 @@ library TFHE {
         uint256 result = FheOps(Precompiles.Fheos).decrypt(inputAsBytes);
         return Common.bigIntToUint16(result);
     }
-
+    /// @notice Performs the decrypt operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function decrypt(euint32 input1) internal pure returns (uint32) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -250,7 +289,12 @@ library TFHE {
         uint256 result = FheOps(Precompiles.Fheos).decrypt(inputAsBytes);
         return Common.bigIntToUint32(result);
     }
-
+    /// @notice This functions performs the lte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -261,7 +305,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).lte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the lte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -272,7 +321,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).lte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the lte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -283,7 +337,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).lte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the sub operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function sub(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -294,7 +353,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).sub);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the sub operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function sub(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -305,7 +369,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).sub);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the sub operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function sub(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -316,7 +385,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).sub);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the mul operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function mul(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -327,7 +401,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).mul);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the mul operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function mul(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -338,7 +417,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).mul);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the mul operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function mul(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -349,7 +433,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).mul);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the lt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -360,7 +449,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).lt);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the lt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -371,7 +465,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).lt);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the lt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function lt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -434,7 +533,9 @@ library TFHE {
         uint256 result = Impl.select(unwrappedInput1, unwrappedInput2, unwrappedInput3);
         return euint32.wrap(result);
     }
-
+    /// @notice Performs the req operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function req(ebool input1) internal pure  {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -443,7 +544,9 @@ library TFHE {
         bytes memory inputAsBytes = bytes.concat(bytes32(unwrappedInput1));
         FheOps(Precompiles.Fheos).req(inputAsBytes);
     }
-
+    /// @notice Performs the req operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function req(euint8 input1) internal pure  {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -452,7 +555,9 @@ library TFHE {
         bytes memory inputAsBytes = bytes.concat(bytes32(unwrappedInput1));
         FheOps(Precompiles.Fheos).req(inputAsBytes);
     }
-
+    /// @notice Performs the req operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function req(euint16 input1) internal pure  {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -461,7 +566,9 @@ library TFHE {
         bytes memory inputAsBytes = bytes.concat(bytes32(unwrappedInput1));
         FheOps(Precompiles.Fheos).req(inputAsBytes);
     }
-
+    /// @notice Performs the req operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function req(euint32 input1) internal pure  {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -470,7 +577,12 @@ library TFHE {
         bytes memory inputAsBytes = bytes.concat(bytes32(unwrappedInput1));
         FheOps(Precompiles.Fheos).req(inputAsBytes);
     }
-
+    /// @notice This functions performs the div operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function div(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -481,7 +593,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).div);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the div operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function div(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -492,7 +609,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).div);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the div operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function div(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -503,7 +625,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).div);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the gt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -514,7 +641,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gt);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the gt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -525,7 +657,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gt);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the gt operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -536,7 +673,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gt);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the gte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -547,7 +689,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the gte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -558,7 +705,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the gte operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function gte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -569,7 +721,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).gte);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the rem operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function rem(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -580,7 +737,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).rem);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the rem operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function rem(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -591,7 +753,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).rem);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the rem operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function rem(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -602,7 +769,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).rem);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the and operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function and(ebool lhs, ebool rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -613,7 +785,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).and);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the and operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function and(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -624,7 +801,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).and);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the and operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function and(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -635,7 +817,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).and);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the and operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function and(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -646,7 +833,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).and);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the or operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function or(ebool lhs, ebool rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -657,7 +849,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).or);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the or operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function or(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -668,7 +865,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).or);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the or operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function or(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -679,7 +881,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).or);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the or operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function or(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -690,7 +897,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).or);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the xor operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function xor(ebool lhs, ebool rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -701,7 +913,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).xor);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the xor operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function xor(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -712,7 +929,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).xor);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the xor operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function xor(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -723,7 +945,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).xor);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the xor operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function xor(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -734,7 +961,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).xor);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the eq operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function eq(ebool lhs, ebool rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -745,7 +977,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).eq);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the eq operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function eq(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -756,7 +993,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).eq);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the eq operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function eq(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -767,7 +1009,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).eq);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the eq operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function eq(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -778,7 +1025,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).eq);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the ne operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function ne(ebool lhs, ebool rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -789,7 +1041,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).ne);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the ne operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function ne(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -800,7 +1057,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).ne);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the ne operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function ne(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -811,7 +1073,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).ne);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the ne operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function ne(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -822,7 +1089,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).ne);
         return ebool.wrap(result);
     }
-
+    /// @notice This functions performs the min operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function min(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -833,7 +1105,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).min);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the min operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function min(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -844,7 +1121,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).min);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the min operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function min(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -855,7 +1137,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).min);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the max operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function max(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -866,7 +1153,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).max);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the max operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function max(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -877,7 +1169,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).max);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the max operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function max(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -888,7 +1185,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).max);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the shl operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shl(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -899,7 +1201,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).shl);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the shl operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shl(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -910,7 +1217,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).shl);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the shl operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shl(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -921,7 +1233,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).shl);
         return euint32.wrap(result);
     }
-
+    /// @notice This functions performs the shr operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shr(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -932,7 +1249,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).shr);
         return euint8.wrap(result);
     }
-
+    /// @notice This functions performs the shr operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shr(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -943,7 +1265,12 @@ library TFHE {
         uint256 result = mathHelper(unwrappedInput1, unwrappedInput2, FheOps(Precompiles.Fheos).shr);
         return euint16.wrap(result);
     }
-
+    /// @notice This functions performs the shr operation
+    /// @dev If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+    ///Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs The first input 
+    /// @param rhs The second input
+    /// @return The result of the operation
     function shr(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         if (!isInitialized(lhs) || !isInitialized(rhs)) {
             revert UninitializedInputs();
@@ -955,12 +1282,16 @@ library TFHE {
         return euint32.wrap(result);
     }
 
-    // "not" for ebool not working in the traditional way as it converts ebool to euint8
-    // Ebool(true) is Euint8(1) so !Ebool(true) is !Euint8(1) which is Euint8(254) which is still Ebool(true)
+    /// @notice Performs the "not" for the ebool type
+    /// @dev Implemented by a workaround due to ebool being a euint8 type behind the scenes, therefore xor is needed to assure that not(true) = false and vise-versa
+    /// @param value input ebool ciphertext
+    /// @return Result of the not operation on `value` 
     function not(ebool value) internal pure returns (ebool) {
         return xor(value, asEbool(true));
     }
-
+    /// @notice Performs the not operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function not(euint8 input1) internal pure returns (euint8) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -971,7 +1302,9 @@ library TFHE {
         uint256 result = Impl.getValue(b);
         return euint8.wrap(result);
     }
-
+    /// @notice Performs the not operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function not(euint16 input1) internal pure returns (euint16) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -982,7 +1315,9 @@ library TFHE {
         uint256 result = Impl.getValue(b);
         return euint16.wrap(result);
     }
-
+    /// @notice Performs the not operation on a ciphertext
+    /// @dev Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param input1 the input ciphertext
     function not(euint32 input1) internal pure returns (euint32) {
         if (!isInitialized(input1)) {
             revert UninitializedInputs();
@@ -995,66 +1330,101 @@ library TFHE {
     }
 
     // ********** TYPE CASTING ************* //
+    /// @notice Converts a ebool to an euint8
     function asEuint8(ebool value) internal pure returns (euint8) {
         return euint8.wrap(Impl.cast(ebool.unwrap(value), Common.EUINT8_TFHE_GO));
     }
+    /// @notice Converts a ebool to an euint16
     function asEuint16(ebool value) internal pure returns (euint16) {
         return euint16.wrap(Impl.cast(ebool.unwrap(value), Common.EUINT16_TFHE_GO));
     }
+    /// @notice Converts a ebool to an euint32
     function asEuint32(ebool value) internal pure returns (euint32) {
         return euint32.wrap(Impl.cast(ebool.unwrap(value), Common.EUINT32_TFHE_GO));
     }
-    function asEbool(euint8 value) internal pure returns (ebool) {
+    
+    /// @notice Converts a euint8 to an ebool
+        function asEbool(euint8 value) internal pure returns (ebool) {
         return ne(value,  asEuint8(0));
     }
+    /// @notice Converts a euint8 to an euint16
     function asEuint16(euint8 value) internal pure returns (euint16) {
         return euint16.wrap(Impl.cast(euint8.unwrap(value), Common.EUINT16_TFHE_GO));
     }
+    /// @notice Converts a euint8 to an euint32
     function asEuint32(euint8 value) internal pure returns (euint32) {
         return euint32.wrap(Impl.cast(euint8.unwrap(value), Common.EUINT32_TFHE_GO));
     }
-    function asEbool(euint16 value) internal pure returns (ebool) {
+    
+    /// @notice Converts a euint16 to an ebool
+        function asEbool(euint16 value) internal pure returns (ebool) {
         return ne(value,  asEuint16(0));
     }
+    /// @notice Converts a euint16 to an euint8
     function asEuint8(euint16 value) internal pure returns (euint8) {
         return euint8.wrap(Impl.cast(euint16.unwrap(value), Common.EUINT8_TFHE_GO));
     }
+    /// @notice Converts a euint16 to an euint32
     function asEuint32(euint16 value) internal pure returns (euint32) {
         return euint32.wrap(Impl.cast(euint16.unwrap(value), Common.EUINT32_TFHE_GO));
     }
-    function asEbool(euint32 value) internal pure returns (ebool) {
+    
+    /// @notice Converts a euint32 to an ebool
+        function asEbool(euint32 value) internal pure returns (ebool) {
         return ne(value,  asEuint32(0));
     }
+    /// @notice Converts a euint32 to an euint8
     function asEuint8(euint32 value) internal pure returns (euint8) {
         return euint8.wrap(Impl.cast(euint32.unwrap(value), Common.EUINT8_TFHE_GO));
     }
+    /// @notice Converts a euint32 to an euint16
     function asEuint16(euint32 value) internal pure returns (euint16) {
         return euint16.wrap(Impl.cast(euint32.unwrap(value), Common.EUINT16_TFHE_GO));
     }
+    /// @notice Converts a uint256 to an ebool
     function asEbool(uint256 value) internal pure returns (ebool) {
         return ebool.wrap(Impl.trivialEncrypt(value, Common.EBOOL_TFHE_GO));
     }
+    /// @notice Converts a uint256 to an euint8
     function asEuint8(uint256 value) internal pure returns (euint8) {
         return euint8.wrap(Impl.trivialEncrypt(value, Common.EUINT8_TFHE_GO));
     }
+    /// @notice Converts a uint256 to an euint16
     function asEuint16(uint256 value) internal pure returns (euint16) {
         return euint16.wrap(Impl.trivialEncrypt(value, Common.EUINT16_TFHE_GO));
     }
+    /// @notice Converts a uint256 to an euint32
     function asEuint32(uint256 value) internal pure returns (euint32) {
         return euint32.wrap(Impl.trivialEncrypt(value, Common.EUINT32_TFHE_GO));
     }
+    /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an ebool
+    /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
+    /// @return a ciphertext representation of the input
     function asEbool(bytes memory value) internal pure returns (ebool) {
         return ebool.wrap(Impl.verify(value, Common.EBOOL_TFHE_GO));
     }
+    /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint8
+    /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
+    /// @return a ciphertext representation of the input
     function asEuint8(bytes memory value) internal pure returns (euint8) {
         return euint8.wrap(Impl.verify(value, Common.EUINT8_TFHE_GO));
     }
+    /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint16
+    /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
+    /// @return a ciphertext representation of the input
     function asEuint16(bytes memory value) internal pure returns (euint16) {
         return euint16.wrap(Impl.verify(value, Common.EUINT16_TFHE_GO));
     }
+    /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint32
+    /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
+    /// @return a ciphertext representation of the input
     function asEuint32(bytes memory value) internal pure returns (euint32) {
         return euint32.wrap(Impl.verify(value, Common.EUINT32_TFHE_GO));
     }
+    /// @notice Converts a plaintext boolean value to a ciphertext ebool
+    /// @dev Privacy: The input value is public, therefore the ciphertext should be considered public and should be used
+    ///only for mathematical operations, not to represent data that should be private
+    /// @return A ciphertext representation of the input 
     function asEbool(bool value) internal pure returns (ebool) {
         uint256 sVal = 0;
         if (value) {
@@ -1068,136 +1438,163 @@ library TFHE {
 // ********** OPERATOR OVERLOADING ************* //
 
 using {operatorAddEuint8 as +} for euint8 global;
+/// @notice Performs the add operation
 function operatorAddEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.add(lhs, rhs);
 }
 
 using {operatorAddEuint16 as +} for euint16 global;
+/// @notice Performs the add operation
 function operatorAddEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.add(lhs, rhs);
 }
 
 using {operatorAddEuint32 as +} for euint32 global;
+/// @notice Performs the add operation
 function operatorAddEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.add(lhs, rhs);
 }
 
 using {operatorSubEuint8 as -} for euint8 global;
+/// @notice Performs the sub operation
 function operatorSubEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.sub(lhs, rhs);
 }
 
 using {operatorSubEuint16 as -} for euint16 global;
+/// @notice Performs the sub operation
 function operatorSubEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.sub(lhs, rhs);
 }
 
 using {operatorSubEuint32 as -} for euint32 global;
+/// @notice Performs the sub operation
 function operatorSubEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.sub(lhs, rhs);
 }
 
 using {operatorMulEuint8 as *} for euint8 global;
+/// @notice Performs the mul operation
 function operatorMulEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.mul(lhs, rhs);
 }
 
 using {operatorMulEuint16 as *} for euint16 global;
+/// @notice Performs the mul operation
 function operatorMulEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.mul(lhs, rhs);
 }
 
 using {operatorMulEuint32 as *} for euint32 global;
+/// @notice Performs the mul operation
 function operatorMulEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.mul(lhs, rhs);
 }
 
 using {operatorDivEuint8 as /} for euint8 global;
+/// @notice Performs the div operation
 function operatorDivEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.div(lhs, rhs);
 }
 
 using {operatorDivEuint16 as /} for euint16 global;
+/// @notice Performs the div operation
 function operatorDivEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.div(lhs, rhs);
 }
 
 using {operatorDivEuint32 as /} for euint32 global;
+/// @notice Performs the div operation
 function operatorDivEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.div(lhs, rhs);
 }
 
 using {operatorOrEbool as |} for ebool global;
+/// @notice Performs the or operation
 function operatorOrEbool(ebool lhs, ebool rhs) pure returns (ebool) {
     return TFHE.or(lhs, rhs);
 }
 
 using {operatorOrEuint8 as |} for euint8 global;
+/// @notice Performs the or operation
 function operatorOrEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.or(lhs, rhs);
 }
 
 using {operatorOrEuint16 as |} for euint16 global;
+/// @notice Performs the or operation
 function operatorOrEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.or(lhs, rhs);
 }
 
 using {operatorOrEuint32 as |} for euint32 global;
+/// @notice Performs the or operation
 function operatorOrEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.or(lhs, rhs);
 }
 
 using {operatorAndEbool as &} for ebool global;
+/// @notice Performs the and operation
 function operatorAndEbool(ebool lhs, ebool rhs) pure returns (ebool) {
     return TFHE.and(lhs, rhs);
 }
 
 using {operatorAndEuint8 as &} for euint8 global;
+/// @notice Performs the and operation
 function operatorAndEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.and(lhs, rhs);
 }
 
 using {operatorAndEuint16 as &} for euint16 global;
+/// @notice Performs the and operation
 function operatorAndEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.and(lhs, rhs);
 }
 
 using {operatorAndEuint32 as &} for euint32 global;
+/// @notice Performs the and operation
 function operatorAndEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.and(lhs, rhs);
 }
 
 using {operatorXorEbool as ^} for ebool global;
+/// @notice Performs the xor operation
 function operatorXorEbool(ebool lhs, ebool rhs) pure returns (ebool) {
     return TFHE.xor(lhs, rhs);
 }
 
 using {operatorXorEuint8 as ^} for euint8 global;
+/// @notice Performs the xor operation
 function operatorXorEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.xor(lhs, rhs);
 }
 
 using {operatorXorEuint16 as ^} for euint16 global;
+/// @notice Performs the xor operation
 function operatorXorEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.xor(lhs, rhs);
 }
 
 using {operatorXorEuint32 as ^} for euint32 global;
+/// @notice Performs the xor operation
 function operatorXorEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.xor(lhs, rhs);
 }
 
 using {operatorRemEuint8 as %} for euint8 global;
+/// @notice Performs the rem operation
 function operatorRemEuint8(euint8 lhs, euint8 rhs) pure returns (euint8) {
     return TFHE.rem(lhs, rhs);
 }
 
 using {operatorRemEuint16 as %} for euint16 global;
+/// @notice Performs the rem operation
 function operatorRemEuint16(euint16 lhs, euint16 rhs) pure returns (euint16) {
     return TFHE.rem(lhs, rhs);
 }
 
 using {operatorRemEuint32 as %} for euint32 global;
+/// @notice Performs the rem operation
 function operatorRemEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
     return TFHE.rem(lhs, rhs);
 }
@@ -1206,18 +1603,43 @@ function operatorRemEuint32(euint32 lhs, euint32 rhs) pure returns (euint32) {
 
 using BindingsEbool for ebool global;
 library BindingsEbool {
+    
+    /// @notice Performs the eq operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type ebool
+    /// @return the result of the eq
     function eq(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return TFHE.eq(lhs, rhs);
     }
+    
+    /// @notice Performs the ne operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type ebool
+    /// @return the result of the ne
     function ne(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return TFHE.ne(lhs, rhs);
     }
+    
+    /// @notice Performs the and operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type ebool
+    /// @return the result of the and
     function and(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return TFHE.and(lhs, rhs);
     }
+    
+    /// @notice Performs the or operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type ebool
+    /// @return the result of the or
     function or(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return TFHE.or(lhs, rhs);
     }
+    
+    /// @notice Performs the xor operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type ebool
+    /// @return the result of the xor
     function xor(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return TFHE.xor(lhs, rhs);
     }
@@ -1225,57 +1647,147 @@ library BindingsEbool {
 
 using BindingsEuint8 for euint8 global;
 library BindingsEuint8 {
+    
+    /// @notice Performs the add operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the add
     function add(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.add(lhs, rhs);
     }
+    
+    /// @notice Performs the mul operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the mul
     function mul(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.mul(lhs, rhs);
     }
+    
+    /// @notice Performs the div operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the div
     function div(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.div(lhs, rhs);
     }
+    
+    /// @notice Performs the sub operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the sub
     function sub(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.sub(lhs, rhs);
     }
+    
+    /// @notice Performs the eq operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the eq
     function eq(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.eq(lhs, rhs);
     }
+    
+    /// @notice Performs the ne operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the ne
     function ne(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.ne(lhs, rhs);
     }
+    
+    /// @notice Performs the and operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the and
     function and(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.and(lhs, rhs);
     }
+    
+    /// @notice Performs the or operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the or
     function or(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.or(lhs, rhs);
     }
+    
+    /// @notice Performs the xor operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the xor
     function xor(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.xor(lhs, rhs);
     }
+    
+    /// @notice Performs the gt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the gt
     function gt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.gt(lhs, rhs);
     }
+    
+    /// @notice Performs the gte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the gte
     function gte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.gte(lhs, rhs);
     }
+    
+    /// @notice Performs the lt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the lt
     function lt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.lt(lhs, rhs);
     }
+    
+    /// @notice Performs the lte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the lte
     function lte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return TFHE.lte(lhs, rhs);
     }
+    
+    /// @notice Performs the rem operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the rem
     function rem(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.rem(lhs, rhs);
     }
+    
+    /// @notice Performs the max operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the max
     function max(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.max(lhs, rhs);
     }
+    
+    /// @notice Performs the min operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the min
     function min(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.min(lhs, rhs);
     }
+    
+    /// @notice Performs the shl operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the shl
     function shl(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.shl(lhs, rhs);
     }
+    
+    /// @notice Performs the shr operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint8
+    /// @return the result of the shr
     function shr(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return TFHE.shr(lhs, rhs);
     }
@@ -1283,57 +1795,147 @@ library BindingsEuint8 {
 
 using BindingsEuint16 for euint16 global;
 library BindingsEuint16 {
+    
+    /// @notice Performs the add operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the add
     function add(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.add(lhs, rhs);
     }
+    
+    /// @notice Performs the mul operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the mul
     function mul(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.mul(lhs, rhs);
     }
+    
+    /// @notice Performs the div operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the div
     function div(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.div(lhs, rhs);
     }
+    
+    /// @notice Performs the sub operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the sub
     function sub(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.sub(lhs, rhs);
     }
+    
+    /// @notice Performs the eq operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the eq
     function eq(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.eq(lhs, rhs);
     }
+    
+    /// @notice Performs the ne operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the ne
     function ne(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.ne(lhs, rhs);
     }
+    
+    /// @notice Performs the and operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the and
     function and(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.and(lhs, rhs);
     }
+    
+    /// @notice Performs the or operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the or
     function or(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.or(lhs, rhs);
     }
+    
+    /// @notice Performs the xor operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the xor
     function xor(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.xor(lhs, rhs);
     }
+    
+    /// @notice Performs the gt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the gt
     function gt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.gt(lhs, rhs);
     }
+    
+    /// @notice Performs the gte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the gte
     function gte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.gte(lhs, rhs);
     }
+    
+    /// @notice Performs the lt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the lt
     function lt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.lt(lhs, rhs);
     }
+    
+    /// @notice Performs the lte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the lte
     function lte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return TFHE.lte(lhs, rhs);
     }
+    
+    /// @notice Performs the rem operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the rem
     function rem(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.rem(lhs, rhs);
     }
+    
+    /// @notice Performs the max operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the max
     function max(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.max(lhs, rhs);
     }
+    
+    /// @notice Performs the min operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the min
     function min(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.min(lhs, rhs);
     }
+    
+    /// @notice Performs the shl operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the shl
     function shl(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.shl(lhs, rhs);
     }
+    
+    /// @notice Performs the shr operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint16
+    /// @return the result of the shr
     function shr(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return TFHE.shr(lhs, rhs);
     }
@@ -1341,57 +1943,147 @@ library BindingsEuint16 {
 
 using BindingsEuint32 for euint32 global;
 library BindingsEuint32 {
+    
+    /// @notice Performs the add operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the add
     function add(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.add(lhs, rhs);
     }
+    
+    /// @notice Performs the mul operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the mul
     function mul(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.mul(lhs, rhs);
     }
+    
+    /// @notice Performs the div operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the div
     function div(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.div(lhs, rhs);
     }
+    
+    /// @notice Performs the sub operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the sub
     function sub(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.sub(lhs, rhs);
     }
+    
+    /// @notice Performs the eq operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the eq
     function eq(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.eq(lhs, rhs);
     }
+    
+    /// @notice Performs the ne operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the ne
     function ne(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.ne(lhs, rhs);
     }
+    
+    /// @notice Performs the and operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the and
     function and(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.and(lhs, rhs);
     }
+    
+    /// @notice Performs the or operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the or
     function or(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.or(lhs, rhs);
     }
+    
+    /// @notice Performs the xor operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the xor
     function xor(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.xor(lhs, rhs);
     }
+    
+    /// @notice Performs the gt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the gt
     function gt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.gt(lhs, rhs);
     }
+    
+    /// @notice Performs the gte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the gte
     function gte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.gte(lhs, rhs);
     }
+    
+    /// @notice Performs the lt operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the lt
     function lt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.lt(lhs, rhs);
     }
+    
+    /// @notice Performs the lte operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the lte
     function lte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return TFHE.lte(lhs, rhs);
     }
+    
+    /// @notice Performs the rem operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the rem
     function rem(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.rem(lhs, rhs);
     }
+    
+    /// @notice Performs the max operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the max
     function max(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.max(lhs, rhs);
     }
+    
+    /// @notice Performs the min operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the min
     function min(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.min(lhs, rhs);
     }
+    
+    /// @notice Performs the shl operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the shl
     function shl(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.shl(lhs, rhs);
     }
+    
+    /// @notice Performs the shr operation
+    /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
+    /// @param lhs input of type euint32
+    /// @return the result of the shr
     function shr(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return TFHE.shr(lhs, rhs);
     }
