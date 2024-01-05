@@ -1,10 +1,10 @@
 {
-  "name": "@fhenixprotocol/fhnx-contracts",
+  "name": "@fhenixprotocol/fhe",
   "description": "",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Fhenix",
-    "url": "https://github.com/fhenixprotocol"
+    "url": "https://github.com/fhenixprotocol/fhenix-contracts"
   },
   "devDependencies": {
     "hardhat": "2.19.3",
