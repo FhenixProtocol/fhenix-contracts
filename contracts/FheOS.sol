@@ -11,7 +11,7 @@ library Precompiles {
 interface FheOps {
     function add(bytes memory input) external pure returns (bytes memory);
     function verify(bytes memory input) external pure returns (bytes memory);
-    function reencrypt(bytes memory input) external pure returns (bytes memory);
+    function sealOutput(bytes memory input) external pure returns (bytes memory);
     function decrypt(bytes memory input) external pure returns (uint256);
     function lte(bytes memory input) external pure returns (bytes memory);
     function sub(bytes memory input) external pure returns (bytes memory);
