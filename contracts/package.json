@@ -1,0 +1,25 @@
+{
+  "name": "@fhenixprotocol/contracts",
+  "description": "Smart Contract Library for the Fhenix Blockchain with FHE primitives",
+  "version": "0.0.1",
+  "author": {
+    "name": "FhenixProtocol",
+    "url": "https://github.com/fhenixprotocol/fhenix-contracts"
+  }
+  "files": [
+    "FHE.sol",
+    "FheOS.sol"
+  ],
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "smart-contracts",
+    "solidity",
+    "FHE",
+    "encryption",
+    "privacy"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
