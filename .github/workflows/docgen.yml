@@ -1,0 +1,35 @@
+name: Generate Docs
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  doc:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install deps
+      run: |
+        npm install -g pnpm
+        pnpm install
+    - name: Generate Docs
+      run: |
+        pnpm docgen
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
