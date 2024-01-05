@@ -1,0 +1,28 @@
+{
+  "name": "@fhenixprotocol/fhnx-contracts",
+  "description": "",
+  "version": "1.0.0",
+  "author": {
+    "name": "Fhenix",
+    "url": "https://github.com/fhenixprotocol"
+  },
+  "devDependencies": {
+    "hardhat": "2.19.3",
+    "solidity-docgen": "0.6.0-beta.36"
+  },
+  "files": [
+    "contracts"
+  ],
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "smart-contracts",
+    "solidity"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "docgen": "hardhat docgen"
+  }
+}
