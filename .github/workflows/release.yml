@@ -14,8 +14,7 @@ jobs:
         with:
           version: 8
       - name: Set publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        run: cd contracts && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: pnpm install
-      - run: pnpm publish --no-git-checks
+      - run: cd contracts && pnpm publish --no-git-checks
