@@ -7,7 +7,7 @@ const config = {
       sources: "./contracts",
     },
     solidity: {
-      version: "0.8.19",
+      version: "0.8.20",
     },
     docgen: {
         pages: "items"
