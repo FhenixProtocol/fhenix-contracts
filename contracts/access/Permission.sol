@@ -4,26 +4,52 @@ pragma solidity ^0.8.20;
 import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import { EIP712 } from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 
-struct Signature {
-	bytes32 publicKey;
-	bytes sig;
+/// @title Permissioned Access Control Contract
+/// @notice Abstract contract that provides EIP-712 based signature verification for access control
+/// @dev This contract should be inherited by other contracts to provide EIP-712 signature validated access control
+abstract contract Permissioned is EIP712 {
+    /// @notice Emitted when the signer is not the message sender
+    error SignerNotMessageSender();
+
+    /// @notice Emitted when the signer is not the specified owner
+    error SignerNotOwner();
+
+    /// @dev Constructor that initializes EIP712 domain separator with a name and version
+    /// solhint-disable-next-line func-visibility, no-empty-blocks
+    constructor() EIP712("Fhenix Permission", "1") {} 
+
+    /// @notice Modifier that requires the provided signature to be signed by the message sender
+    /// @param signature Data structure containing the public key and the signature to be verified
+    modifier onlySignedPublicKey(Signature memory signature) {
+        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(
+            keccak256("Permissioned(bytes32 publicKey)"),
+            signature.publicKey
+        )));
+        address signer = ECDSA.recover(digest, signature.sig);
+        if (signer != msg.sender)
+            revert SignerNotMessageSender();
+        _;
+    }
+
+    /// @notice Modifier that requires the provided signature to be signed by a specific owner address
+    /// @param signature Data structure containing the public key and the signature to be verified
+    /// @param owner The expected owner of the public key to match against the recovered signer
+    modifier onlySignedPublicKeyOwner(Signature memory signature, address owner) {
+        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(
+            keccak256("Permissioned(bytes32 publicKey)"),
+            signature.publicKey
+        )));
+        address signer = ECDSA.recover(digest, signature.sig);
+        if (signer != owner)
+            revert SignerNotOwner();
+        _;
+    }
 }
 
-abstract contract Permissioned is EIP712 {
-    // solhint-disable-next-line func-visibility, no-empty-blocks
-    constructor() EIP712("Fhenix Permission", "1.0") {}
-
-    modifier onlySignedPublicKey(Signature memory signature) {
-        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(keccak256("Permissioned(bytes32 publicKey)"), signature.publicKey)));
-        address signer = ECDSA.recover(digest, signature.sig);
-        require(signer == msg.sender, "signature signer not msg.sender");
-        _;
-    }
-
-    modifier onlySignedPublicKeyOwner(Signature memory signature, address owner) {
-        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(keccak256("Permissioned(bytes32 publicKey)"), signature.publicKey)));
-        address signer = ECDSA.recover(digest, signature.sig);
-        require(signer == owner, "signature signer not owner");
-        _;
-    }
+/// @title Struct for holding signature information
+/// @notice Used to pass both the public key and signature data within transactions
+/// @dev Should be used with Signature-based modifiers for access control
+struct Signature {
+    bytes32 publicKey;
+    bytes sig;
 }
