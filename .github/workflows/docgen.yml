@@ -22,7 +22,8 @@ jobs:
     - name: Install deps
       run: |
         npm install -g pnpm
-        pnpm install && cd contracts && pnpm install
+        pnpm install 
+        pnpm install @openzeppelin/contracts 
     - name: Generate Docs
       run: |
         pnpm docgen
