@@ -6,9 +6,13 @@
     "name": "FhenixProtocol",
     "url": "https://github.com/fhenixprotocol/fhenix-contracts"
   },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  },
   "files": [
     "FHE.sol",
-    "FheOS.sol"
+    "FheOS.sol",
+    "access/Permissioned.sol"
   ],
   "keywords": [
     "blockchain",
