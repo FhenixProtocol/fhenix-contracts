@@ -22,7 +22,7 @@ jobs:
     - name: Install deps
       run: |
         npm install -g pnpm
-        pnpm install
+        pnpm install && cd contracts && pnpm install
     - name: Generate Docs
       run: |
         pnpm docgen
