@@ -34,7 +34,7 @@ solhint-disable-next-line func-visibility, no-empty-blocks_
 ### onlySignedPublicKey
 
 ```solidity
-modifier onlySignedPublicKey(struct Signature signature)
+modifier onlySignedPublicKey(struct Permission permission)
 ```
 
 Modifier that requires the provided signature to be signed by the message sender
@@ -43,12 +43,12 @@ Modifier that requires the provided signature to be signed by the message sender
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| signature | struct Signature | Data structure containing the public key and the signature to be verified |
+| permission | struct Permission | Data structure containing the public key and the signature to be verified |
 
 ### onlySignedPublicKeyOwner
 
 ```solidity
-modifier onlySignedPublicKeyOwner(struct Signature signature, address owner)
+modifier onlySignedPublicKeyOwner(struct Permission permission, address owner)
 ```
 
 Modifier that requires the provided signature to be signed by a specific owner address
@@ -57,6 +57,6 @@ Modifier that requires the provided signature to be signed by a specific owner a
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| signature | struct Signature | Data structure containing the public key and the signature to be verified |
+| permission | struct Permission | Data structure containing the public key and the signature to be verified |
 | owner | address | The expected owner of the public key to match against the recovered signer |
 
