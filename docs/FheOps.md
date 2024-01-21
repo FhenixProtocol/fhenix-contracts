@@ -5,157 +5,157 @@
 ### add
 
 ```solidity
-function add(bytes input) external pure returns (bytes)
+function add(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### verify
 
 ```solidity
-function verify(bytes input) external pure returns (bytes)
+function verify(uint8 utype, bytes input) external pure returns (bytes)
 ```
 
 ### sealOutput
 
 ```solidity
-function sealOutput(bytes input) external pure returns (bytes)
+function sealOutput(uint8 utype, bytes ctHash, bytes pk) external pure returns (bytes)
 ```
 
 ### decrypt
 
 ```solidity
-function decrypt(bytes input) external pure returns (uint256)
+function decrypt(uint8 utype, bytes input) external pure returns (uint256)
 ```
 
 ### lte
 
 ```solidity
-function lte(bytes input) external pure returns (bytes)
+function lte(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### sub
 
 ```solidity
-function sub(bytes input) external pure returns (bytes)
+function sub(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### mul
 
 ```solidity
-function mul(bytes input) external pure returns (bytes)
+function mul(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### lt
 
 ```solidity
-function lt(bytes input) external pure returns (bytes)
+function lt(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### select
 
 ```solidity
-function select(bytes input) external pure returns (bytes)
+function select(uint8 utype, bytes controlHash, bytes ifTrueHash, bytes ifFalseHash) external pure returns (bytes)
 ```
 
 ### req
 
 ```solidity
-function req(bytes input) external pure returns (bytes)
+function req(uint8 utype, bytes input) external pure returns (bytes)
 ```
 
 ### cast
 
 ```solidity
-function cast(bytes input) external pure returns (bytes)
+function cast(uint8 utype, bytes input, uint8 toType) external pure returns (bytes)
 ```
 
 ### trivialEncrypt
 
 ```solidity
-function trivialEncrypt(bytes input) external pure returns (bytes)
+function trivialEncrypt(bytes input, uint8 toType) external pure returns (bytes)
 ```
 
 ### div
 
 ```solidity
-function div(bytes input) external pure returns (bytes)
+function div(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### gt
 
 ```solidity
-function gt(bytes input) external pure returns (bytes)
+function gt(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### gte
 
 ```solidity
-function gte(bytes input) external pure returns (bytes)
+function gte(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### rem
 
 ```solidity
-function rem(bytes input) external pure returns (bytes)
+function rem(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### and
 
 ```solidity
-function and(bytes input) external pure returns (bytes)
+function and(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### or
 
 ```solidity
-function or(bytes input) external pure returns (bytes)
+function or(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### xor
 
 ```solidity
-function xor(bytes input) external pure returns (bytes)
+function xor(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### eq
 
 ```solidity
-function eq(bytes input) external pure returns (bytes)
+function eq(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### ne
 
 ```solidity
-function ne(bytes input) external pure returns (bytes)
+function ne(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### min
 
 ```solidity
-function min(bytes input) external pure returns (bytes)
+function min(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### max
 
 ```solidity
-function max(bytes input) external pure returns (bytes)
+function max(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### shl
 
 ```solidity
-function shl(bytes input) external pure returns (bytes)
+function shl(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### shr
 
 ```solidity
-function shr(bytes input) external pure returns (bytes)
+function shr(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
 ### not
 
 ```solidity
-function not(bytes input) external pure returns (bytes)
+function not(uint8 utype, bytes value) external pure returns (bytes)
 ```
 
 ### getNetworkPublicKey

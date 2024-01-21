@@ -5,7 +5,7 @@
 ### sealoutput
 
 ```solidity
-function sealoutput(uint256 ciphertext, bytes32 publicKey) internal pure returns (bytes reencrypted)
+function sealoutput(uint8 utype, uint256 ciphertext, bytes32 publicKey) internal pure returns (bytes reencrypted)
 ```
 
 ### verify
@@ -17,7 +17,7 @@ function verify(bytes _ciphertextBytes, uint8 _toType) internal pure returns (ui
 ### cast
 
 ```solidity
-function cast(uint256 ciphertext, uint8 toType) internal pure returns (uint256 result)
+function cast(uint8 utype, uint256 ciphertext, uint8 toType) internal pure returns (uint256 result)
 ```
 
 ### getValue
@@ -35,6 +35,6 @@ function trivialEncrypt(uint256 value, uint8 toType) internal pure returns (uint
 ### select
 
 ```solidity
-function select(uint256 control, uint256 ifTrue, uint256 ifFalse) internal pure returns (uint256 result)
+function select(uint8 utype, uint256 control, uint256 ifTrue, uint256 ifFalse) internal pure returns (uint256 result)
 ```
 

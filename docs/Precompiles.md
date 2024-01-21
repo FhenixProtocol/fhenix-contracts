@@ -8,9 +8,3 @@
 address Fheos
 ```
 
-### FhePubKey
-
-```solidity
-uint256 FhePubKey
-```
-

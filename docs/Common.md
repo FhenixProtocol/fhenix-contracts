@@ -68,3 +68,9 @@ function bigIntToUint128(uint256 i) internal pure returns (uint128)
 function bigIntToUint256(uint256 i) internal pure returns (uint256)
 ```
 
+### toBytes
+
+```solidity
+function toBytes(uint256 x) internal pure returns (bytes b)
+```
+

@@ -5,35 +5,34 @@ pragma solidity >=0.8.13 <0.9.0;
 library Precompiles {
     //solhint-disable const-name-snakecase
     address public constant Fheos = address(128);
-    uint256 public constant FhePubKey = 68;
 }
 
 interface FheOps {
-    function add(bytes memory input) external pure returns (bytes memory);
-    function verify(bytes memory input) external pure returns (bytes memory);
-    function sealOutput(bytes memory input) external pure returns (bytes memory);
-    function decrypt(bytes memory input) external pure returns (uint256);
-    function lte(bytes memory input) external pure returns (bytes memory);
-    function sub(bytes memory input) external pure returns (bytes memory);
-    function mul(bytes memory input) external pure returns (bytes memory);
-    function lt(bytes memory input) external pure returns (bytes memory);
-    function select(bytes memory input) external pure returns (bytes memory);
-    function req(bytes memory input) external pure returns (bytes memory);
-    function cast(bytes memory input) external pure returns (bytes memory);
-    function trivialEncrypt(bytes memory input) external pure returns (bytes memory);
-    function div(bytes memory input) external pure returns (bytes memory);
-    function gt(bytes memory input) external pure returns (bytes memory);
-    function gte(bytes memory input) external pure returns (bytes memory);
-    function rem(bytes memory input) external pure returns (bytes memory);
-    function and(bytes memory input) external pure returns (bytes memory);
-    function or(bytes memory input) external pure returns (bytes memory);
-    function xor(bytes memory input) external pure returns (bytes memory);
-    function eq(bytes memory input) external pure returns (bytes memory);
-    function ne(bytes memory input) external pure returns (bytes memory);
-    function min(bytes memory input) external pure returns (bytes memory);
-    function max(bytes memory input) external pure returns (bytes memory);
-    function shl(bytes memory input) external pure returns (bytes memory);
-    function shr(bytes memory input) external pure returns (bytes memory);
-    function not(bytes memory input) external pure returns (bytes memory);
+    function add(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function verify(uint8 utype, bytes memory input) external pure returns (bytes memory);
+    function sealOutput(uint8 utype, bytes memory ctHash, bytes memory pk) external pure returns (bytes memory);
+    function decrypt(uint8 utype, bytes memory input) external pure returns (uint256);
+    function lte(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function sub(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function mul(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function lt(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function select(uint8 utype, bytes memory controlHash, bytes memory ifTrueHash, bytes memory ifFalseHash) external pure returns (bytes memory);
+    function req(uint8 utype, bytes memory input) external pure returns (bytes memory);
+    function cast(uint8 utype, bytes memory input, uint8 toType) external pure returns (bytes memory);
+    function trivialEncrypt(bytes memory input, uint8 toType) external pure returns (bytes memory);
+    function div(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function gt(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function gte(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function rem(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function and(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function or(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function xor(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function eq(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function ne(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function min(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function max(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function shl(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function shr(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function not(uint8 utype, bytes memory value) external pure returns (bytes memory);
     function getNetworkPublicKey() external pure returns (bytes memory);
 }

@@ -47,7 +47,7 @@ function isInitialized(euint32 v) internal pure returns (bool)
 ### mathHelper
 
 ```solidity
-function mathHelper(uint256 lhs, uint256 rhs, function (bytes) pure external returns (bytes) impl) internal pure returns (uint256 result)
+function mathHelper(uint8 utype, uint256 lhs, uint256 rhs, function (uint8,bytes,bytes) pure external returns (bytes) impl) internal pure returns (uint256 result)
 ```
 
 ### add
