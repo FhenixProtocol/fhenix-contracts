@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 pragma solidity ^0.8.20;
 
-import { ECDSA } from "@openzeppelin/contracts@5.0.0/utils/cryptography/ECDSA.sol";
-import { EIP712 } from "@openzeppelin/contracts@5.0.0/utils/cryptography/EIP712.sol";
+import { ECDSA } from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import { EIP712 } from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 
 /// @title Permissioned Access Control Contract
 /// @notice Abstract contract that provides EIP-712 based signature verification for access control
