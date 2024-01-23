@@ -31,10 +31,10 @@ constructor() internal
 _Constructor that initializes EIP712 domain separator with a name and version
 solhint-disable-next-line func-visibility, no-empty-blocks_
 
-### onlySignedPublicKey
+### onlySender
 
 ```solidity
-modifier onlySignedPublicKey(struct Permission permission)
+modifier onlySender(struct Permission permission)
 ```
 
 Modifier that requires the provided signature to be signed by the message sender
@@ -45,10 +45,10 @@ Modifier that requires the provided signature to be signed by the message sender
 | ---- | ---- | ----------- |
 | permission | struct Permission | Data structure containing the public key and the signature to be verified |
 
-### onlySignedPublicKeyOwner
+### onlyPermitted
 
 ```solidity
-modifier onlySignedPublicKeyOwner(struct Permission permission, address owner)
+modifier onlyPermitted(struct Permission permission, address owner)
 ```
 
 Modifier that requires the provided signature to be signed by a specific owner address
