@@ -17,4 +17,5 @@ jobs:
         run: cd contracts && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - run: cp README.md contracts/README.md
       - run: cd contracts && pnpm publish --no-git-checks
