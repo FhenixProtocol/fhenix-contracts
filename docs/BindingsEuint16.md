@@ -434,3 +434,9 @@ function toU8(euint16 value) internal pure returns (euint8)
 function toU32(euint16 value) internal pure returns (euint32)
 ```
 
+### seal
+
+```solidity
+function seal(euint16 value, bytes32 publicKey) internal pure returns (bytes)
+```
+

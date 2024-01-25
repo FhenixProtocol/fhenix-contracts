@@ -135,3 +135,9 @@ function toU16(ebool value) internal pure returns (euint16)
 function toU32(ebool value) internal pure returns (euint32)
 ```
 
+### seal
+
+```solidity
+function seal(ebool value, bytes32 publicKey) internal pure returns (bytes)
+```
+
