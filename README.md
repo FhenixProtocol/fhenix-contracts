@@ -23,13 +23,13 @@ npm install @fhenixprotocol/contracts
 
 Import `FHE.sol` or any of the helper contracts
 
-```
+```solidity
 import "@fhenixprotocol/contracts/FHE.sol";
 ```
 
 ## Example
 
-```
+```solidity
 pragma solidity ^0.8.20;
 
 import {FHE, euint8, inEuint8} from "@fhenixprotocol/contracts/FHE.sol";
