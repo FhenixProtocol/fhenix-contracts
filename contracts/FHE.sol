@@ -1554,15 +1554,15 @@ library FHE {
     }
     /// @notice Converts a ebool to an euint8
     function asEuint8(ebool value) internal pure returns (euint8) {
-        return euint8.wrap(Impl.cast(Common.EUINT8_TFHE_GO, ebool.unwrap(value), Common.EUINT8_TFHE_GO));
+        return euint8.wrap(Impl.cast(Common.EBOOL_TFHE_GO, ebool.unwrap(value), Common.EUINT8_TFHE_GO));
     }
     /// @notice Converts a ebool to an euint16
     function asEuint16(ebool value) internal pure returns (euint16) {
-        return euint16.wrap(Impl.cast(Common.EUINT16_TFHE_GO, ebool.unwrap(value), Common.EUINT16_TFHE_GO));
+        return euint16.wrap(Impl.cast(Common.EBOOL_TFHE_GO, ebool.unwrap(value), Common.EUINT16_TFHE_GO));
     }
     /// @notice Converts a ebool to an euint32
     function asEuint32(ebool value) internal pure returns (euint32) {
-        return euint32.wrap(Impl.cast(Common.EUINT32_TFHE_GO, ebool.unwrap(value), Common.EUINT32_TFHE_GO));
+        return euint32.wrap(Impl.cast(Common.EBOOL_TFHE_GO, ebool.unwrap(value), Common.EUINT32_TFHE_GO));
     }
     
     /// @notice Converts a euint8 to an ebool
@@ -1577,11 +1577,11 @@ library FHE {
     }
     /// @notice Converts a euint8 to an euint16
     function asEuint16(euint8 value) internal pure returns (euint16) {
-        return euint16.wrap(Impl.cast(Common.EUINT16_TFHE_GO, euint8.unwrap(value), Common.EUINT16_TFHE_GO));
+        return euint16.wrap(Impl.cast(Common.EUINT8_TFHE_GO, euint8.unwrap(value), Common.EUINT16_TFHE_GO));
     }
     /// @notice Converts a euint8 to an euint32
     function asEuint32(euint8 value) internal pure returns (euint32) {
-        return euint32.wrap(Impl.cast(Common.EUINT32_TFHE_GO, euint8.unwrap(value), Common.EUINT32_TFHE_GO));
+        return euint32.wrap(Impl.cast(Common.EUINT8_TFHE_GO, euint8.unwrap(value), Common.EUINT32_TFHE_GO));
     }
     
     /// @notice Converts a euint16 to an ebool
@@ -1590,7 +1590,7 @@ library FHE {
     }
     /// @notice Converts a euint16 to an euint8
     function asEuint8(euint16 value) internal pure returns (euint8) {
-        return euint8.wrap(Impl.cast(Common.EUINT8_TFHE_GO, euint16.unwrap(value), Common.EUINT8_TFHE_GO));
+        return euint8.wrap(Impl.cast(Common.EUINT16_TFHE_GO, euint16.unwrap(value), Common.EUINT8_TFHE_GO));
     }
     /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint16
     /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
@@ -1600,7 +1600,7 @@ library FHE {
     }
     /// @notice Converts a euint16 to an euint32
     function asEuint32(euint16 value) internal pure returns (euint32) {
-        return euint32.wrap(Impl.cast(Common.EUINT32_TFHE_GO, euint16.unwrap(value), Common.EUINT32_TFHE_GO));
+        return euint32.wrap(Impl.cast(Common.EUINT16_TFHE_GO, euint16.unwrap(value), Common.EUINT32_TFHE_GO));
     }
     
     /// @notice Converts a euint32 to an ebool
@@ -1609,11 +1609,11 @@ library FHE {
     }
     /// @notice Converts a euint32 to an euint8
     function asEuint8(euint32 value) internal pure returns (euint8) {
-        return euint8.wrap(Impl.cast(Common.EUINT8_TFHE_GO, euint32.unwrap(value), Common.EUINT8_TFHE_GO));
+        return euint8.wrap(Impl.cast(Common.EUINT32_TFHE_GO, euint32.unwrap(value), Common.EUINT8_TFHE_GO));
     }
     /// @notice Converts a euint32 to an euint16
     function asEuint16(euint32 value) internal pure returns (euint16) {
-        return euint16.wrap(Impl.cast(Common.EUINT16_TFHE_GO, euint32.unwrap(value), Common.EUINT16_TFHE_GO));
+        return euint16.wrap(Impl.cast(Common.EUINT32_TFHE_GO, euint32.unwrap(value), Common.EUINT16_TFHE_GO));
     }
     /// @notice Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint32
     /// @dev Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key
@@ -1892,6 +1892,9 @@ library BindingsEbool {
     function toU32(ebool value) internal pure returns (euint32) {
         return FHE.asEuint32(value);
     }
+    function seal(ebool value, bytes32 publicKey) internal pure returns (bytes memory) {
+        return FHE.sealoutput(value, publicKey);
+    }
 }
 
 using BindingsEuint8 for euint8 global;
@@ -2048,6 +2051,9 @@ library BindingsEuint8 {
     }
     function toU32(euint8 value) internal pure returns (euint32) {
         return FHE.asEuint32(value);
+    }
+    function seal(euint8 value, bytes32 publicKey) internal pure returns (bytes memory) {
+        return FHE.sealoutput(value, publicKey);
     }
 }
 
@@ -2206,6 +2212,9 @@ library BindingsEuint16 {
     function toU32(euint16 value) internal pure returns (euint32) {
         return FHE.asEuint32(value);
     }
+    function seal(euint16 value, bytes32 publicKey) internal pure returns (bytes memory) {
+        return FHE.sealoutput(value, publicKey);
+    }
 }
 
 using BindingsEuint32 for euint32 global;
@@ -2362,5 +2371,8 @@ library BindingsEuint32 {
     }
     function toU16(euint32 value) internal pure returns (euint16) {
         return FHE.asEuint16(value);
+    }
+    function seal(euint32 value, bytes32 publicKey) internal pure returns (bytes memory) {
+        return FHE.sealoutput(value, publicKey);
     }
 }
