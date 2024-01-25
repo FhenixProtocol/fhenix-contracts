@@ -1,7 +1,9 @@
-# Fhenix Contracts [![Github Actions][gha-badge]][gha] [![License: MIT][license-badge]][license]
+# Fhenix Contracts [![NPM Package][npm-badge]][npm] [![Github Actions][gha-badge]][gha] [![License: MIT][license-badge]][license]
 
-[gha]: https://github.com/fhenixprotocol/fhenix-contracts/actions
-[gha-badge]: https://github.com/fhenixprotocol/fhenix-contracts/actions/workflows/ci.yml/badge.svg
+[npm]: https://www.npmjs.org/package/@fhenixprotcol/contracts
+[npm-badge]: https://img.shields.io/npm/v/@fhenixprotocol/contracts.svg
+[gha]: https://github.com/fhenixprotocol/fheos/actions
+[gha-badge]: https://github.com/fhenixprotocol/fheos/actions/workflows/Test.yml/badge.svg
 [license]: https://opensource.org/licenses/MIT
 [license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
 
@@ -29,30 +31,19 @@ import "@fhenixprotocol/contracts/FHE.sol";
 
 ```
 pragma solidity ^0.8.20;
+
 import {FHE, euint8, inEuint8} from "@fhenixprotocol/contracts/FHE.sol";
-contract Test {
+
+contract Example {
     
-    euint8 _output2;
-    uint8 _output;
+    euint8 _output;
+
     function setOutput(inEuint8 calldata _encryptedNumber) public  {
-        uint8 action = FHE.decrypt(FHE.asEuint8(_encryptedNumber));
-        _output = action;
+        _output = FHE.asEuint8(_encryptedNumber);
     }
-    function setOutputBytes(bytes calldata _encryptedNumber) public  {
-        uint8 action = FHE.decrypt(FHE.asEuint8(_encryptedNumber));
-        _output = action;
-    }
-    function getOutput() public view returns (uint8) {
-        return _output;
-    }
-     function getOutput2() public view returns (uint8) {
-        return FHE.decrypt(_output2);
-    }
-    function setOutput2(bytes calldata e) public {
-        _output2 = FHE.asEuint8(e);
-    }
-    function getOutputEncrypted(bytes32 publicKey) public view  returns (bytes memory) {
-        return FHE.sealoutput(FHE.asEuint8(_output), publicKey);
+
+    function getOutputEncrypted(bytes32 publicKey) public view returns (bytes memory) {
+        return _output.seal(publicKey);
     }
 }
 ```
