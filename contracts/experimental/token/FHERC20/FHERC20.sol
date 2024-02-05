@@ -130,14 +130,6 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         return FHE.sealoutput(_encBalances[msg.sender], auth.publicKey);
     }
 
-    function balanceOfRawEncrypted() public view returns (euint32) {
-        return _encBalances[msg.sender];
-    }
-
-    // function balanceOfRaw(bytes memory publicKey) public view returns (bytes memory) {
-    //     return FHE.sealoutput(_encBalances[msg.sender], bytes32(publicKey[:32]));
-    // }
-
     function getEncryptedTotalSupply(
         Permission calldata permission
     ) public view onlySender(permission) returns (bytes memory) {
