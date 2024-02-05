@@ -11,7 +11,7 @@ error ErrorInsufficientFunds();
 error ERC20InvalidApprover(address);
 error ERC20InvalidSpender(address);
 
-contract WrappingERC20 is IFHERC20, ERC20, Permissioned {
+contract FHERC20 is IFHERC20, ERC20, Permissioned {
     // A mapping from address to an encrypted balance.
     mapping(address => euint32) internal _encBalances;
     // A mapping from address (owner) to a mapping of address (spender) to an encrypted amount.
