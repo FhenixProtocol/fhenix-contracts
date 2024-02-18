@@ -4,8 +4,8 @@ pragma solidity ^0.8.20;
 // Fhenix Protocol (last updated v0.1.0) (token/FHERC20/IFHERC20.sol)
 // Inspired by OpenZeppelin (https://github.com/OpenZeppelin/openzeppelin-contracts) (token/ERC20/IERC20.sol)
 
-import { Permission, Permissioned } from "../../../access/Permissioned.sol";
-import { euint32, inEuint32 } from "../../../FHE.sol";
+import { Permission, Permissioned } from "../../access/Permissioned.sol";
+import { euint32, inEuint32 } from "../../FHE.sol";
 
 /**
  * @dev Interface of the ERC-20 standard as defined in the ERC.

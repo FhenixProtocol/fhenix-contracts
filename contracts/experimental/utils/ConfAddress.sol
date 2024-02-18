@@ -2,7 +2,7 @@
 
 pragma solidity >=0.8.20 <0.9.0;
 
-import { euint32, ebool, FHE } from "../../../FHE.sol";
+import { euint32, ebool, FHE } from "../../FHE.sol";
 import "./BytesLib.sol";
 
 /// @title Encrypted Address Library
