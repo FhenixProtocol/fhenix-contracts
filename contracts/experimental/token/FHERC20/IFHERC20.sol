@@ -43,6 +43,7 @@ interface IFHERC20 {
      * Emits a {TransferEncrypted} event.
      */
     function transferEncrypted(address to, inEuint32 calldata value) external returns (euint32);
+    function transferEncrypted(address to, euint32 value) external returns (euint32);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -80,4 +81,5 @@ interface IFHERC20 {
      * Emits a {TransferEncrypted} event.
      */
     function transferFromEncrypted(address from, address to, inEuint32 calldata value) external returns (euint32);
+    function transferFromEncrypted(address from, address to, euint32 value) external returns (euint32);
 }
