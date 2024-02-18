@@ -12,7 +12,11 @@
   "files": [
     "FHE.sol",
     "FheOS.sol",
-    "access/Permissioned.sol"
+    "access/Permissioned.sol",
+    "experimental/token/FHERC20/FHERC20.sol",
+    "experimental/token/FHERC20/IFHERC20.sol",
+    "experimental/utils/ConfAddress.sol",
+    "experimental/utils/BytesLib.sol"
   ],
   "keywords": [
     "blockchain",

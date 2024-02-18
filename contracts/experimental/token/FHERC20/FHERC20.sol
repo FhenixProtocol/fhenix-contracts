@@ -2,15 +2,14 @@
 pragma solidity ^0.8.20;
 
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import { FHE, euint32, inEuint32 } from "@fhenixprotocol/contracts/FHE.sol";
-import { Permissioned, Permission } from "@fhenixprotocol/contracts/access/Permissioned.sol";
+import { FHE, euint32, inEuint32 } from "../../../FHE.sol";
+import { Permissioned, Permission } from "../../../access/Permissioned.sol";
 
 import { IFHERC20 } from "./IFHERC20.sol";
 
 error ErrorInsufficientFunds();
 error ERC20InvalidApprover(address);
 error ERC20InvalidSpender(address);
-
 
 contract FHERC20 is IFHERC20, ERC20, Permissioned {
 
