@@ -1,0 +1,85 @@
+pragma solidity ^0.8.20;
+
+// SPDX-License-Identifier: MIT
+// Fhenix Protocol (last updated v0.1.0) (token/FHERC20/IFHERC20.sol)
+// Inspired by OpenZeppelin (https://github.com/OpenZeppelin/openzeppelin-contracts) (token/ERC20/IERC20.sol)
+
+import { Permission, Permissioned } from "@fhenixprotocol/contracts/access/Permissioned.sol";
+import { euint32, inEuint32 } from "@fhenixprotocol/contracts/FHE.sol";
+
+/**
+ * @dev Interface of the ERC-20 standard as defined in the ERC.
+ */
+interface IFHERC20 {
+    /**
+     * @dev Emitted when `value` tokens are moved from one account (`from`) to
+     * another (`to`).
+     *
+     * Note that `value` may be zero.
+     */
+    event TransferEncrypted(address indexed from, address indexed to);
+
+    /**
+     * @dev Emitted when the allowance of a `spender` for an `owner` is set by
+     * a call to {approveEncrypted}. `value` is the new allowance.
+     */
+    event ApprovalEncrypted(address indexed owner, address indexed spender);
+
+    // /**
+    //  * @dev Returns the value of tokens in existence.
+    //  */
+    // function totalSupply() external view returns (uint256);
+
+    /**
+     * @dev Returns the value of tokens owned by `account`, sealed and encrypted for the caller.
+     */
+    function balanceOfEncrypted(address account, Permission memory auth) external view returns (bytes memory);
+
+    /**
+     * @dev Moves a `value` amount of tokens from the caller's account to `to`.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {TransferEncrypted} event.
+     */
+    function transferEncrypted(address to, inEuint32 calldata value) external returns (euint32);
+    function transferEncrypted(address to, euint32 value) external returns (euint32);
+
+    /**
+     * @dev Returns the remaining number of tokens that `spender` will be
+     * allowed to spend on behalf of `owner` through {transferFrom}. This is
+     * zero by default.
+     *
+     * This value changes when {approve} or {transferFrom} are called.
+     */
+    function allowanceEncrypted(address spender, Permission memory permission) external view returns (bytes memory);
+
+    /**
+     * @dev Sets a `value` amount of tokens as the allowance of `spender` over the
+     * caller's tokens.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * IMPORTANT: Beware that changing an allowance with this method brings the risk
+     * that someone may use both the old and the new allowance by unfortunate
+     * transaction ordering. One possible solution to mitigate this race
+     * condition is to first reduce the spender's allowance to 0 and set the
+     * desired value afterwards:
+     * https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729
+     *
+     * Emits an {ApprovalEncrypted} event.
+     */
+    function approveEncrypted(address spender, inEuint32 calldata value) external returns (bool);
+
+    /**
+     * @dev Moves a `value` amount of tokens from `from` to `to` using the
+     * allowance mechanism. `value` is then deducted from the caller's
+     * allowance.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {TransferEncrypted} event.
+     */
+    function transferFromEncrypted(address from, address to, inEuint32 calldata value) external returns (euint32);
+    function transferFromEncrypted(address from, address to, euint32 value) external returns (euint32);
+}
