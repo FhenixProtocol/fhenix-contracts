@@ -141,3 +141,9 @@ function toU32(ebool value) internal pure returns (euint32)
 function seal(ebool value, bytes32 publicKey) internal pure returns (bytes)
 ```
 
+### decrypt
+
+```solidity
+function decrypt(ebool value) internal pure returns (bool)
+```
+

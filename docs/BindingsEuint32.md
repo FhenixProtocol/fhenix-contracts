@@ -440,3 +440,9 @@ function toU16(euint32 value) internal pure returns (euint16)
 function seal(euint32 value, bytes32 publicKey) internal pure returns (bytes)
 ```
 
+### decrypt
+
+```solidity
+function decrypt(euint32 value) internal pure returns (uint32)
+```
+
