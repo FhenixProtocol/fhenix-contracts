@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 // solhint-disable one-contract-per-file
 
-pragma solidity >=0.8.19 <0.9.0;
+pragma solidity >=0.8.19 <0.8.25;
 
 import {Precompiles, FheOps} from "./FheOS.sol";
 

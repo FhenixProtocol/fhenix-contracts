@@ -1,4 +1,4 @@
-pragma solidity ^0.8.20;
+pragma solidity >=0.8.19 <0.8.25;
 
 // SPDX-License-Identifier: MIT
 // Fhenix Protocol (last updated v0.1.0) (token/FHERC20/IFHERC20.sol)
