@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 // solhint-disable one-contract-per-file
-pragma solidity >=0.8.19 <0.8.25;
+pragma solidity >=0.8.13 <0.9.0;
 
 library Precompiles {
     //solhint-disable const-name-snakecase
@@ -8,6 +8,7 @@ library Precompiles {
 }
 
 interface FheOps {
+    function log(string memory s) external pure;
     function add(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function verify(uint8 utype, bytes memory input) external pure returns (bytes memory);
     function sealOutput(uint8 utype, bytes memory ctHash, bytes memory pk) external pure returns (bytes memory);
