@@ -1,11 +1,11 @@
 # Solidity API
 
-## BindingsEuint8
+## BindingsEuint256
 
 ### add
 
 ```solidity
-function add(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function add(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the add operation
@@ -16,19 +16,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the add |
+| [0] | euint256 | the result of the add |
 
 ### mul
 
 ```solidity
-function mul(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function mul(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the mul operation
@@ -39,19 +39,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the mul |
+| [0] | euint256 | the result of the mul |
 
 ### div
 
 ```solidity
-function div(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function div(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the div operation
@@ -62,19 +62,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the div |
+| [0] | euint256 | the result of the div |
 
 ### sub
 
 ```solidity
-function sub(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function sub(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the sub operation
@@ -85,19 +85,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the sub |
+| [0] | euint256 | the result of the sub |
 
 ### eq
 
 ```solidity
-function eq(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function eq(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the eq operation
@@ -108,8 +108,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -120,7 +120,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### ne
 
 ```solidity
-function ne(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function ne(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the ne operation
@@ -131,8 +131,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -143,7 +143,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### and
 
 ```solidity
-function and(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function and(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the and operation
@@ -154,19 +154,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the and |
+| [0] | euint256 | the result of the and |
 
 ### or
 
 ```solidity
-function or(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function or(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the or operation
@@ -177,19 +177,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the or |
+| [0] | euint256 | the result of the or |
 
 ### xor
 
 ```solidity
-function xor(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function xor(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the xor operation
@@ -200,19 +200,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the xor |
+| [0] | euint256 | the result of the xor |
 
 ### gt
 
 ```solidity
-function gt(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function gt(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the gt operation
@@ -223,8 +223,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -235,7 +235,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### gte
 
 ```solidity
-function gte(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function gte(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the gte operation
@@ -246,8 +246,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -258,7 +258,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### lt
 
 ```solidity
-function lt(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function lt(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the lt operation
@@ -269,8 +269,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -281,7 +281,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### lte
 
 ```solidity
-function lte(euint8 lhs, euint8 rhs) internal pure returns (ebool)
+function lte(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
 Performs the lte operation
@@ -292,8 +292,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
@@ -304,7 +304,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### rem
 
 ```solidity
-function rem(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function rem(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the rem operation
@@ -315,19 +315,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the rem |
+| [0] | euint256 | the result of the rem |
 
 ### max
 
 ```solidity
-function max(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function max(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the max operation
@@ -338,19 +338,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the max |
+| [0] | euint256 | the result of the max |
 
 ### min
 
 ```solidity
-function min(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function min(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the min operation
@@ -361,19 +361,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the min |
+| [0] | euint256 | the result of the min |
 
 ### shl
 
 ```solidity
-function shl(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function shl(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the shl operation
@@ -384,19 +384,19 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the shl |
+| [0] | euint256 | the result of the shl |
 
 ### shr
 
 ```solidity
-function shr(euint8 lhs, euint8 rhs) internal pure returns (euint8)
+function shr(euint256 lhs, euint256 rhs) internal pure returns (euint256)
 ```
 
 Performs the shr operation
@@ -407,60 +407,60 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint8 | input of type euint8 |
-| rhs | euint8 |  |
+| lhs | euint256 | input of type euint256 |
+| rhs | euint256 |  |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | euint8 | the result of the shr |
+| [0] | euint256 | the result of the shr |
 
 ### toBool
 
 ```solidity
-function toBool(euint8 value) internal pure returns (ebool)
+function toBool(euint256 value) internal pure returns (ebool)
+```
+
+### toU8
+
+```solidity
+function toU8(euint256 value) internal pure returns (euint8)
 ```
 
 ### toU16
 
 ```solidity
-function toU16(euint8 value) internal pure returns (euint16)
+function toU16(euint256 value) internal pure returns (euint16)
 ```
 
 ### toU32
 
 ```solidity
-function toU32(euint8 value) internal pure returns (euint32)
+function toU32(euint256 value) internal pure returns (euint32)
 ```
 
 ### toU64
 
 ```solidity
-function toU64(euint8 value) internal pure returns (euint64)
+function toU64(euint256 value) internal pure returns (euint64)
 ```
 
 ### toU128
 
 ```solidity
-function toU128(euint8 value) internal pure returns (euint128)
-```
-
-### toU256
-
-```solidity
-function toU256(euint8 value) internal pure returns (euint256)
+function toU128(euint256 value) internal pure returns (euint128)
 ```
 
 ### seal
 
 ```solidity
-function seal(euint8 value, bytes32 publicKey) internal pure returns (bytes)
+function seal(euint256 value, bytes32 publicKey) internal pure returns (bytes)
 ```
 
 ### decrypt
 
 ```solidity
-function decrypt(euint8 value) internal pure returns (uint8)
+function decrypt(euint256 value) internal pure returns (uint256)
 ```
 

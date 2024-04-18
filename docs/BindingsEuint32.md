@@ -434,6 +434,24 @@ function toU8(euint32 value) internal pure returns (euint8)
 function toU16(euint32 value) internal pure returns (euint16)
 ```
 
+### toU64
+
+```solidity
+function toU64(euint32 value) internal pure returns (euint64)
+```
+
+### toU128
+
+```solidity
+function toU128(euint32 value) internal pure returns (euint128)
+```
+
+### toU256
+
+```solidity
+function toU256(euint32 value) internal pure returns (euint256)
+```
+
 ### seal
 
 ```solidity

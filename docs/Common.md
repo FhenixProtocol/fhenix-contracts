@@ -2,28 +2,46 @@
 
 ## Common
 
-### EBOOL_TFHE_GO
+### EUINT8_TFHE
 
 ```solidity
-uint8 EBOOL_TFHE_GO
+uint8 EUINT8_TFHE
 ```
 
-### EUINT8_TFHE_GO
+### EUINT16_TFHE
 
 ```solidity
-uint8 EUINT8_TFHE_GO
+uint8 EUINT16_TFHE
 ```
 
-### EUINT16_TFHE_GO
+### EUINT32_TFHE
 
 ```solidity
-uint8 EUINT16_TFHE_GO
+uint8 EUINT32_TFHE
 ```
 
-### EUINT32_TFHE_GO
+### EUINT64_TFHE
 
 ```solidity
-uint8 EUINT32_TFHE_GO
+uint8 EUINT64_TFHE
+```
+
+### EUINT128_TFHE
+
+```solidity
+uint8 EUINT128_TFHE
+```
+
+### EUINT256_TFHE
+
+```solidity
+uint8 EUINT256_TFHE
+```
+
+### EBOOL_TFHE
+
+```solidity
+uint8 EBOOL_TFHE
 ```
 
 ### bigIntToBool

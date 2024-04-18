@@ -2,6 +2,12 @@
 
 ## FheOps
 
+### log
+
+```solidity
+function log(string s) external pure
+```
+
 ### add
 
 ```solidity
