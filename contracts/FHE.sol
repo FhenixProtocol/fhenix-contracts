@@ -87,7 +87,7 @@ library Common {
 }
 
 library Impl {
-    function sealoutput(uint8 utype, uint256 ciphertext, bytes32 publicKey) internal pure returns (bytes memory reencrypted) {
+    function sealoutput(uint8 utype, uint256 ciphertext, bytes32 publicKey) internal pure returns (string memory reencrypted) {
         // Call the sealoutput precompile.
         reencrypted = FheOps(Precompiles.Fheos).sealOutput(utype, Common.toBytes(ciphertext), bytes.concat(publicKey));
 
@@ -311,7 +311,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(ebool value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(ebool value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEbool(0);
         }
@@ -324,7 +324,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint8 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint8 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint8(0);
         }
@@ -337,7 +337,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint16 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint16 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint16(0);
         }
@@ -350,7 +350,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint32 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint32 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint32(0);
         }
@@ -363,7 +363,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint64 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint64 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint64(0);
         }
@@ -376,7 +376,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint128 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint128 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint128(0);
         }
@@ -389,7 +389,7 @@ library FHE {
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
     /// @return Plaintext input, sealed for the owner of `publicKey`
-    function sealoutput(euint256 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function sealoutput(euint256 value, bytes32 publicKey) internal pure returns (string memory) {
         if (!isInitialized(value)) {
             value = asEuint256(0);
         }
@@ -3482,7 +3482,7 @@ library BindingsEbool {
     function toU256(ebool value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(ebool value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(ebool value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(ebool value) internal pure returns (bool) {
@@ -3654,7 +3654,7 @@ library BindingsEuint8 {
     function toU256(euint8 value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(euint8 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint8 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint8 value) internal pure returns (uint8) {
@@ -3826,7 +3826,7 @@ library BindingsEuint16 {
     function toU256(euint16 value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(euint16 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint16 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint16 value) internal pure returns (uint16) {
@@ -3998,7 +3998,7 @@ library BindingsEuint32 {
     function toU256(euint32 value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(euint32 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint32 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint32 value) internal pure returns (uint32) {
@@ -4170,7 +4170,7 @@ library BindingsEuint64 {
     function toU256(euint64 value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(euint64 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint64 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint64 value) internal pure returns (uint64) {
@@ -4342,7 +4342,7 @@ library BindingsEuint128 {
     function toU256(euint128 value) internal pure returns (euint256) {
         return FHE.asEuint256(value);
     }
-    function seal(euint128 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint128 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint128 value) internal pure returns (uint128) {
@@ -4514,7 +4514,7 @@ library BindingsEuint256 {
     function toU128(euint256 value) internal pure returns (euint128) {
         return FHE.asEuint128(value);
     }
-    function seal(euint256 value, bytes32 publicKey) internal pure returns (bytes memory) {
+    function seal(euint256 value, bytes32 publicKey) internal pure returns (string memory) {
         return FHE.sealoutput(value, publicKey);
     }
     function decrypt(euint256 value) internal pure returns (uint256) {
