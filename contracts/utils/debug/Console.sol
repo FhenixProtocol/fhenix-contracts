@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.19 <0.8.25;
 
-import {FheOps, Precompiles} from "./FheOS.sol";
+import {FheOps, Precompiles} from "../../FheOS.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Console {
