@@ -11,7 +11,7 @@ interface FheOps {
     function log(string memory s) external pure;
     function add(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function verify(uint8 utype, bytes memory input) external pure returns (bytes memory);
-    function sealOutput(uint8 utype, bytes memory ctHash, bytes memory pk) external pure returns (bytes memory);
+    function sealOutput(uint8 utype, bytes memory ctHash, bytes memory pk) external pure returns (string memory);
     function decrypt(uint8 utype, bytes memory input) external pure returns (uint256);
     function lte(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function sub(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
