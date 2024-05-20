@@ -12,7 +12,10 @@
   "files": [
     "FHE.sol",
     "FheOS.sol",
-    "**/*"
+    "access/**",
+    "experimental/token/**",
+    "experimental/utils/BytesLib.sol",
+    "utils/**"
   ],
   "keywords": [
     "blockchain",
