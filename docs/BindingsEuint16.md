@@ -455,7 +455,7 @@ function toU256(euint16 value) internal pure returns (euint256)
 ### seal
 
 ```solidity
-function seal(euint16 value, bytes32 publicKey) internal pure returns (bytes)
+function seal(euint16 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 ### decrypt

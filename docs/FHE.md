@@ -188,34 +188,10 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### add
-
-```solidity
-function add(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the add operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### sealoutput
 
 ```solidity
-function sealoutput(ebool value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(ebool value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -233,12 +209,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint8 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint8 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -256,12 +232,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint16 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint16 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -279,12 +255,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint32 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint32 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -302,12 +278,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint64 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint64 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -325,12 +301,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint128 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint128 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -348,12 +324,12 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### sealoutput
 
 ```solidity
-function sealoutput(euint256 value, bytes32 publicKey) internal pure returns (bytes)
+function sealoutput(euint256 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 performs the sealoutput function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided
@@ -371,7 +347,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| [0] | bytes | Plaintext input, sealed for the owner of `publicKey` |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
 ### decrypt
 
@@ -605,30 +581,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | ebool | The result of the operation |
 
-### lte
-
-```solidity
-function lte(euint256 lhs, euint256 rhs) internal pure returns (ebool)
-```
-
-This functions performs the lte operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | ebool | The result of the operation |
-
 ### sub
 
 ```solidity
@@ -749,30 +701,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### sub
-
-```solidity
-function sub(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the sub operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### mul
 
 ```solidity
@@ -868,54 +796,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint64 | The result of the operation |
-
-### mul
-
-```solidity
-function mul(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-This functions performs the mul operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | The first input |
-| rhs | euint128 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | The result of the operation |
-
-### mul
-
-```solidity
-function mul(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the mul operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
 
 ### lt
 
@@ -1037,30 +917,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | ebool | The result of the operation |
 
-### lt
-
-```solidity
-function lt(euint256 lhs, euint256 rhs) internal pure returns (ebool)
-```
-
-This functions performs the lt operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | ebool | The result of the operation |
-
 ### select
 
 ```solidity
@@ -1095,12 +951,6 @@ function select(ebool input1, euint64 input2, euint64 input3) internal pure retu
 
 ```solidity
 function select(ebool input1, euint128 input2, euint128 input3) internal pure returns (euint128)
-```
-
-### select
-
-```solidity
-function select(ebool input1, euint256 input2, euint256 input3) internal pure returns (euint256)
 ```
 
 ### req
@@ -1287,78 +1137,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint32 | The result of the operation |
 
-### div
-
-```solidity
-function div(euint64 lhs, euint64 rhs) internal pure returns (euint64)
-```
-
-This functions performs the div operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint64 | The first input |
-| rhs | euint64 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint64 | The result of the operation |
-
-### div
-
-```solidity
-function div(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-This functions performs the div operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | The first input |
-| rhs | euint128 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | The result of the operation |
-
-### div
-
-```solidity
-function div(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the div operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### gt
 
 ```solidity
@@ -1472,30 +1250,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | lhs | euint128 | The first input |
 | rhs | euint128 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | ebool | The result of the operation |
-
-### gt
-
-```solidity
-function gt(euint256 lhs, euint256 rhs) internal pure returns (ebool)
-```
-
-This functions performs the gt operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
 
 #### Return Values
 
@@ -1623,30 +1377,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | ebool | The result of the operation |
 
-### gte
-
-```solidity
-function gte(euint256 lhs, euint256 rhs) internal pure returns (ebool)
-```
-
-This functions performs the gte operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | ebool | The result of the operation |
-
 ### rem
 
 ```solidity
@@ -1718,78 +1448,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint32 | The result of the operation |
-
-### rem
-
-```solidity
-function rem(euint64 lhs, euint64 rhs) internal pure returns (euint64)
-```
-
-This functions performs the rem operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint64 | The first input |
-| rhs | euint64 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint64 | The result of the operation |
-
-### rem
-
-```solidity
-function rem(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-This functions performs the rem operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | The first input |
-| rhs | euint128 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | The result of the operation |
-
-### rem
-
-```solidity
-function rem(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the rem operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
 
 ### and
 
@@ -1935,30 +1593,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### and
-
-```solidity
-function and(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the and operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### or
 
 ```solidity
@@ -2103,30 +1737,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### or
-
-```solidity
-function or(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the or operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### xor
 
 ```solidity
@@ -2270,30 +1880,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
-
-### xor
-
-```solidity
-function xor(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the xor operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
 
 ### eq
 
@@ -2751,30 +2337,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### min
-
-```solidity
-function min(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the min operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### max
 
 ```solidity
@@ -2894,30 +2456,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
-
-### max
-
-```solidity
-function max(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the max operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
 
 ### shl
 
@@ -3039,30 +2577,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### shl
-
-```solidity
-function shl(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the shl operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### shr
 
 ```solidity
@@ -3183,30 +2697,6 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | euint128 | The result of the operation |
 
-### shr
-
-```solidity
-function shr(euint256 lhs, euint256 rhs) internal pure returns (euint256)
-```
-
-This functions performs the shr operation
-
-_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
-Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint256 | The first input |
-| rhs | euint256 | The second input |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint256 | The result of the operation |
-
 ### not
 
 ```solidity
@@ -3308,22 +2798,6 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | euint128 | the input ciphertext |
-
-### not
-
-```solidity
-function not(euint256 input1) internal pure returns (euint256)
-```
-
-Performs the not operation on a ciphertext
-
-_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| input1 | euint256 | the input ciphertext |
 
 ### asEbool
 

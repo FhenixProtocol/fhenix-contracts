@@ -23,7 +23,7 @@ function verify(uint8 utype, bytes input) external pure returns (bytes)
 ### sealOutput
 
 ```solidity
-function sealOutput(uint8 utype, bytes ctHash, bytes pk) external pure returns (bytes)
+function sealOutput(uint8 utype, bytes ctHash, bytes pk) external pure returns (string)
 ```
 
 ### decrypt

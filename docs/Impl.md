@@ -5,7 +5,7 @@
 ### sealoutput
 
 ```solidity
-function sealoutput(uint8 utype, uint256 ciphertext, bytes32 publicKey) internal pure returns (bytes reencrypted)
+function sealoutput(uint8 utype, uint256 ciphertext, bytes32 publicKey) internal pure returns (string reencrypted)
 ```
 
 ### verify

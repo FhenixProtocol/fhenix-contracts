@@ -23,7 +23,7 @@ function _allowanceEncrypted(address owner, address spender) public view virtual
 ### allowanceEncrypted
 
 ```solidity
-function allowanceEncrypted(address spender, struct Permission permission) public view virtual returns (bytes)
+function allowanceEncrypted(address spender, struct Permission permission) public view virtual returns (string)
 ```
 
 _Returns the remaining number of tokens that `spender` will be
@@ -123,7 +123,7 @@ function _transferImpl(address from, address to, euint32 amount) internal return
 ### balanceOfEncrypted
 
 ```solidity
-function balanceOfEncrypted(address account, struct Permission auth) public view virtual returns (bytes)
+function balanceOfEncrypted(address account, struct Permission auth) public view virtual returns (string)
 ```
 
 _Returns the value of tokens owned by `account`, sealed and encrypted for the caller._

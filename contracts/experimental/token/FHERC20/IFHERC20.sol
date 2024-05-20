@@ -33,7 +33,7 @@ interface IFHERC20 {
     /**
      * @dev Returns the value of tokens owned by `account`, sealed and encrypted for the caller.
      */
-    function balanceOfEncrypted(address account, Permission memory auth) external view returns (bytes memory);
+    function balanceOfEncrypted(address account, Permission memory auth) external view returns (string memory);
 
     /**
      * @dev Moves a `value` amount of tokens from the caller's account to `to`.
@@ -52,7 +52,7 @@ interface IFHERC20 {
      *
      * This value changes when {approve} or {transferFrom} are called.
      */
-    function allowanceEncrypted(address spender, Permission memory permission) external view returns (bytes memory);
+    function allowanceEncrypted(address spender, Permission memory permission) external view returns (string memory);
 
     /**
      * @dev Sets a `value` amount of tokens as the allowance of `spender` over the

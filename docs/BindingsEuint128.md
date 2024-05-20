@@ -25,52 +25,6 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | ---- | ---- | ----------- |
 | [0] | euint128 | the result of the add |
 
-### mul
-
-```solidity
-function mul(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-Performs the mul operation
-
-_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | input of type euint128 |
-| rhs | euint128 |  |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | the result of the mul |
-
-### div
-
-```solidity
-function div(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-Performs the div operation
-
-_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | input of type euint128 |
-| rhs | euint128 |  |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | the result of the div |
-
 ### sub
 
 ```solidity
@@ -301,29 +255,6 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | ---- | ---- | ----------- |
 | [0] | ebool | the result of the lte |
 
-### rem
-
-```solidity
-function rem(euint128 lhs, euint128 rhs) internal pure returns (euint128)
-```
-
-Performs the rem operation
-
-_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| lhs | euint128 | input of type euint128 |
-| rhs | euint128 |  |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | euint128 | the result of the rem |
-
 ### max
 
 ```solidity
@@ -455,7 +386,7 @@ function toU256(euint128 value) internal pure returns (euint256)
 ### seal
 
 ```solidity
-function seal(euint128 value, bytes32 publicKey) internal pure returns (bytes)
+function seal(euint128 value, bytes32 publicKey) internal pure returns (string)
 ```
 
 ### decrypt

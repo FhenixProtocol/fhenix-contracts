@@ -27,7 +27,7 @@ a call to {approveEncrypted}. `value` is the new allowance._
 ### balanceOfEncrypted
 
 ```solidity
-function balanceOfEncrypted(address account, struct Permission auth) external view returns (bytes)
+function balanceOfEncrypted(address account, struct Permission auth) external view returns (string)
 ```
 
 _Returns the value of tokens owned by `account`, sealed and encrypted for the caller._
@@ -53,7 +53,7 @@ function transferEncrypted(address to, euint32 value) external returns (euint32)
 ### allowanceEncrypted
 
 ```solidity
-function allowanceEncrypted(address spender, struct Permission permission) external view returns (bytes)
+function allowanceEncrypted(address spender, struct Permission permission) external view returns (string)
 ```
 
 _Returns the remaining number of tokens that `spender` will be
