@@ -62,6 +62,12 @@ function isInitialized(euint128 v) internal pure returns (bool)
 function isInitialized(euint256 v) internal pure returns (bool)
 ```
 
+### isInitialized
+
+```solidity
+function isInitialized(eaddress v) internal pure returns (bool)
+```
+
 ### mathHelper
 
 ```solidity
@@ -349,6 +355,29 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | ---- | ---- | ----------- |
 | [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
+### sealoutput
+
+```solidity
+function sealoutput(eaddress value, bytes32 publicKey) internal pure returns (string)
+```
+
+performs the sealoutput function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | eaddress | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | string | Plaintext input, sealed for the owner of `publicKey` |
+
 ### decrypt
 
 ```solidity
@@ -460,6 +489,22 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | euint256 | the input ciphertext |
+
+### decrypt
+
+```solidity
+function decrypt(eaddress input1) internal pure returns (address)
+```
+
+Performs the decrypt operation on a ciphertext
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | eaddress | the input ciphertext |
 
 ### lte
 
@@ -951,6 +996,18 @@ function select(ebool input1, euint64 input2, euint64 input3) internal pure retu
 
 ```solidity
 function select(ebool input1, euint128 input2, euint128 input3) internal pure returns (euint128)
+```
+
+### select
+
+```solidity
+function select(ebool input1, euint256 input2, euint256 input3) internal pure returns (euint256)
+```
+
+### select
+
+```solidity
+function select(ebool input1, eaddress input2, eaddress input3) internal pure returns (eaddress)
 ```
 
 ### req
@@ -2049,6 +2106,30 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | [0] | ebool | The result of the operation |
 
+### eq
+
+```solidity
+function eq(eaddress lhs, eaddress rhs) internal pure returns (ebool)
+```
+
+This functions performs the eq operation
+
+_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | eaddress | The first input |
+| rhs | eaddress | The second input |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | ebool | The result of the operation |
+
 ### ne
 
 ```solidity
@@ -2210,6 +2291,30 @@ Pure in this function is marked as a hack/workaround - note that this function i
 | ---- | ---- | ----------- |
 | lhs | euint256 | The first input |
 | rhs | euint256 | The second input |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | ebool | The result of the operation |
+
+### ne
+
+```solidity
+function ne(eaddress lhs, eaddress rhs) internal pure returns (ebool)
+```
+
+This functions performs the ne operation
+
+_If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
+Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | eaddress | The first input |
+| rhs | eaddress | The second input |
 
 #### Return Values
 
@@ -2863,6 +2968,14 @@ function asEuint256(ebool value) internal pure returns (euint256)
 
 Converts a ebool to an euint256
 
+### asEaddress
+
+```solidity
+function asEaddress(ebool value) internal pure returns (eaddress)
+```
+
+Converts a ebool to an eaddress
+
 ### asEbool
 
 ```solidity
@@ -2926,6 +3039,14 @@ function asEuint256(euint8 value) internal pure returns (euint256)
 ```
 
 Converts a euint8 to an euint256
+
+### asEaddress
+
+```solidity
+function asEaddress(euint8 value) internal pure returns (eaddress)
+```
+
+Converts a euint8 to an eaddress
 
 ### asEbool
 
@@ -2991,6 +3112,14 @@ function asEuint256(euint16 value) internal pure returns (euint256)
 
 Converts a euint16 to an euint256
 
+### asEaddress
+
+```solidity
+function asEaddress(euint16 value) internal pure returns (eaddress)
+```
+
+Converts a euint16 to an eaddress
+
 ### asEbool
 
 ```solidity
@@ -3054,6 +3183,14 @@ function asEuint256(euint32 value) internal pure returns (euint256)
 ```
 
 Converts a euint32 to an euint256
+
+### asEaddress
+
+```solidity
+function asEaddress(euint32 value) internal pure returns (eaddress)
+```
+
+Converts a euint32 to an eaddress
 
 ### asEbool
 
@@ -3119,6 +3256,14 @@ function asEuint256(euint64 value) internal pure returns (euint256)
 
 Converts a euint64 to an euint256
 
+### asEaddress
+
+```solidity
+function asEaddress(euint64 value) internal pure returns (eaddress)
+```
+
+Converts a euint64 to an eaddress
+
 ### asEbool
 
 ```solidity
@@ -3182,6 +3327,14 @@ function asEuint256(euint128 value) internal pure returns (euint256)
 ```
 
 Converts a euint128 to an euint256
+
+### asEaddress
+
+```solidity
+function asEaddress(euint128 value) internal pure returns (eaddress)
+```
+
+Converts a euint128 to an eaddress
 
 ### asEbool
 
@@ -3247,6 +3400,86 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 | ---- | ---- | ----------- |
 | [0] | euint256 | a ciphertext representation of the input |
 
+### asEaddress
+
+```solidity
+function asEaddress(euint256 value) internal pure returns (eaddress)
+```
+
+Converts a euint256 to an eaddress
+
+### asEbool
+
+```solidity
+function asEbool(eaddress value) internal pure returns (ebool)
+```
+
+Converts a eaddress to an ebool
+
+### asEuint8
+
+```solidity
+function asEuint8(eaddress value) internal pure returns (euint8)
+```
+
+Converts a eaddress to an euint8
+
+### asEuint16
+
+```solidity
+function asEuint16(eaddress value) internal pure returns (euint16)
+```
+
+Converts a eaddress to an euint16
+
+### asEuint32
+
+```solidity
+function asEuint32(eaddress value) internal pure returns (euint32)
+```
+
+Converts a eaddress to an euint32
+
+### asEuint64
+
+```solidity
+function asEuint64(eaddress value) internal pure returns (euint64)
+```
+
+Converts a eaddress to an euint64
+
+### asEuint128
+
+```solidity
+function asEuint128(eaddress value) internal pure returns (euint128)
+```
+
+Converts a eaddress to an euint128
+
+### asEuint256
+
+```solidity
+function asEuint256(eaddress value) internal pure returns (euint256)
+```
+
+Converts a eaddress to an euint256
+
+### asEaddress
+
+```solidity
+function asEaddress(struct inEaddress value) internal pure returns (eaddress)
+```
+
+Parses input ciphertexts from the user. Converts from encrypted raw bytes to an eaddress
+
+_Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key_
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | eaddress | a ciphertext representation of the input |
+
 ### asEbool
 
 ```solidity
@@ -3302,6 +3535,14 @@ function asEuint256(uint256 value) internal pure returns (euint256)
 ```
 
 Converts a uint256 to an euint256
+
+### asEaddress
+
+```solidity
+function asEaddress(uint256 value) internal pure returns (eaddress)
+```
+
+Converts a uint256 to an eaddress
 
 ### asEbool
 
@@ -3414,6 +3655,31 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint256 | a ciphertext representation of the input |
+
+### asEaddress
+
+```solidity
+function asEaddress(bytes value) internal pure returns (eaddress)
+```
+
+Parses input ciphertexts from the user. Converts from encrypted raw bytes to an eaddress
+
+_Also performs validation that the ciphertext is valid and has been encrypted using the network encryption key_
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | eaddress | a ciphertext representation of the input |
+
+### asEaddress
+
+```solidity
+function asEaddress(address value) internal pure returns (eaddress)
+```
+
+Converts a address to an eaddress
+Allows for a better user experience when working with eaddresses
 
 ### asEbool
 

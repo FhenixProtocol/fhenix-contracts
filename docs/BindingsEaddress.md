@@ -1,11 +1,11 @@
 # Solidity API
 
-## BindingsEuint256
+## BindingsEaddress
 
 ### eq
 
 ```solidity
-function eq(euint256 lhs, euint256 rhs) internal pure returns (ebool)
+function eq(eaddress lhs, eaddress rhs) internal pure returns (ebool)
 ```
 
 Performs the eq operation
@@ -16,8 +16,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint256 | input of type euint256 |
-| rhs | euint256 |  |
+| lhs | eaddress | input of type eaddress |
+| rhs | eaddress |  |
 
 #### Return Values
 
@@ -28,7 +28,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### ne
 
 ```solidity
-function ne(euint256 lhs, euint256 rhs) internal pure returns (ebool)
+function ne(eaddress lhs, eaddress rhs) internal pure returns (ebool)
 ```
 
 Performs the ne operation
@@ -39,8 +39,8 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| lhs | euint256 | input of type euint256 |
-| rhs | euint256 |  |
+| lhs | eaddress | input of type eaddress |
+| rhs | eaddress |  |
 
 #### Return Values
 
@@ -51,54 +51,54 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 ### toBool
 
 ```solidity
-function toBool(euint256 value) internal pure returns (ebool)
+function toBool(eaddress value) internal pure returns (ebool)
 ```
 
 ### toU8
 
 ```solidity
-function toU8(euint256 value) internal pure returns (euint8)
+function toU8(eaddress value) internal pure returns (euint8)
 ```
 
 ### toU16
 
 ```solidity
-function toU16(euint256 value) internal pure returns (euint16)
+function toU16(eaddress value) internal pure returns (euint16)
 ```
 
 ### toU32
 
 ```solidity
-function toU32(euint256 value) internal pure returns (euint32)
+function toU32(eaddress value) internal pure returns (euint32)
 ```
 
 ### toU64
 
 ```solidity
-function toU64(euint256 value) internal pure returns (euint64)
+function toU64(eaddress value) internal pure returns (euint64)
 ```
 
 ### toU128
 
 ```solidity
-function toU128(euint256 value) internal pure returns (euint128)
+function toU128(eaddress value) internal pure returns (euint128)
 ```
 
-### toEaddress
+### toU256
 
 ```solidity
-function toEaddress(euint256 value) internal pure returns (eaddress)
+function toU256(eaddress value) internal pure returns (euint256)
 ```
 
 ### seal
 
 ```solidity
-function seal(euint256 value, bytes32 publicKey) internal pure returns (string)
+function seal(eaddress value, bytes32 publicKey) internal pure returns (string)
 ```
 
 ### decrypt
 
 ```solidity
-function decrypt(euint256 value) internal pure returns (uint256)
+function decrypt(eaddress value) internal pure returns (address)
 ```
 

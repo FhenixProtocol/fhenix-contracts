@@ -153,6 +153,12 @@ function toU128(ebool value) internal pure returns (euint128)
 function toU256(ebool value) internal pure returns (euint256)
 ```
 
+### toEaddress
+
+```solidity
+function toEaddress(ebool value) internal pure returns (eaddress)
+```
+
 ### seal
 
 ```solidity

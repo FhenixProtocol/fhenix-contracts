@@ -38,6 +38,12 @@ uint8 EUINT128_TFHE
 uint8 EUINT256_TFHE
 ```
 
+### EADDRESS_TFHE
+
+```solidity
+uint8 EADDRESS_TFHE
+```
+
 ### EBOOL_TFHE
 
 ```solidity
@@ -84,6 +90,12 @@ function bigIntToUint128(uint256 i) internal pure returns (uint128)
 
 ```solidity
 function bigIntToUint256(uint256 i) internal pure returns (uint256)
+```
+
+### bigIntToAddress
+
+```solidity
+function bigIntToAddress(uint256 i) internal pure returns (address)
 ```
 
 ### toBytes

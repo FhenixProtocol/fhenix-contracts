@@ -406,6 +406,12 @@ function toU128(euint64 value) internal pure returns (euint128)
 function toU256(euint64 value) internal pure returns (euint256)
 ```
 
+### toEaddress
+
+```solidity
+function toEaddress(euint64 value) internal pure returns (eaddress)
+```
+
 ### seal
 
 ```solidity
