@@ -13,8 +13,7 @@
     "FHE.sol",
     "FheOS.sol",
     "access/**",
-    "experimental/token/**",
-    "experimental/utils/BytesLib.sol",
+    "experimental/**",
     "utils/**"
   ],
   "keywords": [
