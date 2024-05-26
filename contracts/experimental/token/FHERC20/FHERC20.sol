@@ -115,7 +115,7 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
     // Transfers an encrypted amount.
     function _transferImpl(address from, address to, euint32 amount) internal returns (euint32) {
         // Make sure the sender has enough tokens.
-        euint32 amountToSend = FHE.select(amount.lt(_encBalances[from]), amount, FHE.asEuint32(0));
+        euint32 amountToSend = FHE.select(amount.lte(_encBalances[from]), amount, FHE.asEuint32(0));
 
         // Add to the balance of `to` and subract from the balance of `from`.
         _encBalances[to] = _encBalances[to] + amountToSend;
