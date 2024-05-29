@@ -8,6 +8,18 @@
 mapping(address => euint32) _encBalances
 ```
 
+### _allowed
+
+```solidity
+mapping(address => mapping(address => euint32)) _allowed
+```
+
+### totalEncryptedSupply
+
+```solidity
+euint32 totalEncryptedSupply
+```
+
 ### constructor
 
 ```solidity
