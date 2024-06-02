@@ -1,7 +1,7 @@
 {
   "name": "@fhenixprotocol/contracts",
   "description": "Smart Contract Library for the Fhenix Blockchain with FHE primitives",
-  "version": "0.2.0-beta.10",
+  "version": "0.2.0-beta.11",
   "author": {
     "name": "FhenixProtocol",
     "url": "https://github.com/fhenixprotocol/fhenix-contracts"

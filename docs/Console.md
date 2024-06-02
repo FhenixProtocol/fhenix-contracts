@@ -71,936 +71,936 @@ function _logAddress(address p0) internal pure
 ### logBytes
 
 ```solidity
-function logBytes(bytes p0) external pure
+function logBytes(bytes p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0) external pure
+function log(int256 p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0) external pure
+function log(uint256 p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0) external pure
+function log(string p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0) external pure
+function log(bool p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0) external pure
+function log(address p0) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1) external pure
+function log(int256 p0, int256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1) external pure
+function log(int256 p0, uint256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1) external pure
+function log(int256 p0, string p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1) external pure
+function log(int256 p0, bool p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1) external pure
+function log(int256 p0, address p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1) external pure
+function log(uint256 p0, int256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1) external pure
+function log(uint256 p0, uint256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1) external pure
+function log(uint256 p0, string p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1) external pure
+function log(uint256 p0, bool p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1) external pure
+function log(uint256 p0, address p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1) external pure
+function log(string p0, int256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1) external pure
+function log(string p0, uint256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1) external pure
+function log(string p0, string p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1) external pure
+function log(string p0, bool p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1) external pure
+function log(string p0, address p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1) external pure
+function log(bool p0, int256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1) external pure
+function log(bool p0, uint256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1) external pure
+function log(bool p0, string p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1) external pure
+function log(bool p0, bool p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1) external pure
+function log(bool p0, address p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1) external pure
+function log(address p0, int256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1) external pure
+function log(address p0, uint256 p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1) external pure
+function log(address p0, string p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1) external pure
+function log(address p0, bool p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1) external pure
+function log(address p0, address p1) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1, int256 p2) external pure
+function log(int256 p0, int256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1, uint256 p2) external pure
+function log(int256 p0, int256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1, string p2) external pure
+function log(int256 p0, int256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1, bool p2) external pure
+function log(int256 p0, int256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, int256 p1, address p2) external pure
+function log(int256 p0, int256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1, int256 p2) external pure
+function log(int256 p0, uint256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1, uint256 p2) external pure
+function log(int256 p0, uint256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1, string p2) external pure
+function log(int256 p0, uint256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1, bool p2) external pure
+function log(int256 p0, uint256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, uint256 p1, address p2) external pure
+function log(int256 p0, uint256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1, int256 p2) external pure
+function log(int256 p0, string p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1, uint256 p2) external pure
+function log(int256 p0, string p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1, string p2) external pure
+function log(int256 p0, string p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1, bool p2) external pure
+function log(int256 p0, string p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, string p1, address p2) external pure
+function log(int256 p0, string p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1, int256 p2) external pure
+function log(int256 p0, bool p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1, uint256 p2) external pure
+function log(int256 p0, bool p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1, string p2) external pure
+function log(int256 p0, bool p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1, bool p2) external pure
+function log(int256 p0, bool p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, bool p1, address p2) external pure
+function log(int256 p0, bool p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1, int256 p2) external pure
+function log(int256 p0, address p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1, uint256 p2) external pure
+function log(int256 p0, address p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1, string p2) external pure
+function log(int256 p0, address p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1, bool p2) external pure
+function log(int256 p0, address p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(int256 p0, address p1, address p2) external pure
+function log(int256 p0, address p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1, int256 p2) external pure
+function log(uint256 p0, int256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1, uint256 p2) external pure
+function log(uint256 p0, int256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1, string p2) external pure
+function log(uint256 p0, int256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1, bool p2) external pure
+function log(uint256 p0, int256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, int256 p1, address p2) external pure
+function log(uint256 p0, int256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1, int256 p2) external pure
+function log(uint256 p0, uint256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1, uint256 p2) external pure
+function log(uint256 p0, uint256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1, string p2) external pure
+function log(uint256 p0, uint256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1, bool p2) external pure
+function log(uint256 p0, uint256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, uint256 p1, address p2) external pure
+function log(uint256 p0, uint256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1, int256 p2) external pure
+function log(uint256 p0, string p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1, uint256 p2) external pure
+function log(uint256 p0, string p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1, string p2) external pure
+function log(uint256 p0, string p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1, bool p2) external pure
+function log(uint256 p0, string p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, string p1, address p2) external pure
+function log(uint256 p0, string p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1, int256 p2) external pure
+function log(uint256 p0, bool p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1, uint256 p2) external pure
+function log(uint256 p0, bool p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1, string p2) external pure
+function log(uint256 p0, bool p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1, bool p2) external pure
+function log(uint256 p0, bool p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, bool p1, address p2) external pure
+function log(uint256 p0, bool p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1, int256 p2) external pure
+function log(uint256 p0, address p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1, uint256 p2) external pure
+function log(uint256 p0, address p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1, string p2) external pure
+function log(uint256 p0, address p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1, bool p2) external pure
+function log(uint256 p0, address p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(uint256 p0, address p1, address p2) external pure
+function log(uint256 p0, address p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1, int256 p2) external pure
+function log(string p0, int256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1, uint256 p2) external pure
+function log(string p0, int256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1, string p2) external pure
+function log(string p0, int256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1, bool p2) external pure
+function log(string p0, int256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, int256 p1, address p2) external pure
+function log(string p0, int256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1, int256 p2) external pure
+function log(string p0, uint256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1, uint256 p2) external pure
+function log(string p0, uint256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1, string p2) external pure
+function log(string p0, uint256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1, bool p2) external pure
+function log(string p0, uint256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, uint256 p1, address p2) external pure
+function log(string p0, uint256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1, int256 p2) external pure
+function log(string p0, string p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1, uint256 p2) external pure
+function log(string p0, string p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1, string p2) external pure
+function log(string p0, string p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1, bool p2) external pure
+function log(string p0, string p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, string p1, address p2) external pure
+function log(string p0, string p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1, int256 p2) external pure
+function log(string p0, bool p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1, uint256 p2) external pure
+function log(string p0, bool p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1, string p2) external pure
+function log(string p0, bool p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1, bool p2) external pure
+function log(string p0, bool p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, bool p1, address p2) external pure
+function log(string p0, bool p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1, int256 p2) external pure
+function log(string p0, address p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1, uint256 p2) external pure
+function log(string p0, address p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1, string p2) external pure
+function log(string p0, address p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1, bool p2) external pure
+function log(string p0, address p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(string p0, address p1, address p2) external pure
+function log(string p0, address p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1, int256 p2) external pure
+function log(bool p0, int256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1, uint256 p2) external pure
+function log(bool p0, int256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1, string p2) external pure
+function log(bool p0, int256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1, bool p2) external pure
+function log(bool p0, int256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, int256 p1, address p2) external pure
+function log(bool p0, int256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1, int256 p2) external pure
+function log(bool p0, uint256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1, uint256 p2) external pure
+function log(bool p0, uint256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1, string p2) external pure
+function log(bool p0, uint256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1, bool p2) external pure
+function log(bool p0, uint256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, uint256 p1, address p2) external pure
+function log(bool p0, uint256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1, int256 p2) external pure
+function log(bool p0, string p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1, uint256 p2) external pure
+function log(bool p0, string p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1, string p2) external pure
+function log(bool p0, string p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1, bool p2) external pure
+function log(bool p0, string p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, string p1, address p2) external pure
+function log(bool p0, string p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1, int256 p2) external pure
+function log(bool p0, bool p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1, uint256 p2) external pure
+function log(bool p0, bool p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1, string p2) external pure
+function log(bool p0, bool p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1, bool p2) external pure
+function log(bool p0, bool p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, bool p1, address p2) external pure
+function log(bool p0, bool p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1, int256 p2) external pure
+function log(bool p0, address p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1, uint256 p2) external pure
+function log(bool p0, address p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1, string p2) external pure
+function log(bool p0, address p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1, bool p2) external pure
+function log(bool p0, address p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(bool p0, address p1, address p2) external pure
+function log(bool p0, address p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1, int256 p2) external pure
+function log(address p0, int256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1, uint256 p2) external pure
+function log(address p0, int256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1, string p2) external pure
+function log(address p0, int256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1, bool p2) external pure
+function log(address p0, int256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, int256 p1, address p2) external pure
+function log(address p0, int256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1, int256 p2) external pure
+function log(address p0, uint256 p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1, uint256 p2) external pure
+function log(address p0, uint256 p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1, string p2) external pure
+function log(address p0, uint256 p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1, bool p2) external pure
+function log(address p0, uint256 p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, uint256 p1, address p2) external pure
+function log(address p0, uint256 p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1, int256 p2) external pure
+function log(address p0, string p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1, uint256 p2) external pure
+function log(address p0, string p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1, string p2) external pure
+function log(address p0, string p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1, bool p2) external pure
+function log(address p0, string p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, string p1, address p2) external pure
+function log(address p0, string p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1, int256 p2) external pure
+function log(address p0, bool p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1, uint256 p2) external pure
+function log(address p0, bool p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1, string p2) external pure
+function log(address p0, bool p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1, bool p2) external pure
+function log(address p0, bool p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, bool p1, address p2) external pure
+function log(address p0, bool p1, address p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1, int256 p2) external pure
+function log(address p0, address p1, int256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1, uint256 p2) external pure
+function log(address p0, address p1, uint256 p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1, string p2) external pure
+function log(address p0, address p1, string p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1, bool p2) external pure
+function log(address p0, address p1, bool p2) internal pure
 ```
 
 ### log
 
 ```solidity
-function log(address p0, address p1, address p2) external pure
+function log(address p0, address p1, address p2) internal pure
 ```
 
