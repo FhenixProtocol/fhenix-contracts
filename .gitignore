@@ -10,6 +10,7 @@ dist
 node_modules
 types
 deployments
+.idea
 
 # files
 *.env
