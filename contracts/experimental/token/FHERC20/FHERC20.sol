@@ -85,7 +85,7 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
     function unwrap(uint32 amount) public {
         euint32 encAmount = FHE.asEuint32(amount);
 
-        euint32 amountToUnwrap = FHE.select(_encBalances[msg.sender].lte(encAmount), FHE.asEuint32(0), encAmount);
+        euint32 amountToUnwrap = FHE.select(_encBalances[msg.sender].gte(encAmount), encAmount, FHE.asEuint32(0));
 
         _encBalances[msg.sender] = _encBalances[msg.sender] - amountToUnwrap;
         totalEncryptedSupply = totalEncryptedSupply - amountToUnwrap;
