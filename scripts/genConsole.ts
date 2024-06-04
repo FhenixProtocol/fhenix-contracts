@@ -78,7 +78,7 @@ function generateCombinations(types: string[], n: number): string[][] {
 }
 
 let output = `// SPDX-License-Identifier: MIT
-pragma solidity >=0.8.19 <0.8.25;
+pragma solidity >=0.8.19 <0.9.0;
 
 import {FheOps, Precompiles} from "./FheOS.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
