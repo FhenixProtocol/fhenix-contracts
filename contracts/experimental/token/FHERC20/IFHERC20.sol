@@ -1,11 +1,11 @@
-pragma solidity >=0.8.19 <0.8.25;
+pragma solidity >=0.8.19 <0.9.0;
 
 // SPDX-License-Identifier: MIT
 // Fhenix Protocol (last updated v0.1.0) (token/FHERC20/IFHERC20.sol)
 // Inspired by OpenZeppelin (https://github.com/OpenZeppelin/openzeppelin-contracts) (token/ERC20/IERC20.sol)
 
 import { Permission, Permissioned } from "../../../access/Permissioned.sol";
-import { euint32, inEuint32 } from "../../../FHE.sol";
+import { euint128, inEuint128 } from "../../../FHE.sol";
 
 /**
  * @dev Interface of the ERC-20 standard as defined in the ERC.
@@ -42,8 +42,8 @@ interface IFHERC20 {
      *
      * Emits a {TransferEncrypted} event.
      */
-    function transferEncrypted(address to, inEuint32 calldata value) external returns (euint32);
-    function transferEncrypted(address to, euint32 value) external returns (euint32);
+    function transferEncrypted(address to, inEuint128 calldata value) external returns (euint128);
+    function transferEncrypted(address to, euint128 value) external returns (euint128);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -69,7 +69,7 @@ interface IFHERC20 {
      *
      * Emits an {ApprovalEncrypted} event.
      */
-    function approveEncrypted(address spender, inEuint32 calldata value) external returns (bool);
+    function approveEncrypted(address spender, inEuint128 calldata value) external returns (bool);
 
     /**
      * @dev Moves a `value` amount of tokens from `from` to `to` using the
@@ -80,6 +80,6 @@ interface IFHERC20 {
      *
      * Emits a {TransferEncrypted} event.
      */
-    function transferFromEncrypted(address from, address to, inEuint32 calldata value) external returns (euint32);
-    function transferFromEncrypted(address from, address to, euint32 value) external returns (euint32);
+    function transferFromEncrypted(address from, address to, inEuint128 calldata value) external returns (euint128);
+    function transferFromEncrypted(address from, address to, euint128 value) external returns (euint128);
 }

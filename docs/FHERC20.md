@@ -5,19 +5,19 @@
 ### _encBalances
 
 ```solidity
-mapping(address => euint32) _encBalances
+mapping(address => euint128) _encBalances
 ```
 
 ### _allowed
 
 ```solidity
-mapping(address => mapping(address => euint32)) _allowed
+mapping(address => mapping(address => euint128)) _allowed
 ```
 
 ### totalEncryptedSupply
 
 ```solidity
-euint32 totalEncryptedSupply
+euint128 totalEncryptedSupply
 ```
 
 ### constructor
@@ -29,7 +29,7 @@ constructor(string name, string symbol) public
 ### _allowanceEncrypted
 
 ```solidity
-function _allowanceEncrypted(address owner, address spender) public view virtual returns (euint32)
+function _allowanceEncrypted(address owner, address spender) public view virtual returns (euint128)
 ```
 
 ### allowanceEncrypted
@@ -47,7 +47,7 @@ This value changes when {approve} or {transferFrom} are called._
 ### approveEncrypted
 
 ```solidity
-function approveEncrypted(address spender, struct inEuint32 value) public virtual returns (bool)
+function approveEncrypted(address spender, struct inEuint128 value) public virtual returns (bool)
 ```
 
 _Sets a `value` amount of tokens as the allowance of `spender` over the
@@ -67,25 +67,25 @@ Emits an {ApprovalEncrypted} event._
 ### _approve
 
 ```solidity
-function _approve(address owner, address spender, euint32 value) internal
+function _approve(address owner, address spender, euint128 value) internal
 ```
 
 ### _spendAllowance
 
 ```solidity
-function _spendAllowance(address owner, address spender, euint32 value) internal virtual returns (euint32)
+function _spendAllowance(address owner, address spender, euint128 value) internal virtual returns (euint128)
 ```
 
 ### transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, euint32 value) public virtual returns (euint32)
+function transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128)
 ```
 
 ### transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, struct inEuint32 value) public virtual returns (euint32)
+function transferFromEncrypted(address from, address to, struct inEuint128 value) public virtual returns (euint128)
 ```
 
 _Moves a `value` amount of tokens from `from` to `to` using the
@@ -111,25 +111,25 @@ function unwrap(uint32 amount) public
 ### _mintEncrypted
 
 ```solidity
-function _mintEncrypted(address to, struct inEuint32 encryptedAmount) internal
+function _mintEncrypted(address to, struct inEuint128 encryptedAmount) internal
 ```
 
 ### transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, struct inEuint32 encryptedAmount) public returns (euint32)
+function transferEncrypted(address to, struct inEuint128 encryptedAmount) public returns (euint128)
 ```
 
 ### transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, euint32 amount) public returns (euint32)
+function transferEncrypted(address to, euint128 amount) public returns (euint128)
 ```
 
 ### _transferImpl
 
 ```solidity
-function _transferImpl(address from, address to, euint32 amount) internal returns (euint32)
+function _transferImpl(address from, address to, euint128 amount) internal returns (euint128)
 ```
 
 ### balanceOfEncrypted

@@ -35,7 +35,7 @@ _Returns the value of tokens owned by `account`, sealed and encrypted for the ca
 ### transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, struct inEuint32 value) external returns (euint32)
+function transferEncrypted(address to, struct inEuint128 value) external returns (euint128)
 ```
 
 _Moves a `value` amount of tokens from the caller's account to `to`.
@@ -47,7 +47,7 @@ Emits a {TransferEncrypted} event._
 ### transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, euint32 value) external returns (euint32)
+function transferEncrypted(address to, euint128 value) external returns (euint128)
 ```
 
 ### allowanceEncrypted
@@ -65,7 +65,7 @@ This value changes when {approve} or {transferFrom} are called._
 ### approveEncrypted
 
 ```solidity
-function approveEncrypted(address spender, struct inEuint32 value) external returns (bool)
+function approveEncrypted(address spender, struct inEuint128 value) external returns (bool)
 ```
 
 _Sets a `value` amount of tokens as the allowance of `spender` over the
@@ -85,7 +85,7 @@ Emits an {ApprovalEncrypted} event._
 ### transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, struct inEuint32 value) external returns (euint32)
+function transferFromEncrypted(address from, address to, struct inEuint128 value) external returns (euint128)
 ```
 
 _Moves a `value` amount of tokens from `from` to `to` using the
@@ -99,6 +99,6 @@ Emits a {TransferEncrypted} event._
 ### transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, euint32 value) external returns (euint32)
+function transferFromEncrypted(address from, address to, euint128 value) external returns (euint128)
 ```
 
