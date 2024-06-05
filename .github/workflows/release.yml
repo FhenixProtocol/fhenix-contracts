@@ -18,4 +18,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: cp README.md contracts/README.md
-      - run: cd contracts && pnpm publish --no-git-checks --tag beta
+      - run: cd contracts && pnpm publish --no-git-checks
