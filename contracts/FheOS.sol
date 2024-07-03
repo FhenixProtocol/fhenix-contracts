@@ -20,7 +20,7 @@ interface FheOps {
     function select(uint8 utype, bytes memory controlHash, bytes memory ifTrueHash, bytes memory ifFalseHash) external pure returns (bytes memory);
     function req(uint8 utype, bytes memory input) external pure returns (bytes memory);
     function cast(uint8 utype, bytes memory input, uint8 toType) external pure returns (bytes memory);
-    function trivialEncrypt(bytes memory input, uint8 toType) external pure returns (bytes memory);
+    function trivialEncrypt(bytes memory input, uint8 toType, int32 securityZone) external pure returns (bytes memory);
     function div(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function gt(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function gte(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
@@ -35,5 +35,5 @@ interface FheOps {
     function shl(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function shr(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function not(uint8 utype, bytes memory value) external pure returns (bytes memory);
-    function getNetworkPublicKey() external pure returns (bytes memory);
+    function getNetworkPublicKey(int32 securityZone) external pure returns (bytes memory);
 }
