@@ -23,6 +23,7 @@
     "access": "public"
   },
   "scripts": {
-    "docgen": "hardhat docgen"
+    "docgen": "hardhat docgen",
+    "compile": "hardhat compile"
   }
 }

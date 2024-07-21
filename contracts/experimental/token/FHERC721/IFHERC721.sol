@@ -5,10 +5,7 @@ pragma solidity >=0.8.19 <0.9.0;
 // Inspired by OpenZeppelin (https://github.com/OpenZeppelin/openzeppelin-contracts) (token/FHERC721/IFHERC721.sol)
 
 import { IERC721 } from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-// todo (eshel) remove
-import { IERC721 } from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Royalty.sol";
 import { Permission, Permissioned } from "../../../access/Permissioned.sol";
-import { euint256, inEuint256 } from "../../../FHE.sol";
 
 /**
  * @dev Interface of the ERC-721 standard as defined in the ERC.
@@ -18,11 +15,6 @@ interface IFHERC721 is IERC721 {
      * @dev Emitted when `owner` enables `approved` to view the private data of the `tokenId` token.
      */
     event ViewApproval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-
-    /**
-     * @dev Returns the Uniform Resource Identifier (URI) for `tokenId` token.
-     */
-    function tokenURI(uint256 tokenId) external view returns (string memory);
 
     /**
      * @dev Returns the private data associated with `tokenId` token, if the caller is allowed to view it.
@@ -43,5 +35,6 @@ interface IFHERC721 is IERC721 {
      *
      * Emits a {ViewApproval} event.
      */
-    function approveViewing(address to, uint256 tokenId) external;
+    // todo (eshel) restore
+    // function approveViewing(address to, uint256 tokenId) external;
 }
