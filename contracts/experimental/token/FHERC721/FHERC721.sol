@@ -29,6 +29,11 @@ contract FHERC721 is IFHERC721, Permissioned, ERC721 {
         return bytes(baseURI).length > 0 ? string.concat(baseURI, tokenId.toString()) : "";
     }
 
+    function _mint(address to, uint256 tokenId, inEuint256 privateData) internal {
+        super._mint(to, tokenId);
+        privateData[tokenId] = FHE.asEuint256(privateData);
+    }
+
     function tokenPrivateData(
         uint256 tokenId,
         Permission memory auth
