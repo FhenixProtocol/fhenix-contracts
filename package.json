@@ -8,7 +8,11 @@
   },
   "devDependencies": {
     "hardhat": "2.19.3",
-    "solidity-docgen": "0.6.0-beta.36"
+    "solidity-docgen": "0.6.0-beta.36",
+    "@openzeppelin/test-helpers": "^0.5.13",
+    "@openzeppelin/contracts": "^5.0.2",
+    "@nomiclabs/hardhat-truffle5": "^2.0.5",
+    "hardhat-exposed": "^0.3.13"
   },
   "files": [
     "contracts"
