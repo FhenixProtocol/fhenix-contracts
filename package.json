@@ -24,6 +24,7 @@
   },
   "scripts": {
     "docgen": "hardhat docgen",
-    "compile": "hardhat compile"
+    "compile": "hardhat compile",
+    "test": "hardhat test"
   }
 }
