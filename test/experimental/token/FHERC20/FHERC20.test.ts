@@ -1,20 +1,21 @@
 const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
-// const { ZERO_ADDRESS } = constants;
-//
-// const {
-//   shouldBehaveLikeERC20,
-//   shouldBehaveLikeERC20Transfer,
-//   shouldBehaveLikeERC20Approve,
-// } = require('./ERC20.behavior');
+
+import hre from "hardhat";
+const { ZERO_ADDRESS } = constants;
+
+const {
+  shouldBehaveLikeERC20,
+  shouldBehaveLikeERC20Transfer,
+  shouldBehaveLikeERC20Approve,
+} = require('./FHERC20.behavior');
 // const { expectRevertCustomError } = require('../../helpers/customError');
 
 const TOKENS = [
-  { Token: artifacts.require('$ERC20') },
-  { Token: artifacts.require('$ERC20ApprovalMock'), forcedApproval: true },
+  { Token: artifacts.require('$FHERC20') },
 ];
 
-contract('ERC20', function (accounts) {
+contract('FHERC20', function (accounts) {
   const [initialHolder, recipient] = accounts;
 
   const name = 'My Token';
@@ -23,12 +24,27 @@ contract('ERC20', function (accounts) {
 
   for (const { Token, forcedApproval } of TOKENS) {
     describe(`using ${Token._json.contractName}`, function () {
+
       beforeEach(async function () {
+        // get sufficient funds
+        const { fhenixjs, ethers, deployments } = hre;
+        const [signer, spender] = await ethers.getSigners();
+
+        // fund first account: owner
+        if ((await ethers.provider.getBalance(signer.address)).toString() === "0") {
+          await fhenixjs.getFunds(signer.address);
+        }
+
+        // fund second account as it is sometimes an allowed spender
+        if ((await ethers.provider.getBalance(spender.address)).toString() === "0") {
+          await fhenixjs.getFunds(spender.address);
+        }
+
         this.token = await Token.new(name, symbol);
         await this.token.$_mint(initialHolder, initialSupply);
       });
 
-      // shouldBehaveLikeERC20(initialSupply, accounts, { forcedApproval });
+      shouldBehaveLikeERC20(initialSupply, accounts, { forcedApproval });
 
       it('has a name', async function () {
         expect(await this.token.name()).to.equal(name);
