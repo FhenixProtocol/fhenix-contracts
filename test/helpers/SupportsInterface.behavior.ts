@@ -92,6 +92,7 @@ for (const k of Object.getOwnPropertyNames(INTERFACES)) {
 }
 
 function shouldSupportInterfaces(interfaces = []) {
+  // todo (eshel) add support for IFHERC721 supportInterface
   describe('ERC165', function () {
     beforeEach(function () {
       this.contractUnderTest = this.mock || this.token || this.holder || this.accessControl;

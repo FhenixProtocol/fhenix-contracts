@@ -1,4 +1,5 @@
 const { shouldBehaveLikeERC721, shouldBehaveLikeERC721Metadata } = require('./ERC721.behavior');
+const { shouldBehaveLikeFHERC721 } = require('./FHERC721.behavior');
 
 const ERC721 = artifacts.require('$FHERC721');
 
@@ -31,4 +32,5 @@ contract.only('FHERC721 as ERC721', function (accounts) {
 
   shouldBehaveLikeERC721(...accounts);
   shouldBehaveLikeERC721Metadata(name, symbol, ...accounts);
+  shouldBehaveLikeFHERC721Metadata(name, symbol, ...accounts);
 });
