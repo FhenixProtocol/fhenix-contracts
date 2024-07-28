@@ -779,7 +779,7 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
 function shouldBehaveLikeERC721Metadata(name, symbol, owner) {
   shouldSupportInterfaces(['ERC721Metadata']);
 
-  describe.only('metadata', function () {
+  describe('metadata', function () {
     it('has a name', async function () {
       expect(await this.token.name()).to.be.equal(name);
     });

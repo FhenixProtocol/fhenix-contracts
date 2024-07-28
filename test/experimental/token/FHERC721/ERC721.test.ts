@@ -3,7 +3,7 @@ const { shouldBehaveLikeFHERC721 } = require('./FHERC721.behavior');
 
 const ERC721 = artifacts.require('$FHERC721');
 
-contract.only('FHERC721 as ERC721', function (accounts) {
+contract('FHERC721 as ERC721', function (accounts) {
   const name = 'Non Fungible Token';
   const symbol = 'NFT';
 
@@ -31,6 +31,6 @@ contract.only('FHERC721 as ERC721', function (accounts) {
   });
 
   shouldBehaveLikeERC721(...accounts);
+  shouldBehaveLikeFHERC721(...accounts);
   shouldBehaveLikeERC721Metadata(name, symbol, ...accounts);
-  shouldBehaveLikeFHERC721Metadata(name, symbol, ...accounts);
 });
