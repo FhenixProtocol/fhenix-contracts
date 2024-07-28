@@ -719,7 +719,7 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
       ]);
     });
 
-    context.only('with minted token', async function () {
+    context('with minted token', async function () {
       beforeEach(async function () {
         const privateMetadataEnc = await fhenixjs.encrypt_uint256(privateMetadata);
         this.receipt = await this.token.$_mint(owner, firstTokenId, privateMetadataEnc);
@@ -740,41 +740,41 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
       });
     });
   });
-//
-//   describe('_burn', function () {
-//     it('reverts when burning a non-existent token id', async function () {
-//       await expectRevertCustomError(this.token.$_burn(nonExistentTokenId), 'ERC721NonexistentToken', [
-//         nonExistentTokenId,
-//       ]);
-//     });
-//
-//     context('with minted tokens', function () {
-//       beforeEach(async function () {
-//         await this.token.$_mint(owner, firstTokenId);
-//         await this.token.$_mint(owner, secondTokenId);
-//       });
-//
-//       context('with burnt token', function () {
-//         beforeEach(async function () {
-//           this.receipt = await this.token.$_burn(firstTokenId);
-//         });
-//
-//         it('emits a Transfer event', function () {
-//           expectEvent(this.receipt, 'Transfer', { from: owner, to: ZERO_ADDRESS, tokenId: firstTokenId });
-//         });
-//
-//         it('deletes the token', async function () {
-//           expect(await this.token.balanceOf(owner)).to.be.bignumber.equal('1');
-//           await expectRevertCustomError(this.token.ownerOf(firstTokenId), 'ERC721NonexistentToken', [firstTokenId]);
-//         });
-//
-//         it('reverts when burning a token id that has been deleted', async function () {
-//           await expectRevertCustomError(this.token.$_burn(firstTokenId), 'ERC721NonexistentToken', [firstTokenId]);
-//         });
-//       });
-//     });
-//   });
-// }
+
+  describe('_burn', function () {
+    it('reverts when burning a non-existent token id', async function () {
+      await expectRevertCustomError(this.token.$_burn(nonExistentTokenId), 'ERC721NonexistentToken', [
+        nonExistentTokenId,
+      ]);
+    });
+
+    context('with minted tokens', function () {
+      beforeEach(async function () {
+        await this.token.$_mint(owner, firstTokenId);
+        await this.token.$_mint(owner, secondTokenId);
+      });
+
+      context('with burnt token', function () {
+        beforeEach(async function () {
+          this.receipt = await this.token.$_burn(firstTokenId);
+        });
+
+        it('emits a Transfer event', function () {
+          expectEvent(this.receipt, 'Transfer', { from: owner, to: ZERO_ADDRESS, tokenId: firstTokenId });
+        });
+
+        it('deletes the token', async function () {
+          expect(await this.token.balanceOf(owner)).to.be.bignumber.equal('1');
+          await expectRevertCustomError(this.token.ownerOf(firstTokenId), 'ERC721NonexistentToken', [firstTokenId]);
+        });
+
+        it('reverts when burning a token id that has been deleted', async function () {
+          await expectRevertCustomError(this.token.$_burn(firstTokenId), 'ERC721NonexistentToken', [firstTokenId]);
+        });
+      });
+    });
+  });
+}
 //
 // function shouldBehaveLikeERC721Enumerable(owner, newOwner, approved, anotherApproved, operator, other) {
 //   shouldSupportInterfaces(['ERC721Enumerable']);
@@ -976,7 +976,7 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
 //       });
 //     });
 //   });
-}
+// }
 
 module.exports = {
   shouldBehaveLikeERC721,
