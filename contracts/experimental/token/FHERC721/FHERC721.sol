@@ -46,6 +46,8 @@ contract FHERC721 is IFHERC721, Permissioned, ERC721 {
      * @dev See {IERC165-supportsInterface}.
      */
     function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, IERC165) returns (bool) {
-        return super.supportsInterface(interfaceId);
+        return
+            interfaceId == type(IFHERC721).interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 }
