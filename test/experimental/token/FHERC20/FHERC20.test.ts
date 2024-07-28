@@ -23,8 +23,6 @@ contract.only('FHERC20 encrypted', function (accounts) {
   const symbol = 'MTKN';
   const initialSupply = 100n;
 
-
-
   for (const { Token, forcedApproval } of TOKENS) {
     describe(`using ${Token._json.contractName}`, function () {
       before(async function () {

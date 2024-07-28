@@ -187,7 +187,7 @@ function shouldBehaveLikeFHERC20Transfer(from, to, balance, transfer) {
     describe('when the sender does not have enough balance', function () {
       const value = balance + 1n;
 
-      it.only("doesn't transfer value", async function () {
+      it("doesn't transfer value", async function () {
         await transfer.call(this, from, to, value);
 
         const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
@@ -206,21 +206,29 @@ function shouldBehaveLikeFHERC20Transfer(from, to, balance, transfer) {
       it('transfers the requested value', async function () {
         await transfer.call(this, from, to, value);
 
-        expect(await this.token.balanceOfEncrypted(from)).to.be.bignumber.equal('0');
+        const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+        const balanceToAfter = fhenixjs.unseal(this.token.address, balanceToEnc);
+        expect(balanceToAfter).to.equal(value);
 
-        expect(await this.token.balanceOfEncrypted(to)).to.be.bignumber.equal(value);
+        const balanceEnc = await this.token.balanceOfEncrypted(from, await this.getPermission(from))
+        const balanceAfter = fhenixjs.unseal(this.token.address, balanceEnc);
+        expect(balanceAfter).to.equal(0n);
       });
     });
 
     describe('when the sender transfers zero tokens', function () {
-      const value = new BN('0');
+      const value = 0n;
 
       it('transfers the requested value', async function () {
         await transfer.call(this, from, to, value);
 
-        expect(await this.token.balanceOfEncrypted(from)).to.be.bignumber.equal(balance);
+        const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+        const balanceToAfter = fhenixjs.unseal(this.token.address, balanceToEnc);
+        expect(balanceToAfter).to.equal(0n);
 
-        expect(await this.token.balanceOfEncrypted(to)).to.be.bignumber.equal('0');
+        const balanceEnc = await this.token.balanceOfEncrypted(from, await this.getPermission(from))
+        const balanceAfter = fhenixjs.unseal(this.token.address, balanceEnc);
+        expect(balanceAfter).to.equal(balance);
       });
     });
   });
