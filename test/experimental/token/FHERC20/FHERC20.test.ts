@@ -75,7 +75,7 @@ contract('FHERC20 encrypted', function (accounts) {
             expect(await this.token.totalSupply()).to.be.bignumber.equal(expectedSupply);
           });
 
-          it.only('increments recipient balance', async function () {
+          it('increments recipient balance', async function () {
             const balanceEnc = await this.token.balanceOfEncrypted(recipient, await this.getPermission(recipient))
             const balance = fhenixjs.unseal(this.token.address, balanceEnc);
             expect(balance).to.equal(value);

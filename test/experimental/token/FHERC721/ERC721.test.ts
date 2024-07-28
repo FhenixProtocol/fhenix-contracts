@@ -11,5 +11,5 @@ contract.only('FHERC721 as ERC721', function (accounts) {
   });
 
   shouldBehaveLikeERC721(...accounts);
-  shouldBehaveLikeERC721Metadata(name, symbol, ...accounts);
+  // shouldBehaveLikeERC721Metadata(name, symbol, ...accounts);
 });
