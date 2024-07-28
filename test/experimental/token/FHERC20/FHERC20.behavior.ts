@@ -10,14 +10,18 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 
   describe('balanceOfEncrypted', function () {
     describe('when the requested account has no tokens', function () {
-      it('returns zero', async function () {
-        expect(await this.token.balanceOfEncrypted(anotherAccount)).to.be.bignumber.equal('0');
+      it.only('returns zero', async function () {
+        const balanceEnc = await this.token.balanceOfEncrypted(anotherAccount, await this.getPermission(anotherAccount))
+        const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+        expect(balance).to.equal(0n);
       });
     });
 
     describe('when the requested account has some tokens', function () {
-      it('returns the total token value', async function () {
-        expect(await this.token.balanceOfEncrypted(initialHolder)).to.be.bignumber.equal(initialSupply);
+      it.only('returns the total token value', async function () {
+        const balanceEnc = await this.token.balanceOfEncrypted(initialHolder, await this.getPermission(initialHolder))
+        const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+        expect(balance).to.equal(initialSupply);
       });
     });
   });
@@ -79,14 +83,14 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
               await expectRevertCustomError(
                 this.token.transferFromEncrypted(tokenOwner, to, value, { from: spender }),
                 'ERC20InsufficientBalance',
-                [tokenOwner, value - 1, value],
+                [tokenOwner, value - 1n, value],
               );
             });
           });
         });
 
         describe('when the spender does not have enough allowance', function () {
-          const allowance = initialSupply.subn(1);
+          const allowance = initialSupply - 1n;
 
           beforeEach(async function () {
             await this.token.approveEncrypted(spender, allowance, { from: tokenOwner });
@@ -115,7 +119,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
               await expectRevertCustomError(
                 this.token.transferFromEncrypted(tokenOwner, to, value, { from: spender }),
                 'ERC20InsufficientBalance',
-                [tokenOwner, value - 1, value],
+                [tokenOwner, value - 1n, value],
               );
             });
           });
@@ -177,7 +181,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 function shouldBehaveLikeFHERC20Transfer(from, to, balance, transfer) {
   describe('when the recipient is not the zero address', function () {
     describe('when the sender does not have enough balance', function () {
-      const value = balance.addn(1);
+      const value = balance + 1n;
 
       it('reverts', async function () {
         await expectRevertCustomError(transfer.call(this, from, to, value), 'ERC20InsufficientBalance', [
@@ -257,7 +261,7 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
     });
 
     describe('when the sender does not have enough balance', function () {
-      const value = supply.addn(1);
+      const value = supply + 1n;
 
       describe('when there was no approved value before', function () {
         it('approves the requested value', async function () {

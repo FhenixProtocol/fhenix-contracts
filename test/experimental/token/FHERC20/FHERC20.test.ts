@@ -20,15 +20,25 @@ contract('FHERC20 encrypted', function (accounts) {
 
   const name = 'My Token';
   const symbol = 'MTKN';
-  const initialSupply = new BN(100);
+  const initialSupply = 100n;
+
+
 
   for (const { Token, forcedApproval } of TOKENS) {
     describe(`using ${Token._json.contractName}`, function () {
+      before(async function () {
+        this.signers = (await ethers.getSigners()).slice(0, 3);
+        this.getPermission = async address => {
+          const signer = this.signers.find(s => s.address === address);
+          const permit = await fhenixjs.generatePermit(this.token.address, undefined, signer)
+          return fhenixjs.extractPermitPermission(permit);
+        }
+      });
 
       beforeEach(async function () {
         // get sufficient funds
-        const { fhenixjs, ethers, deployments } = hre;
-        const [signer, spender] = await ethers.getSigners();
+        const { ethers, deployments } = hre;
+        const [signer, spender] = this.signers;
 
         // fund first account: owner
         if ((await ethers.provider.getBalance(signer.address)).toString() === "0") {
@@ -40,11 +50,16 @@ contract('FHERC20 encrypted', function (accounts) {
           await fhenixjs.getFunds(spender.address);
         }
 
+        console.log("deploying token"); // todo (eshel): remove
         this.token = await Token.new(name, symbol);
-        await this.token.$_mint(initialHolder, initialSupply);
+
+        const encryptedInitialSupply = await fhenixjs.encrypt_uint128(initialSupply);
+        await this.token.$_mintEncrypted(initialHolder, encryptedInitialSupply);
+        console.log("minted"); // todo (eshel) remove
+        console.log("initial holder:", initialHolder); // todo (eshel) remove
       });
 
-      shouldBehaveLikeFHERC20(initialSupply, accounts, { forcedApproval });
+      shouldBehaveLikeFHERC20(initialSupply, accounts, { forcedApproval});
 
       describe('_mintEncrypted', function () {
         const value = new BN(50);
