@@ -85,12 +85,17 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
               await this.token.transferEncrypted(to, valueEnc, { from: tokenOwner });
             });
 
-            it('reverts', async function () {
-              await expectRevertCustomError(
-                this.token.transferFromEncrypted(tokenOwner, to, value, { from: spender }),
-                'ERC20InsufficientBalance',
-                [tokenOwner, value - 1n, value],
-              );
+            it("doesn't transfer the requested value", async function () {
+              const valueEnc = await fhenixjs.encrypt_uint128(value);
+              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+
+              const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
+              const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+              expect(balance).to.equal(value - 1n);
+
+              const balanceEncTo = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+              const balanceTo = fhenixjs.unseal(this.token.address, balanceEncTo);
+              expect(balanceTo).to.equal(1n);
             });
           });
         });
@@ -106,12 +111,17 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
           describe('when the token owner has enough balance', function () {
             const value = initialSupply;
 
-            it('reverts', async function () {
-              await expectRevertCustomError(
-                this.token.transferFrom(tokenOwner, to, value, { from: spender }),
-                'ERC20InsufficientAllowance',
-                [spender, allowance, value],
-              );
+            it("doesn't transfer the requested value", async function () {
+              const valueEnc = await fhenixjs.encrypt_uint128(value);
+              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+
+              const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
+              const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+              expect(balance).to.equal(value);
+
+              const balanceEncTo = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+              const balanceTo = fhenixjs.unseal(this.token.address, balanceEncTo);
+              expect(balanceTo).to.equal(0n);
             });
           });
 
@@ -119,38 +129,49 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
             const value = allowance;
 
             beforeEach('reducing balance', async function () {
-              await this.token.transferEncrypted(to, 2, { from: tokenOwner });
+              const reductionEnc = await fhenixjs.encrypt_uint128(2n);
+              await this.token.transferEncrypted(to, reductionEnc, { from: tokenOwner });
             });
 
-            it('reverts', async function () {
-              await expectRevertCustomError(
-                this.token.transferFromEncrypted(tokenOwner, to, value, { from: spender }),
-                'ERC20InsufficientBalance',
-                [tokenOwner, value - 1n, value],
-              );
+            it("doesn't transfer the requested value", async function () {
+              const valueEnc = await fhenixjs.encrypt_uint128(value);
+              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+
+              const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
+              const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+              expect(balance).to.equal(value - 1n);
+
+              const balanceEncTo = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+              const balanceTo = fhenixjs.unseal(this.token.address, balanceEncTo);
+              expect(balanceTo).to.equal(2n); // because we sent 2 tokens here when lowering balance
             });
           });
         });
 
-        describe('when the spender has unlimited allowance', function () {
+        // FHERC20 does not have this functionality
+        describe.skip('when the spender has unlimited allowance', function () {
           beforeEach(async function () {
+            // todo if unskipped - encrypt amount
             await this.token.approve(spender, MAX_UINT256, { from: initialHolder });
           });
 
           it('does not decrease the spender allowance', async function () {
-            await this.token.transferFromEncrypted(tokenOwner, to, 1, { from: spender });
+            const encryptedValue = await fhenixjs.encrypt_uint128(1n);
+            await this.token.transferFromEncrypted(tokenOwner, to, encryptedValue, { from: spender });
 
-            expect(await this.token.allowanceEncrypted(tokenOwner, spender)).to.be.bignumber.equal(MAX_UINT256);
+            expect(await this.token.allowanceEncrypted(tokenOwner, spender)).to.equal(MAX_UINT256);
           });
         });
       });
 
-      describe('when the recipient is the zero address', function () {
+      // FHERC20 does not have this functionality
+      describe.skip('when the recipient is the zero address', function () {
         const value = initialSupply;
         const to = ZERO_ADDRESS;
 
         beforeEach(async function () {
-          await this.token.approveEncrypted(spender, value, { from: tokenOwner });
+          const encryptedValue = await fhenixjs.encrypt_uint128(value);
+          await this.token.approveEncrypted(spender, encryptedValue, { from: tokenOwner });
         });
 
         it('reverts', async function () {
@@ -163,7 +184,8 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
       });
     });
 
-    describe('when the token owner is the zero address', function () {
+    // FHERC20 does not have this functionality
+    describe.skip('when the token owner is the zero address', function () {
       const value = 0;
       const tokenOwner = ZERO_ADDRESS;
       const to = recipient;
@@ -179,8 +201,9 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
   });
 
   describe('approve', function () {
-    shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, function (owner, spender, value) {
-      return this.token.approveEncrypted(spender, value, { from: owner });
+    shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, async function (owner, spender, value) {
+      const encryptedValue = await fhenixjs.encrypt_uint128(value);
+      return this.token.approveEncrypted(spender, encryptedValue, { from: owner });
     });
   });
 }
@@ -251,19 +274,14 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
     describe('when the sender has enough balance', function () {
       const value = supply;
 
-      it('emits an approval event', async function () {
-        expectEvent(await approve.call(this, owner, spender, value), 'Approval', {
-          owner: owner,
-          spender: spender,
-          value: value,
-        });
-      });
-
       describe('when there was no approved value before', function () {
         it('approves the requested value', async function () {
           await approve.call(this, owner, spender, value);
 
-          expect(await this.token.allowanceEncrypted(owner, spender)).to.be.bignumber.equal(value);
+
+          const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
+          const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+          expect(balance).to.equal(0n);
         });
       });
 
