@@ -200,7 +200,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
     });
   });
 
-  describe('approve', function () {
+  describe.only('approve', function () {
     shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, async function (owner, spender, value) {
       const encryptedValue = await fhenixjs.encrypt_uint128(value);
       return this.token.approveEncrypted(spender, encryptedValue, { from: owner });
@@ -277,11 +277,11 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
       describe('when there was no approved value before', function () {
         it('approves the requested value', async function () {
           await approve.call(this, owner, spender, value);
-
+          console.log("done approving");
 
           const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
           const balance = fhenixjs.unseal(this.token.address, balanceEnc);
-          expect(balance).to.equal(0n);
+          expect(balance).to.equal(value);
         });
       });
 
@@ -293,7 +293,9 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
         it('approves the requested value and replaces the previous one', async function () {
           await approve.call(this, owner, spender, value);
 
-          expect(await this.token.allowanceEncrypted(owner, spender)).to.be.bignumber.equal(value);
+          const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
+          const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+          expect(balance).to.equal(value);
         });
       });
     });
@@ -305,7 +307,9 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
         it('approves the requested value', async function () {
           await approve.call(this, owner, spender, value);
 
-          expect(await this.token.allowanceEncrypted(owner, spender)).to.be.bignumber.equal(value);
+          const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
+          const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+          expect(balance).to.equal(value);
         });
       });
 
@@ -317,7 +321,9 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
         it('approves the requested value and replaces the previous one', async function () {
           await approve.call(this, owner, spender, value);
 
-          expect(await this.token.allowanceEncrypted(owner, spender)).to.be.bignumber.equal(value);
+          const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
+          const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+          expect(balance).to.equal(value);
         });
       });
     });

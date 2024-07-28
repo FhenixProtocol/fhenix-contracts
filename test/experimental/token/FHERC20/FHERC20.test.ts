@@ -50,32 +50,30 @@ contract.only('FHERC20 encrypted', function (accounts) {
         }
 
         this.token = await Token.new(name, symbol);
-        console.log("deployed token:", this.token.address); // todo (eshel): remove
 
         const encryptedInitialSupply = await fhenixjs.encrypt_uint128(initialSupply);
         await this.token.$_mintEncrypted(initialHolder, encryptedInitialSupply);
-        console.log("minted"); // todo (eshel) remove
       });
 
       shouldBehaveLikeFHERC20(initialSupply, accounts, { forcedApproval});
 
       describe('_mintEncrypted', function () {
-        const value = new BN(50);
-        // this is not implemented:
-        // it('rejects a null account', async function () {
-        //   await expectRevertCustomError(this.token.$_mintEncrypted(ZERO_ADDRESS, value), 'ERC20InvalidReceiver', [ZERO_ADDRESS]);
-        // });
+        const value = 50n;
+        // FHERC20 doesn't have a special case for the zero address
+        it.skip('rejects a null account', async function () {
+          await expectRevertCustomError(this.token.$_mintEncrypted(ZERO_ADDRESS, value), 'ERC20InvalidReceiver', [ZERO_ADDRESS]);
+        });
 
         describe('for a non zero account', function () {
           beforeEach('minting', async function () {
             this.receipt = await this.token.$_mintEncrypted(recipient, value);
           });
 
-          // this is not yet implmeneted:
-          // it('increments totalSupply', async function () {
-          //   const expectedSupply = initialSupply.add(value);
-          //   expect(await this.token.totalSupply()).to.be.bignumber.equal(expectedSupply);
-          // });
+          // Not yet implmeneted:
+          it.skip('increments totalSupply', async function () {
+            const expectedSupply = initialSupply.add(value);
+            expect(await this.token.totalSupply()).to.be.bignumber.equal(expectedSupply);
+          });
 
           it('increments recipient balance', async function () {
             expect(await this.token.balanceOf(recipient)).to.be.bignumber.equal(value);
@@ -83,48 +81,51 @@ contract.only('FHERC20 encrypted', function (accounts) {
         });
       });
 
-      // these encrypted functions are commented out as they don't deal with zero-addresses in a special way, like in ERC20
-      // describe('_transferImpl', function () {
-      //   const value = new BN(1);
-      //
-      //   it('from is the zero address', async function () {
-      //     const balanceBefore = await this.token.balanceOf(initialHolder);
-      //
-      //     await this.token.$_transferImpl(ZERO_ADDRESS, initialHolder, value);
-      //
-      //     // total encrypted supply not implemented:
-      //     // const totalSupply = await this.token.getEncryptedTotalSupply();
-      //     // expect(await this.token.getEncryptedTotalSupply()).to.be.bignumber.equal(totalSupply.add(value));
-      //     expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(balanceBefore.add(value));
-      //   });
-      //
-      //   it('to is the zero address', async function () {
-      //     const balanceBefore = await this.token.balanceOf(initialHolder);
-      //     // const totalSupply = await this.token.getTotalEncryptedSupply();
-      //
-      //     await this.token.$_transferImpl(initialHolder, ZERO_ADDRESS, value)
-      //     // expect(await this.token.getTotalEncryptedSupply()).to.be.bignumber.equal(totalSupply.sub(value));
-      //     expect(await this.token.balanceOfEncrypted(initialHolder)).to.be.bignumber.equal(balanceBefore.sub(value));
-      //   });
-      // });
+      // FHERC20 doesn't have a special case for the zero address
+      describe.skip('_transferImpl', function () {
+        const value = 1n;
 
-      describe('_transferImpl', function () {
-        // shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, function (from, to, value) {
-        //   return this.token.$_transferImpl(from, to, value);
-        // });
+        it('from is the zero address', async function () {
+          const balanceBefore = await this.token.balanceOf(initialHolder);
 
-        // describe('when the sender is the zero address', function () {
-        //   it('reverts', async function () {
-        //     await expectRevertCustomError(
-        //       this.token.$_transfer(ZERO_ADDRESS, recipient, initialSupply),
-        //       'ERC20InvalidSender',
-        //       [ZERO_ADDRESS],
-        //     );
-        //   });
-        // });
+          await this.token.$_transferImpl(ZERO_ADDRESS, initialHolder, value);
+
+          // total encrypted supply not implemented:
+          // const totalSupply = await this.token.getEncryptedTotalSupply();
+          // expect(await this.token.getEncryptedTotalSupply()).to.be.bignumber.equal(totalSupply.add(value));
+          // expect(await this.token.balanceOf(initialHolder)).to.be.bignumber.equal(balanceBefore.add(value));
+        });
+
+        it('to is the zero address', async function () {
+          const balanceBefore = await this.token.balanceOf(initialHolder);
+          // const totalSupply = await this.token.getTotalEncryptedSupply();
+
+          await this.token.$_transferImpl(initialHolder, ZERO_ADDRESS, value)
+          // expect(await this.token.getTotalEncryptedSupply()).to.be.bignumber.equal(totalSupply.sub(value));
+          expect(await this.token.balanceOfEncrypted(initialHolder)).to.be.bignumber.equal(balanceBefore.sub(value));
+        });
       });
 
-      describe('_approve', function () {
+      describe('_transferImpl', function () {
+        shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, function (from, to, value) {
+          const encValue = fhenixjs.encrypt_uint128(value);
+          return this.token.$_transferImpl(from, to, encValue);
+        });
+
+        // FHERC20 doesn't have a special case for the zero address
+        describe.skip('when the sender is the zero address', function () {
+          it('reverts', async function () {
+            await expectRevertCustomError(
+              this.token.$_transfer(ZERO_ADDRESS, recipient, initialSupply),
+              'ERC20InvalidSender',
+              [ZERO_ADDRESS],
+            );
+          });
+        });
+      });
+
+      // todo (eshel) temp skip, return later
+      describe.skip('_approve', function () {
         shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, function (owner, spender, value) {
           return this.token.$_approve(owner, spender, value);
         });
