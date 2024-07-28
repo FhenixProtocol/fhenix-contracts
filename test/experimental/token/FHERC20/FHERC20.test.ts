@@ -15,7 +15,8 @@ const TOKENS = [
   { Token: artifacts.require('$FHERC20') },
 ];
 
-contract('FHERC20 encrypted', function (accounts) {
+// todo (eshel) remove:
+contract.only('FHERC20 encrypted', function (accounts) {
   const [initialHolder, recipient] = accounts;
 
   const name = 'My Token';

@@ -31,7 +31,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 
   describe('transferEncrypted', function () {
     shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, async function (from, to, value) {
-      const encryptedValue = await fhenixjs.encrypt_uint128(100n);
+      const encryptedValue = await fhenixjs.encrypt_uint128(value);
       return this.token.transferEncrypted(to, encryptedValue, { from });
     });
   });
@@ -187,20 +187,16 @@ function shouldBehaveLikeFHERC20Transfer(from, to, balance, transfer) {
     describe('when the sender does not have enough balance', function () {
       const value = balance + 1n;
 
-      it.only("doesn't tranfer value", async function () {
-        console.log("calling transferEncrypted");
+      it.only("doesn't transfer value", async function () {
         await transfer.call(this, from, to, value);
-        console.log("called transferEncrypted");
 
-        // const balanceEnc = await this.token.balanceOfEncrypted(from, await this.getPermission(from))
-        // const balanceAfter = fhenixjs.unseal(this.token.address, balanceEnc);
-        // console.log("balanceAfterFrom:", balanceAfter);
-        // expect(balanceAfter).to.equal(balance);
-        //
-        // const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
-        // const balanceToAfter = fhenixjs.unseal(this.token.address, balanceToEnc);
-        // console.log("balanceAfterTo:", balanceAfter);
-        // expect(balanceToAfter).to.equal(0n);
+        const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+        const balanceToAfter = fhenixjs.unseal(this.token.address, balanceToEnc);
+        expect(balanceToAfter).to.equal(0n);
+
+        const balanceEnc = await this.token.balanceOfEncrypted(from, await this.getPermission(from))
+        const balanceAfter = fhenixjs.unseal(this.token.address, balanceEnc);
+        expect(balanceAfter).to.equal(balance);
       });
     });
 
