@@ -15,8 +15,7 @@ const TOKENS = [
   { Token: artifacts.require('$FHERC20') },
 ];
 
-// todo (eshel) remove:
-contract.only('FHERC20 encrypted', function (accounts) {
+contract('FHERC20 encrypted', function (accounts) {
   const [initialHolder, recipient] = accounts;
 
   const name = 'My Token';
@@ -66,7 +65,8 @@ contract.only('FHERC20 encrypted', function (accounts) {
 
         describe('for a non zero account', function () {
           beforeEach('minting', async function () {
-            this.receipt = await this.token.$_mintEncrypted(recipient, value);
+            const encryptedValue = await fhenixjs.encrypt_uint128(value);
+            this.receipt = await this.token.$_mintEncrypted(recipient, encryptedValue);
           });
 
           // Not yet implmeneted:
@@ -75,8 +75,10 @@ contract.only('FHERC20 encrypted', function (accounts) {
             expect(await this.token.totalSupply()).to.be.bignumber.equal(expectedSupply);
           });
 
-          it('increments recipient balance', async function () {
-            expect(await this.token.balanceOf(recipient)).to.be.bignumber.equal(value);
+          it.only('increments recipient balance', async function () {
+            const balanceEnc = await this.token.balanceOfEncrypted(recipient, await this.getPermission(recipient))
+            const balance = fhenixjs.unseal(this.token.address, balanceEnc);
+            expect(balance).to.equal(value);
           });
         });
       });
@@ -103,41 +105,6 @@ contract.only('FHERC20 encrypted', function (accounts) {
           await this.token.$_transferImpl(initialHolder, ZERO_ADDRESS, value)
           // expect(await this.token.getTotalEncryptedSupply()).to.be.bignumber.equal(totalSupply.sub(value));
           expect(await this.token.balanceOfEncrypted(initialHolder)).to.be.bignumber.equal(balanceBefore.sub(value));
-        });
-      });
-
-      describe('_transferImpl', function () {
-        shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, function (from, to, value) {
-          const encValue = fhenixjs.encrypt_uint128(value);
-          return this.token.$_transferImpl(from, to, encValue);
-        });
-
-        // FHERC20 doesn't have a special case for the zero address
-        describe.skip('when the sender is the zero address', function () {
-          it('reverts', async function () {
-            await expectRevertCustomError(
-              this.token.$_transfer(ZERO_ADDRESS, recipient, initialSupply),
-              'ERC20InvalidSender',
-              [ZERO_ADDRESS],
-            );
-          });
-        });
-      });
-
-      // todo (eshel) temp skip, return later
-      describe.skip('_approve', function () {
-        shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, function (owner, spender, value) {
-          return this.token.$_approve(owner, spender, value);
-        });
-
-        describe('when the owner is the zero address', function () {
-          it('reverts', async function () {
-            await expectRevertCustomError(
-              this.token.$_approve(ZERO_ADDRESS, recipient, initialSupply),
-              'ERC20InvalidApprover',
-              [ZERO_ADDRESS],
-            );
-          });
         });
       });
     });

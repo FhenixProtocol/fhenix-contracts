@@ -10,7 +10,6 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
   const [initialHolder, recipient, anotherAccount] = accounts;
   const { forcedApproval } = opts;
 
-  // todo (eshel) remove
   describe('balanceOfEncrypted', function () {
     describe('when the requested account has no tokens', function () {
       it('returns zero', async function () {
@@ -200,7 +199,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
     });
   });
 
-  describe.only('approve', function () {
+  describe('approve', function () {
     shouldBehaveLikeFHERC20Approve(initialHolder, recipient, initialSupply, async function (owner, spender, value) {
       const encryptedValue = await fhenixjs.encrypt_uint128(value);
       return this.token.approveEncrypted(spender, encryptedValue, { from: owner });
@@ -277,7 +276,6 @@ function shouldBehaveLikeFHERC20Approve(owner, spender, supply, approve) {
       describe('when there was no approved value before', function () {
         it('approves the requested value', async function () {
           await approve.call(this, owner, spender, value);
-          console.log("done approving");
 
           const balanceEnc = await this.token.allowanceEncrypted(owner, spender, await this.getPermission(spender))
           const balance = fhenixjs.unseal(this.token.address, balanceEnc);
