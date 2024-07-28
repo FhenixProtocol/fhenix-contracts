@@ -57,15 +57,12 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         return spent;
     }
 
-    function transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128) {
-        euint128 val = value;
-        euint128 spent = _spendAllowance(from, msg.sender, val);
-        _transferImpl(from, to, spent);
-        return spent;
+    function transferFromEncrypted(address from, address to, inEuint128 calldata value) public virtual returns (euint128) {
+        return _transferFromEncrypted(from, to, FHE.asEuint128(value));
     }
 
-    function transferFromEncrypted(address from, address to, inEuint128 calldata value) public virtual returns (euint128) {
-        euint128 val = FHE.asEuint128(value);
+    function _transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128) {
+        euint128 val = value;
         euint128 spent = _spendAllowance(from, msg.sender, val);
         _transferImpl(from, to, spent);
         return spent;

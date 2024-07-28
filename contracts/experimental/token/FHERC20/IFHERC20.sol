@@ -80,12 +80,23 @@ interface IFHERC20 {
     /**
      * @dev Moves a `value` amount of tokens from `from` to `to` using the
      * allowance mechanism. `value` is then deducted from the caller's
-     * allowance.
+     * allowance. Accepts the value as inEuint128, more convenient for calls from EOAs.
      *
      * Returns a boolean value indicating whether the operation succeeded.
      *
      * Emits a {TransferEncrypted} event.
      */
     function transferFromEncrypted(address from, address to, inEuint128 calldata value) external returns (euint128);
-    function transferFromEncrypted(address from, address to, euint128 value) external returns (euint128);
+
+    /**
+     * @dev Moves a `value` amount of tokens from `from` to `to` using the
+     * allowance mechanism. `value` is then deducted from the caller's
+     * allowance. Accepts the value as inEuint128, more convenient for calls
+     * from other contracts.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {TransferEncrypted} event.
+     */
+    function _transferFromEncrypted(address from, address to, euint128 value) external returns (euint128);
 }
