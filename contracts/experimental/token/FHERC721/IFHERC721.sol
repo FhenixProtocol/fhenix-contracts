@@ -35,6 +35,6 @@ interface IFHERC721 is IERC721 {
      *
      * Emits a {ViewApproval} event.
      */
-    // todo (eshel) restore
+    // todo (eshel) implement on a future extension
     // function approveViewing(address to, uint256 tokenId) external;
 }

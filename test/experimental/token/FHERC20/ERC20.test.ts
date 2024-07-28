@@ -15,7 +15,6 @@ const TOKENS = [
   { Token: artifacts.require('$FHERC20') },
 ];
 
-// todo (eshel) remove:
 contract('FHERC20 as ERC20', function (accounts) {
   const [initialHolder, recipient] = accounts;
 
