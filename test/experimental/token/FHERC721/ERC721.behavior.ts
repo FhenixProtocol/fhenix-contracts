@@ -2,7 +2,7 @@ const { BN, constants, expectEvent, expectRevert } = require('@openzeppelin/test
 const { expect } = require('chai');
 const { ZERO_ADDRESS } = constants;
 
-const { shouldSupportInterfaces } = require('../../utils/introspection/SupportsInterface.behavior');
+const { shouldSupportInterfaces } = require('../../helpers/SupportsInterface.behavior');
 const { expectRevertCustomError } = require('../../helpers/customError');
 const { Enum } = require('../../helpers/enums');
 
