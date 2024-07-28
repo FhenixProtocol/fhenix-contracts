@@ -776,63 +776,62 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
   });
 }
 
-// function shouldBehaveLikeERC721Metadata(name, symbol, owner) {
-//   shouldSupportInterfaces(['ERC721Metadata']);
-//
-//   describe('metadata', function () {
-//     it('has a name', async function () {
-//       expect(await this.token.name()).to.be.equal(name);
-//     });
-//
-//     it('has a symbol', async function () {
-//       expect(await this.token.symbol()).to.be.equal(symbol);
-//     });
-//
-//     describe('token URI', function () {
-//       beforeEach(async function () {
-//         await this.token.$_mint(owner, firstTokenId);
-//       });
-//
-//       it('return empty string by default', async function () {
-//         expect(await this.token.tokenURI(firstTokenId)).to.be.equal('');
-//       });
-//
-//       it('reverts when queried for non existent token id', async function () {
-//         await expectRevertCustomError(this.token.tokenURI(nonExistentTokenId), 'ERC721NonexistentToken', [
-//           nonExistentTokenId,
-//         ]);
-//       });
-//
-//       describe('base URI', function () {
-//         beforeEach(function () {
-//           if (this.token.setBaseURI === undefined) {
-//             this.skip();
-//           }
-//         });
-//
-//         it('base URI can be set', async function () {
-//           await this.token.setBaseURI(baseURI);
-//           expect(await this.token.baseURI()).to.equal(baseURI);
-//         });
-//
-//         it('base URI is added as a prefix to the token URI', async function () {
-//           await this.token.setBaseURI(baseURI);
-//           expect(await this.token.tokenURI(firstTokenId)).to.be.equal(baseURI + firstTokenId.toString());
-//         });
-//
-//         it('token URI can be changed by changing the base URI', async function () {
-//           await this.token.setBaseURI(baseURI);
-//           const newBaseURI = 'https://api.example.com/v2/';
-//           await this.token.setBaseURI(newBaseURI);
-//           expect(await this.token.tokenURI(firstTokenId)).to.be.equal(newBaseURI + firstTokenId.toString());
-//         });
-//       });
-//     });
-//   });
-// }
+function shouldBehaveLikeERC721Metadata(name, symbol, owner) {
+  shouldSupportInterfaces(['ERC721Metadata']);
+
+  describe.only('metadata', function () {
+    it('has a name', async function () {
+      expect(await this.token.name()).to.be.equal(name);
+    });
+
+    it('has a symbol', async function () {
+      expect(await this.token.symbol()).to.be.equal(symbol);
+    });
+
+    describe('token URI', function () {
+      beforeEach(async function () {
+        await this.token.$_mint(owner, firstTokenId);
+      });
+
+      it('return empty string by default', async function () {
+        expect(await this.token.tokenURI(firstTokenId)).to.be.equal('');
+      });
+
+      it('reverts when queried for non existent token id', async function () {
+        await expectRevertCustomError(this.token.tokenURI(nonExistentTokenId), 'ERC721NonexistentToken', [
+          nonExistentTokenId,
+        ]);
+      });
+
+      describe('base URI', function () {
+        beforeEach(function () {
+          if (this.token.setBaseURI === undefined) {
+            this.skip();
+          }
+        });
+
+        it('base URI can be set', async function () {
+          await this.token.setBaseURI(baseURI);
+          expect(await this.token.baseURI()).to.equal(baseURI);
+        });
+
+        it('base URI is added as a prefix to the token URI', async function () {
+          await this.token.setBaseURI(baseURI);
+          expect(await this.token.tokenURI(firstTokenId)).to.be.equal(baseURI + firstTokenId.toString());
+        });
+
+        it('token URI can be changed by changing the base URI', async function () {
+          await this.token.setBaseURI(baseURI);
+          const newBaseURI = 'https://api.example.com/v2/';
+          await this.token.setBaseURI(newBaseURI);
+          expect(await this.token.tokenURI(firstTokenId)).to.be.equal(newBaseURI + firstTokenId.toString());
+        });
+      });
+    });
+  });
+}
 
 module.exports = {
   shouldBehaveLikeERC721,
-  shouldBehaveLikeERC721Enumerable,
-  // shouldBehaveLikeERC721Metadata,
+  shouldBehaveLikeERC721Metadata,
 };
