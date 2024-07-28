@@ -709,32 +709,37 @@ function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, oper
     });
   });
 
-//   describe('_mint(address, uint256)', function () {
-//     it('reverts with a null destination address', async function () {
-//       await expectRevertCustomError(this.token.$_mint(ZERO_ADDRESS, firstTokenId), 'ERC721InvalidReceiver', [
-//         ZERO_ADDRESS,
-//       ]);
-//     });
-//
-//     context('with minted token', async function () {
-//       beforeEach(async function () {
-//         this.receipt = await this.token.$_mint(owner, firstTokenId);
-//       });
-//
-//       it('emits a Transfer event', function () {
-//         expectEvent(this.receipt, 'Transfer', { from: ZERO_ADDRESS, to: owner, tokenId: firstTokenId });
-//       });
-//
-//       it('creates the token', async function () {
-//         expect(await this.token.balanceOf(owner)).to.be.bignumber.equal('1');
-//         expect(await this.token.ownerOf(firstTokenId)).to.equal(owner);
-//       });
-//
-//       it('reverts when adding a token id that already exists', async function () {
-//         await expectRevertCustomError(this.token.$_mint(owner, firstTokenId), 'ERC721InvalidSender', [ZERO_ADDRESS]);
-//       });
-//     });
-//   });
+  describe('_mint(address, uint256)', function () {
+    const privateMetadata = 1n;
+
+    it('reverts with a null destination address', async function () {
+      const privateMetadataEnc = await fhenixjs.encrypt_uint256(privateMetadata);
+      await expectRevertCustomError(this.token.$_mint(ZERO_ADDRESS, firstTokenId, privateMetadataEnc), 'ERC721InvalidReceiver', [
+        ZERO_ADDRESS,
+      ]);
+    });
+
+    context.only('with minted token', async function () {
+      beforeEach(async function () {
+        const privateMetadataEnc = await fhenixjs.encrypt_uint256(privateMetadata);
+        this.receipt = await this.token.$_mint(owner, firstTokenId, privateMetadataEnc);
+      });
+
+      it('emits a Transfer event', function () {
+        expectEvent(this.receipt, 'Transfer', { from: ZERO_ADDRESS, to: owner, tokenId: firstTokenId });
+      });
+
+      it('creates the token', async function () {
+        expect(await this.token.balanceOf(owner)).to.be.bignumber.equal('1');
+        expect(await this.token.ownerOf(firstTokenId)).to.equal(owner);
+      });
+
+      it('reverts when adding a token id that already exists', async function () {
+        const privateMetadataEnc = await fhenixjs.encrypt_uint256(privateMetadata);
+        await expectRevertCustomError(this.token.$_mint(owner, firstTokenId, privateMetadataEnc), 'ERC721InvalidSender', [ZERO_ADDRESS]);
+      });
+    });
+  });
 //
 //   describe('_burn', function () {
 //     it('reverts when burning a non-existent token id', async function () {
