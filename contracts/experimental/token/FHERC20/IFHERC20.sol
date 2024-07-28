@@ -58,7 +58,7 @@ interface IFHERC20 {
      *
      * This value changes when {approve} or {transferFrom} are called.
      */
-    function allowanceEncrypted(address spender, Permission memory permission) external view returns (string memory);
+    function allowanceEncrypted(address owner, address spender, Permission memory permission) external view returns (string memory);
 
     /**
      * @dev Sets a `value` amount of tokens as the allowance of `spender` over the

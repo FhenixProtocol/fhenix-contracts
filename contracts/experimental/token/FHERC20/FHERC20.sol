@@ -24,14 +24,16 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         string memory symbol
     ) ERC20(name, symbol) {}
 
-    function _allowanceEncrypted(address owner, address spender) public view virtual returns (euint128) {
+    function _allowanceEncrypted(address owner, address spender) internal view returns (euint128) {
         return _allowed[owner][spender];
     }
+
     function allowanceEncrypted(
+        address owner,
         address spender,
         Permission calldata permission
-    ) public view virtual onlySender(permission) returns (string memory) {
-        return FHE.sealoutput(_allowanceEncrypted(msg.sender, spender), permission.publicKey);
+    ) public view virtual onlyBetweenPermitted(permission, owner, spender) returns (string memory) {
+        return FHE.sealoutput(_allowanceEncrypted(owner, spender), permission.publicKey);
     }
 
     function approveEncrypted(address spender, inEuint128 calldata value) public virtual returns (bool) {
@@ -64,8 +66,7 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
     function _transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128) {
         euint128 val = value;
         euint128 spent = _spendAllowance(from, msg.sender, val);
-        _transferImpl(from, to, spent);
-        return spent;
+        return _transferImpl(from, to, spent);
     }
 
     function wrap(uint32 amount) public {

@@ -44,6 +44,21 @@ abstract contract Permissioned is EIP712 {
             revert SignerNotOwner();
         _;
     }
+
+    /// @notice Modifier that requires the provided signature to be signed by one of two specific addresses
+    /// @param permission Data structure containing the public key and the signature to be verified
+    /// @param owner The expected owner of the public key to match against the recovered signer
+    /// @param permitted A second permitted owner of the public key to match against the recovered signer
+    modifier onlyBetweenPermitted(Permission memory permission, address owner, address permitted) {
+        bytes32 digest = _hashTypedDataV4(keccak256(abi.encode(
+            keccak256("Permissioned(bytes32 publicKey)"),
+            permission.publicKey
+        )));
+        address signer = ECDSA.recover(digest, permission.signature);
+        if (signer != owner || signer != permitted)
+            revert SignerNotOwner();
+        _;
+    }
 }
 
 /// @title Struct for holding signature information

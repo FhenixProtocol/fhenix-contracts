@@ -48,15 +48,13 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
         describe('when the spender has enough allowance', function () {
           beforeEach(async function () {
             const initialSupplyEnc = await fhenixjs.encrypt_uint128(initialSupply);
-            console.log("approving");
             await this.token.approveEncrypted(spender, initialSupplyEnc, { from: initialHolder });
-            console.log("approved");
           });
 
           describe('when the token owner has enough balance', function () {
             const value = initialSupply;
 
-            it.only('transfers the requested value', async function () {
+            it('transfers the requested value', async function () {
               const valueEnc = await fhenixjs.encrypt_uint128(value);
               await this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
 
