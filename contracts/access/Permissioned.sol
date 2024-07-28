@@ -55,7 +55,7 @@ abstract contract Permissioned is EIP712 {
             permission.publicKey
         )));
         address signer = ECDSA.recover(digest, permission.signature);
-        if (signer != owner || signer != permitted)
+        if (signer != owner && signer != permitted)
             revert SignerNotOwner();
         _;
     }
