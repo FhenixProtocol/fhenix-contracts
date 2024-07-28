@@ -8,7 +8,7 @@ const {
   shouldBehaveLikeERC20,
   shouldBehaveLikeERC20Transfer,
   shouldBehaveLikeERC20Approve,
-} = require('./FHERC20.behavior');
+} = require('./ERC20.behavior');
 const { expectRevertCustomError } = require('../../../helpers/customError');
 
 const TOKENS = [
