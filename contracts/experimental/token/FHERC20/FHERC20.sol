@@ -104,11 +104,11 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
     }
 
     function transferEncrypted(address to, inEuint128 calldata encryptedAmount) public returns (euint128) {
-        return transferEncrypted(to, FHE.asEuint128(encryptedAmount));
+        return _transferEncrypted(to, FHE.asEuint128(encryptedAmount));
     }
 
     // Transfers an amount from the message sender address to the `to` address.
-    function transferEncrypted(address to, euint128 amount) public returns (euint128) {
+    function _transferEncrypted(address to, euint128 amount) public returns (euint128) {
         return _transferImpl(msg.sender, to, amount);
     }
 

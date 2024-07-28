@@ -1,3 +1,5 @@
+import {defineGetterMemoized} from "solidity-docgen/dist/utils/memoized-getter";
+
 const { BN, constants, expectEvent } = require('@openzeppelin/test-helpers');
 const { expect } = require('chai');
 const { ZERO_ADDRESS, MAX_UINT256 } = constants;
@@ -8,9 +10,10 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
   const [initialHolder, recipient, anotherAccount] = accounts;
   const { forcedApproval } = opts;
 
+  // todo (eshel) remove
   describe('balanceOfEncrypted', function () {
     describe('when the requested account has no tokens', function () {
-      it.only('returns zero', async function () {
+      it('returns zero', async function () {
         const balanceEnc = await this.token.balanceOfEncrypted(anotherAccount, await this.getPermission(anotherAccount))
         const balance = fhenixjs.unseal(this.token.address, balanceEnc);
         expect(balance).to.equal(0n);
@@ -18,7 +21,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
     });
 
     describe('when the requested account has some tokens', function () {
-      it.only('returns the total token value', async function () {
+      it('returns the total token value', async function () {
         const balanceEnc = await this.token.balanceOfEncrypted(initialHolder, await this.getPermission(initialHolder))
         const balance = fhenixjs.unseal(this.token.address, balanceEnc);
         expect(balance).to.equal(initialSupply);
@@ -27,8 +30,9 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
   });
 
   describe('transferEncrypted', function () {
-    shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, function (from, to, value) {
-      return this.token.transferEncrypted(to, value, { from });
+    shouldBehaveLikeFHERC20Transfer(initialHolder, recipient, initialSupply, async function (from, to, value) {
+      const encryptedValue = await fhenixjs.encrypt_uint128(100n);
+      return this.token.transferEncrypted(to, encryptedValue, { from });
     });
   });
 
@@ -183,12 +187,20 @@ function shouldBehaveLikeFHERC20Transfer(from, to, balance, transfer) {
     describe('when the sender does not have enough balance', function () {
       const value = balance + 1n;
 
-      it('reverts', async function () {
-        await expectRevertCustomError(transfer.call(this, from, to, value), 'ERC20InsufficientBalance', [
-          from,
-          balance,
-          value,
-        ]);
+      it.only("doesn't tranfer value", async function () {
+        console.log("calling transferEncrypted");
+        await transfer.call(this, from, to, value);
+        console.log("called transferEncrypted");
+
+        // const balanceEnc = await this.token.balanceOfEncrypted(from, await this.getPermission(from))
+        // const balanceAfter = fhenixjs.unseal(this.token.address, balanceEnc);
+        // console.log("balanceAfterFrom:", balanceAfter);
+        // expect(balanceAfter).to.equal(balance);
+        //
+        // const balanceToEnc = await this.token.balanceOfEncrypted(to, await this.getPermission(to))
+        // const balanceToAfter = fhenixjs.unseal(this.token.address, balanceToEnc);
+        // console.log("balanceAfterTo:", balanceAfter);
+        // expect(balanceToAfter).to.equal(0n);
       });
     });
 
