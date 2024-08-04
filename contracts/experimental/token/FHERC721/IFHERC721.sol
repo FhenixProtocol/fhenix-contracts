@@ -12,29 +12,7 @@ import { Permission, Permissioned } from "../../../access/Permissioned.sol";
  */
 interface IFHERC721 is IERC721 {
     /**
-     * @dev Emitted when `owner` enables `approved` to view the private data of the `tokenId` token.
-     */
-    event ViewApproval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-
-    /**
      * @dev Returns the private data associated with `tokenId` token, if the caller is allowed to view it.
      */
     function tokenPrivateData(uint256 tokenId, Permission memory auth) external view returns (string memory);
-
-    /**
-     * @dev Gives permission to `to` to view the private data associated with `tokenId` token.
-     *
-     * The approval is cleared when the token is transferred.
-     *
-     * Only a single account can be approved at a time, so approving the zero address clears previous approvals.
-     *
-     * Requirements:
-     *
-     * - The caller must own the token or be an approved operator.
-     * - `tokenId` must exist.
-     *
-     * Emits a {ViewApproval} event.
-     */
-    // todo (eshel) implement on a future extension
-    // function approveViewing(address to, uint256 tokenId) external;
 }
