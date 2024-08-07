@@ -27,7 +27,7 @@ jobs:
         run_install: false
 
     - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+      run: pnpm install --frozen-lockfile
     - name: Generate Docs
       run: |
         pnpm compile && pnpm docgen
