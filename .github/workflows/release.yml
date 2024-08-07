@@ -9,13 +9,28 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18.x
-      - uses: pnpm/action-setup@v2
+          node-version: 20.x
+      - name: Install pnpm & deps
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
+          version: latest
+          run_install: true
       - name: Set publishing config
         run: cd contracts && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
       - run: cp README.md contracts/README.md
-      - run: cd contracts && pnpm publish --no-git-checks
+      
+      - name: Read package version
+        id: package_version
+        run: echo "VERSION=$(jq -r .version < package.json)" >> $GITHUB_ENV
+
+      - name: Determine prerelease tag
+        id: prerelease_check
+        run: |
+          if [[ "${{ env.VERSION }}" =~ \-(alpha|beta)\.[0-9]+$ ]]; then
+            echo "PRERELEASE=--tag beta" >> $GITHUB_ENV
+          else
+            echo "PRERELEASE=" >> $GITHUB_ENV
+          fi
+      - run: cd contracts && pnpm publish --dry-run --no-git-checks ${{ env.PRERELEASE }}
