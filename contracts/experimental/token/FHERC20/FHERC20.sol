@@ -24,14 +24,16 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         string memory symbol
     ) ERC20(name, symbol) {}
 
-    function _allowanceEncrypted(address owner, address spender) public view virtual returns (euint128) {
+    function _allowanceEncrypted(address owner, address spender) internal view returns (euint128) {
         return _allowed[owner][spender];
     }
+
     function allowanceEncrypted(
+        address owner,
         address spender,
         Permission calldata permission
-    ) public view virtual onlySender(permission) returns (string memory) {
-        return FHE.sealoutput(_allowanceEncrypted(msg.sender, spender), permission.publicKey);
+    ) public view virtual onlyBetweenPermitted(permission, owner, spender) returns (string memory) {
+        return FHE.sealoutput(_allowanceEncrypted(owner, spender), permission.publicKey);
     }
 
     function approveEncrypted(address spender, inEuint128 calldata value) public virtual returns (bool) {
@@ -57,18 +59,14 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         return spent;
     }
 
-    function transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128) {
-        euint128 val = value;
-        euint128 spent = _spendAllowance(from, msg.sender, val);
-        _transferImpl(from, to, spent);
-        return spent;
+    function transferFromEncrypted(address from, address to, inEuint128 calldata value) public virtual returns (euint128) {
+        return _transferFromEncrypted(from, to, FHE.asEuint128(value));
     }
 
-    function transferFromEncrypted(address from, address to, inEuint128 calldata value) public virtual returns (euint128) {
-        euint128 val = FHE.asEuint128(value);
+    function _transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128) {
+        euint128 val = value;
         euint128 spent = _spendAllowance(from, msg.sender, val);
-        _transferImpl(from, to, spent);
-        return spent;
+        return _transferImpl(from, to, spent);
     }
 
     function wrap(uint32 amount) public {
@@ -104,11 +102,11 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
     }
 
     function transferEncrypted(address to, inEuint128 calldata encryptedAmount) public returns (euint128) {
-        return transferEncrypted(to, FHE.asEuint128(encryptedAmount));
+        return _transferEncrypted(to, FHE.asEuint128(encryptedAmount));
     }
 
     // Transfers an amount from the message sender address to the `to` address.
-    function transferEncrypted(address to, euint128 amount) public returns (euint128) {
+    function _transferEncrypted(address to, euint128 amount) public returns (euint128) {
         return _transferImpl(msg.sender, to, amount);
     }
 

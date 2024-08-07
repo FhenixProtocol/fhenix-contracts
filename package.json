@@ -7,8 +7,17 @@
     "url": "https://github.com/fhenixprotocol/fhenix-contracts"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
+    "@nomiclabs/hardhat-truffle5": "^2.0.5",
+    "@openzeppelin/contracts": "^5.0.2",
+    "@openzeppelin/test-helpers": "^0.5.13",
+    "chai": "^4.2.0",
+    "fhenix-hardhat-plugin": "^0.2.1",
     "hardhat": "2.19.3",
-    "solidity-docgen": "0.6.0-beta.36"
+    "hardhat-exposed": "^0.3.13",
+    "solidity-docgen": "0.6.0-beta.36",
+    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2"
   },
   "files": [
     "contracts"
@@ -23,9 +32,8 @@
     "access": "public"
   },
   "scripts": {
-    "docgen": "hardhat docgen"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.2"
+    "docgen": "hardhat docgen",
+    "compile": "hardhat compile",
+    "test": "hardhat test"
   }
 }

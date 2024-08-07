@@ -39,21 +39,25 @@ function transferEncrypted(address to, struct inEuint128 value) external returns
 ```
 
 _Moves a `value` amount of tokens from the caller's account to `to`.
+Accepts the value as inEuint128, more convenient for calls from EOAs.
 
-Returns a boolean value indicating whether the operation succeeded.
+Returns a boolean value indicating whether the operation succeeded._
 
-Emits a {TransferEncrypted} event._
-
-### transferEncrypted
+### _transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, euint128 value) external returns (euint128)
+function _transferEncrypted(address to, euint128 value) external returns (euint128)
 ```
+
+_Moves a `value` amount of tokens from the caller's account to `to`.
+Accepts the value as euint128, more convenient for calls from other contracts
+
+Returns a boolean value indicating whether the operation succeeded._
 
 ### allowanceEncrypted
 
 ```solidity
-function allowanceEncrypted(address spender, struct Permission permission) external view returns (string)
+function allowanceEncrypted(address owner, address spender, struct Permission permission) external view returns (string)
 ```
 
 _Returns the remaining number of tokens that `spender` will be
@@ -90,15 +94,24 @@ function transferFromEncrypted(address from, address to, struct inEuint128 value
 
 _Moves a `value` amount of tokens from `from` to `to` using the
 allowance mechanism. `value` is then deducted from the caller's
-allowance.
+allowance. Accepts the value as inEuint128, more convenient for calls from EOAs.
 
 Returns a boolean value indicating whether the operation succeeded.
 
 Emits a {TransferEncrypted} event._
 
-### transferFromEncrypted
+### _transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, euint128 value) external returns (euint128)
+function _transferFromEncrypted(address from, address to, euint128 value) external returns (euint128)
 ```
+
+_Moves a `value` amount of tokens from `from` to `to` using the
+allowance mechanism. `value` is then deducted from the caller's
+allowance. Accepts the value as inEuint128, more convenient for calls
+from other contracts.
+
+Returns a boolean value indicating whether the operation succeeded.
+
+Emits a {TransferEncrypted} event._
 

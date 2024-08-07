@@ -60,3 +60,19 @@ Modifier that requires the provided signature to be signed by a specific owner a
 | permission | struct Permission | Data structure containing the public key and the signature to be verified |
 | owner | address | The expected owner of the public key to match against the recovered signer |
 
+### onlyBetweenPermitted
+
+```solidity
+modifier onlyBetweenPermitted(struct Permission permission, address owner, address permitted)
+```
+
+Modifier that requires the provided signature to be signed by one of two specific addresses
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| permission | struct Permission | Data structure containing the public key and the signature to be verified |
+| owner | address | The expected owner of the public key to match against the recovered signer |
+| permitted | address | A second permitted owner of the public key to match against the recovered signer |
+

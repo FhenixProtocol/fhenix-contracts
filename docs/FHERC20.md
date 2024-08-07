@@ -29,13 +29,13 @@ constructor(string name, string symbol) public
 ### _allowanceEncrypted
 
 ```solidity
-function _allowanceEncrypted(address owner, address spender) public view virtual returns (euint128)
+function _allowanceEncrypted(address owner, address spender) internal view returns (euint128)
 ```
 
 ### allowanceEncrypted
 
 ```solidity
-function allowanceEncrypted(address spender, struct Permission permission) public view virtual returns (string)
+function allowanceEncrypted(address owner, address spender, struct Permission permission) public view virtual returns (string)
 ```
 
 _Returns the remaining number of tokens that `spender` will be
@@ -79,18 +79,27 @@ function _spendAllowance(address owner, address spender, euint128 value) interna
 ### transferFromEncrypted
 
 ```solidity
-function transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128)
-```
-
-### transferFromEncrypted
-
-```solidity
 function transferFromEncrypted(address from, address to, struct inEuint128 value) public virtual returns (euint128)
 ```
 
 _Moves a `value` amount of tokens from `from` to `to` using the
 allowance mechanism. `value` is then deducted from the caller's
-allowance.
+allowance. Accepts the value as inEuint128, more convenient for calls from EOAs.
+
+Returns a boolean value indicating whether the operation succeeded.
+
+Emits a {TransferEncrypted} event._
+
+### _transferFromEncrypted
+
+```solidity
+function _transferFromEncrypted(address from, address to, euint128 value) public virtual returns (euint128)
+```
+
+_Moves a `value` amount of tokens from `from` to `to` using the
+allowance mechanism. `value` is then deducted from the caller's
+allowance. Accepts the value as inEuint128, more convenient for calls
+from other contracts.
 
 Returns a boolean value indicating whether the operation succeeded.
 
@@ -120,10 +129,10 @@ function _mintEncrypted(address to, struct inEuint128 encryptedAmount) internal
 function transferEncrypted(address to, struct inEuint128 encryptedAmount) public returns (euint128)
 ```
 
-### transferEncrypted
+### _transferEncrypted
 
 ```solidity
-function transferEncrypted(address to, euint128 amount) public returns (euint128)
+function _transferEncrypted(address to, euint128 amount) public returns (euint128)
 ```
 
 ### _transferImpl

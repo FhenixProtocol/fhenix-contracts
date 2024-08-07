@@ -37,13 +37,19 @@ interface IFHERC20 {
 
     /**
      * @dev Moves a `value` amount of tokens from the caller's account to `to`.
+     * Accepts the value as inEuint128, more convenient for calls from EOAs.
      *
      * Returns a boolean value indicating whether the operation succeeded.
-     *
-     * Emits a {TransferEncrypted} event.
      */
     function transferEncrypted(address to, inEuint128 calldata value) external returns (euint128);
-    function transferEncrypted(address to, euint128 value) external returns (euint128);
+
+    /**
+     * @dev Moves a `value` amount of tokens from the caller's account to `to`.
+     * Accepts the value as euint128, more convenient for calls from other contracts
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     */
+    function _transferEncrypted(address to, euint128 value) external returns (euint128);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -52,7 +58,7 @@ interface IFHERC20 {
      *
      * This value changes when {approve} or {transferFrom} are called.
      */
-    function allowanceEncrypted(address spender, Permission memory permission) external view returns (string memory);
+    function allowanceEncrypted(address owner, address spender, Permission memory permission) external view returns (string memory);
 
     /**
      * @dev Sets a `value` amount of tokens as the allowance of `spender` over the
@@ -74,12 +80,23 @@ interface IFHERC20 {
     /**
      * @dev Moves a `value` amount of tokens from `from` to `to` using the
      * allowance mechanism. `value` is then deducted from the caller's
-     * allowance.
+     * allowance. Accepts the value as inEuint128, more convenient for calls from EOAs.
      *
      * Returns a boolean value indicating whether the operation succeeded.
      *
      * Emits a {TransferEncrypted} event.
      */
     function transferFromEncrypted(address from, address to, inEuint128 calldata value) external returns (euint128);
-    function transferFromEncrypted(address from, address to, euint128 value) external returns (euint128);
+
+    /**
+     * @dev Moves a `value` amount of tokens from `from` to `to` using the
+     * allowance mechanism. `value` is then deducted from the caller's
+     * allowance. Accepts the value as inEuint128, more convenient for calls
+     * from other contracts.
+     *
+     * Returns a boolean value indicating whether the operation succeeded.
+     *
+     * Emits a {TransferEncrypted} event.
+     */
+    function _transferFromEncrypted(address from, address to, euint128 value) external returns (euint128);
 }
