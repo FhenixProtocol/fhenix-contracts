@@ -26,7 +26,7 @@ jobs:
         run_install: true
     - name: Generate Docs
       run: |
-        pnpm docgen
+        pnpm compile && pnpm docgen
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
