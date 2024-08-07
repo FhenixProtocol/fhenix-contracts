@@ -20,7 +20,7 @@ const baseURI = 'https://api.example.com/v1/';
 const RECEIVER_MAGIC_VALUE = '0x150b7a02';
 
 function shouldBehaveLikeERC721(owner, newOwner, approved, anotherApproved, operator, other) {
-  shouldSupportInterfaces(['ERC165', 'ERC721']);
+  shouldSupportInterfaces(['ERC165', 'ERC721', 'FHERC721']);
 
   context('with minted tokens', function () {
     beforeEach(async function () {

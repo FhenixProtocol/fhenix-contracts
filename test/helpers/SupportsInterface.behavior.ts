@@ -5,6 +5,7 @@ const { expect } = require('chai');
 const INVALID_ID = '0xffffffff';
 const INTERFACES = {
   ERC165: ['supportsInterface(bytes4)'],
+  FHERC721: ['tokenPrivateData(uint256,(bytes32,bytes))'],
   ERC721: [
     'balanceOf(address)',
     'ownerOf(uint256)',
