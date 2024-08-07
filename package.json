@@ -15,7 +15,9 @@
     "fhenix-hardhat-plugin": "^0.2.1",
     "hardhat": "2.19.3",
     "hardhat-exposed": "^0.3.13",
-    "solidity-docgen": "0.6.0-beta.36"
+    "solidity-docgen": "0.6.0-beta.36",
+    "typescript": "^5.5.4",
+    "ts-node": "^10.9.2"
   },
   "files": [
     "contracts"
