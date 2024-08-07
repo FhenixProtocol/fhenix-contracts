@@ -17,7 +17,7 @@ function add(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (b
 ### verify
 
 ```solidity
-function verify(uint8 utype, bytes input) external pure returns (bytes)
+function verify(uint8 utype, bytes input, int32 securityZone) external pure returns (bytes)
 ```
 
 ### sealOutput
@@ -77,7 +77,7 @@ function cast(uint8 utype, bytes input, uint8 toType) external pure returns (byt
 ### trivialEncrypt
 
 ```solidity
-function trivialEncrypt(bytes input, uint8 toType) external pure returns (bytes)
+function trivialEncrypt(bytes input, uint8 toType, int32 securityZone) external pure returns (bytes)
 ```
 
 ### div
@@ -167,6 +167,6 @@ function not(uint8 utype, bytes value) external pure returns (bytes)
 ### getNetworkPublicKey
 
 ```solidity
-function getNetworkPublicKey() external pure returns (bytes)
+function getNetworkPublicKey(int32 securityZone) external pure returns (bytes)
 ```
 

@@ -5,6 +5,7 @@
 ```solidity
 struct inEuint32 {
   bytes data;
+  int32 securityZone;
 }
 ```
 

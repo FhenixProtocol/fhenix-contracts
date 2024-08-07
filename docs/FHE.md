@@ -80,7 +80,7 @@ function mathHelper(uint8 utype, uint256 lhs, uint256 rhs, function (uint8,bytes
 function add(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the add operation
+This function performs the add operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -104,7 +104,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function add(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the add operation
+This function performs the add operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -128,7 +128,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function add(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the add operation
+This function performs the add operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -152,7 +152,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function add(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the add operation
+This function performs the add operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -176,7 +176,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function add(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the add operation
+This function performs the add operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -512,7 +512,7 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 function lte(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lte operation
+This function performs the lte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -536,7 +536,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lte(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lte operation
+This function performs the lte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -560,7 +560,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lte(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lte operation
+This function performs the lte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -584,7 +584,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lte(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lte operation
+This function performs the lte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -608,7 +608,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lte(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lte operation
+This function performs the lte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -632,7 +632,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function sub(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the sub operation
+This function performs the sub operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -656,7 +656,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function sub(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the sub operation
+This function performs the sub operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -680,7 +680,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function sub(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the sub operation
+This function performs the sub operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -704,7 +704,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function sub(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the sub operation
+This function performs the sub operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -728,7 +728,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function sub(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the sub operation
+This function performs the sub operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -752,7 +752,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function mul(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the mul operation
+This function performs the mul operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -776,7 +776,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function mul(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the mul operation
+This function performs the mul operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -800,7 +800,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function mul(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the mul operation
+This function performs the mul operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -824,7 +824,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function mul(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the mul operation
+This function performs the mul operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -848,7 +848,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lt(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lt operation
+This function performs the lt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -872,7 +872,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lt(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lt operation
+This function performs the lt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -896,7 +896,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lt(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lt operation
+This function performs the lt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -920,7 +920,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lt(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lt operation
+This function performs the lt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -944,7 +944,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function lt(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the lt operation
+This function performs the lt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1128,7 +1128,7 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 function div(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the div operation
+This function performs the div operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1152,7 +1152,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function div(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the div operation
+This function performs the div operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1176,7 +1176,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function div(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the div operation
+This function performs the div operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1200,7 +1200,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gt(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gt operation
+This function performs the gt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1224,7 +1224,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gt(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gt operation
+This function performs the gt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1248,7 +1248,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gt(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gt operation
+This function performs the gt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1272,7 +1272,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gt(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gt operation
+This function performs the gt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1296,7 +1296,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gt(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gt operation
+This function performs the gt operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1320,7 +1320,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gte(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gte operation
+This function performs the gte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1344,7 +1344,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gte(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gte operation
+This function performs the gte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1368,7 +1368,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gte(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gte operation
+This function performs the gte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1392,7 +1392,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gte(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gte operation
+This function performs the gte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1416,7 +1416,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function gte(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the gte operation
+This function performs the gte operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1440,7 +1440,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function rem(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the rem operation
+This function performs the rem operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1464,7 +1464,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function rem(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the rem operation
+This function performs the rem operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1488,7 +1488,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function rem(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the rem operation
+This function performs the rem operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1512,7 +1512,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(ebool lhs, ebool rhs) internal pure returns (ebool)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1536,7 +1536,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1560,7 +1560,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1584,7 +1584,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1608,7 +1608,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1632,7 +1632,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function and(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the and operation
+This function performs the and operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1656,7 +1656,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(ebool lhs, ebool rhs) internal pure returns (ebool)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1680,7 +1680,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1704,7 +1704,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1728,7 +1728,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1752,7 +1752,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1776,7 +1776,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function or(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the or operation
+This function performs the or operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1800,7 +1800,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(ebool lhs, ebool rhs) internal pure returns (ebool)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1824,7 +1824,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1848,7 +1848,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1872,7 +1872,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1896,7 +1896,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1920,7 +1920,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function xor(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the xor operation
+This function performs the xor operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1944,7 +1944,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(ebool lhs, ebool rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1968,7 +1968,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -1992,7 +1992,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2016,7 +2016,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2040,7 +2040,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2064,7 +2064,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2088,7 +2088,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2112,7 +2112,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function eq(eaddress lhs, eaddress rhs) internal pure returns (ebool)
 ```
 
-This functions performs the eq operation
+This function performs the eq operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2136,7 +2136,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(ebool lhs, ebool rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2160,7 +2160,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint8 lhs, euint8 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2184,7 +2184,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint16 lhs, euint16 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2208,7 +2208,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint32 lhs, euint32 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2232,7 +2232,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint64 lhs, euint64 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2256,7 +2256,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint128 lhs, euint128 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2280,7 +2280,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(euint256 lhs, euint256 rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2304,7 +2304,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function ne(eaddress lhs, eaddress rhs) internal pure returns (ebool)
 ```
 
-This functions performs the ne operation
+This function performs the ne operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2328,7 +2328,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function min(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the min operation
+This function performs the min operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2352,7 +2352,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function min(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the min operation
+This function performs the min operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2376,7 +2376,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function min(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the min operation
+This function performs the min operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2400,7 +2400,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function min(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the min operation
+This function performs the min operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2424,7 +2424,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function min(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the min operation
+This function performs the min operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2448,7 +2448,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function max(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the max operation
+This function performs the max operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2472,7 +2472,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function max(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the max operation
+This function performs the max operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2496,7 +2496,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function max(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the max operation
+This function performs the max operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2520,7 +2520,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function max(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the max operation
+This function performs the max operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2544,7 +2544,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function max(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the max operation
+This function performs the max operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2568,7 +2568,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shl(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the shl operation
+This function performs the shl operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2592,7 +2592,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shl(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the shl operation
+This function performs the shl operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2616,7 +2616,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shl(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the shl operation
+This function performs the shl operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2640,7 +2640,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shl(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the shl operation
+This function performs the shl operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2664,7 +2664,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shl(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the shl operation
+This function performs the shl operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2688,7 +2688,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shr(euint8 lhs, euint8 rhs) internal pure returns (euint8)
 ```
 
-This functions performs the shr operation
+This function performs the shr operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2712,7 +2712,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shr(euint16 lhs, euint16 rhs) internal pure returns (euint16)
 ```
 
-This functions performs the shr operation
+This function performs the shr operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2736,7 +2736,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shr(euint32 lhs, euint32 rhs) internal pure returns (euint32)
 ```
 
-This functions performs the shr operation
+This function performs the shr operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2760,7 +2760,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shr(euint64 lhs, euint64 rhs) internal pure returns (euint64)
 ```
 
-This functions performs the shr operation
+This function performs the shr operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2784,7 +2784,7 @@ Pure in this function is marked as a hack/workaround - note that this function i
 function shr(euint128 lhs, euint128 rhs) internal pure returns (euint128)
 ```
 
-This functions performs the shr operation
+This function performs the shr operation
 
 _If any of the inputs are expected to be a ciphertext, it verifies that the value matches a valid ciphertext
 Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
@@ -2805,24 +2805,18 @@ Pure in this function is marked as a hack/workaround - note that this function i
 ### not
 
 ```solidity
-function not(ebool value) internal pure returns (ebool)
+function not(ebool input1) internal pure returns (ebool)
 ```
 
-Performs the "not" for the ebool type
+Performs the not operation on a ciphertext
 
-_Implemented by a workaround due to ebool being a euint8 type behind the scenes, therefore xor is needed to assure that not(true) = false and vise-versa_
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
 #### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | ebool | input ebool ciphertext |
-
-#### Return Values
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| [0] | ebool | Result of the not operation on `value` |
+| input1 | ebool | the input ciphertext |
 
 ### not
 
@@ -2968,14 +2962,6 @@ function asEuint256(ebool value) internal pure returns (euint256)
 
 Converts a ebool to an euint256
 
-### asEaddress
-
-```solidity
-function asEaddress(ebool value) internal pure returns (eaddress)
-```
-
-Converts a ebool to an eaddress
-
 ### asEbool
 
 ```solidity
@@ -3039,14 +3025,6 @@ function asEuint256(euint8 value) internal pure returns (euint256)
 ```
 
 Converts a euint8 to an euint256
-
-### asEaddress
-
-```solidity
-function asEaddress(euint8 value) internal pure returns (eaddress)
-```
-
-Converts a euint8 to an eaddress
 
 ### asEbool
 
@@ -3112,14 +3090,6 @@ function asEuint256(euint16 value) internal pure returns (euint256)
 
 Converts a euint16 to an euint256
 
-### asEaddress
-
-```solidity
-function asEaddress(euint16 value) internal pure returns (eaddress)
-```
-
-Converts a euint16 to an eaddress
-
 ### asEbool
 
 ```solidity
@@ -3183,14 +3153,6 @@ function asEuint256(euint32 value) internal pure returns (euint256)
 ```
 
 Converts a euint32 to an euint256
-
-### asEaddress
-
-```solidity
-function asEaddress(euint32 value) internal pure returns (eaddress)
-```
-
-Converts a euint32 to an eaddress
 
 ### asEbool
 
@@ -3256,14 +3218,6 @@ function asEuint256(euint64 value) internal pure returns (euint256)
 
 Converts a euint64 to an euint256
 
-### asEaddress
-
-```solidity
-function asEaddress(euint64 value) internal pure returns (eaddress)
-```
-
-Converts a euint64 to an eaddress
-
 ### asEbool
 
 ```solidity
@@ -3327,14 +3281,6 @@ function asEuint256(euint128 value) internal pure returns (euint256)
 ```
 
 Converts a euint128 to an euint256
-
-### asEaddress
-
-```solidity
-function asEaddress(euint128 value) internal pure returns (eaddress)
-```
-
-Converts a euint128 to an eaddress
 
 ### asEbool
 
@@ -3488,6 +3434,18 @@ function asEbool(uint256 value) internal pure returns (ebool)
 
 Converts a uint256 to an ebool
 
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEbool
+
+```solidity
+function asEbool(uint256 value, int32 securityZone) internal pure returns (ebool)
+```
+
+Converts a uint256 to an ebool, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
 ### asEuint8
 
 ```solidity
@@ -3495,6 +3453,18 @@ function asEuint8(uint256 value) internal pure returns (euint8)
 ```
 
 Converts a uint256 to an euint8
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint8
+
+```solidity
+function asEuint8(uint256 value, int32 securityZone) internal pure returns (euint8)
+```
+
+Converts a uint256 to an euint8, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
 
 ### asEuint16
 
@@ -3504,6 +3474,18 @@ function asEuint16(uint256 value) internal pure returns (euint16)
 
 Converts a uint256 to an euint16
 
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint16
+
+```solidity
+function asEuint16(uint256 value, int32 securityZone) internal pure returns (euint16)
+```
+
+Converts a uint256 to an euint16, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
 ### asEuint32
 
 ```solidity
@@ -3511,6 +3493,18 @@ function asEuint32(uint256 value) internal pure returns (euint32)
 ```
 
 Converts a uint256 to an euint32
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint32
+
+```solidity
+function asEuint32(uint256 value, int32 securityZone) internal pure returns (euint32)
+```
+
+Converts a uint256 to an euint32, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
 
 ### asEuint64
 
@@ -3520,6 +3514,18 @@ function asEuint64(uint256 value) internal pure returns (euint64)
 
 Converts a uint256 to an euint64
 
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint64
+
+```solidity
+function asEuint64(uint256 value, int32 securityZone) internal pure returns (euint64)
+```
+
+Converts a uint256 to an euint64, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
 ### asEuint128
 
 ```solidity
@@ -3527,6 +3533,18 @@ function asEuint128(uint256 value) internal pure returns (euint128)
 ```
 
 Converts a uint256 to an euint128
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint128
+
+```solidity
+function asEuint128(uint256 value, int32 securityZone) internal pure returns (euint128)
+```
+
+Converts a uint256 to an euint128, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
 
 ### asEuint256
 
@@ -3536,6 +3554,18 @@ function asEuint256(uint256 value) internal pure returns (euint256)
 
 Converts a uint256 to an euint256
 
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEuint256
+
+```solidity
+function asEuint256(uint256 value, int32 securityZone) internal pure returns (euint256)
+```
+
+Converts a uint256 to an euint256, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
 ### asEaddress
 
 ```solidity
@@ -3544,10 +3574,22 @@ function asEaddress(uint256 value) internal pure returns (eaddress)
 
 Converts a uint256 to an eaddress
 
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+### asEaddress
+
+```solidity
+function asEaddress(uint256 value, int32 securityZone) internal pure returns (eaddress)
+```
+
+Converts a uint256 to an eaddress, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
 ### asEbool
 
 ```solidity
-function asEbool(bytes value) internal pure returns (ebool)
+function asEbool(bytes value, int32 securityZone) internal pure returns (ebool)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an ebool
@@ -3563,7 +3605,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint8
 
 ```solidity
-function asEuint8(bytes value) internal pure returns (euint8)
+function asEuint8(bytes value, int32 securityZone) internal pure returns (euint8)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint8
@@ -3579,7 +3621,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint16
 
 ```solidity
-function asEuint16(bytes value) internal pure returns (euint16)
+function asEuint16(bytes value, int32 securityZone) internal pure returns (euint16)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint16
@@ -3595,7 +3637,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint32
 
 ```solidity
-function asEuint32(bytes value) internal pure returns (euint32)
+function asEuint32(bytes value, int32 securityZone) internal pure returns (euint32)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint32
@@ -3611,7 +3653,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint64
 
 ```solidity
-function asEuint64(bytes value) internal pure returns (euint64)
+function asEuint64(bytes value, int32 securityZone) internal pure returns (euint64)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint64
@@ -3627,7 +3669,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint128
 
 ```solidity
-function asEuint128(bytes value) internal pure returns (euint128)
+function asEuint128(bytes value, int32 securityZone) internal pure returns (euint128)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint128
@@ -3643,7 +3685,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEuint256
 
 ```solidity
-function asEuint256(bytes value) internal pure returns (euint256)
+function asEuint256(bytes value, int32 securityZone) internal pure returns (euint256)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an euint256
@@ -3659,7 +3701,7 @@ _Also performs validation that the ciphertext is valid and has been encrypted us
 ### asEaddress
 
 ```solidity
-function asEaddress(bytes value) internal pure returns (eaddress)
+function asEaddress(bytes value, int32 securityZone) internal pure returns (eaddress)
 ```
 
 Parses input ciphertexts from the user. Converts from encrypted raw bytes to an eaddress
@@ -3679,7 +3721,20 @@ function asEaddress(address value) internal pure returns (eaddress)
 ```
 
 Converts a address to an eaddress
-Allows for a better user experience when working with eaddresses
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation
+Allows for a better user experience when working with eaddresses_
+
+### asEaddress
+
+```solidity
+function asEaddress(address value, int32 securityZone) internal pure returns (eaddress)
+```
+
+Converts a address to an eaddress, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation
+Allows for a better user experience when working with eaddresses_
 
 ### asEbool
 
@@ -3689,8 +3744,23 @@ function asEbool(bool value) internal pure returns (ebool)
 
 Converts a plaintext boolean value to a ciphertext ebool
 
-_Privacy: The input value is public, therefore the ciphertext should be considered public and should be used
-only for mathematical operations, not to represent data that should be private_
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | ebool | A ciphertext representation of the input |
+
+### asEbool
+
+```solidity
+function asEbool(bool value, int32 securityZone) internal pure returns (ebool)
+```
+
+Converts a plaintext boolean value to a ciphertext ebool, specifying security zone
+
+_Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation_
 
 #### Return Values
 
