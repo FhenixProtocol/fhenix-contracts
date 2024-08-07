@@ -35,4 +35,4 @@ jobs:
           else
             echo "PRERELEASE=" >> $GITHUB_ENV
           fi
-      - run: cd contracts && pnpm publish --dry-run --no-git-checks ${{ env.PRERELEASE }}
+      - run: cd contracts && pnpm publish --no-git-checks ${{ env.PRERELEASE }}
