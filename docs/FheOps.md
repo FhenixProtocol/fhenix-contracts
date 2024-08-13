@@ -164,6 +164,12 @@ function shr(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (b
 function not(uint8 utype, bytes value) external pure returns (bytes)
 ```
 
+### random
+
+```solidity
+function random(uint8 utype, uint64 seed, int32 securityZone) external pure returns (bytes)
+```
+
 ### getNetworkPublicKey
 
 ```solidity
