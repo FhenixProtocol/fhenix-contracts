@@ -209,6 +209,6 @@ function getNetworkPublicKey(int32) external pure returns (bytes)
 ### random
 
 ```solidity
-function random(uint8 utype, uint64 seed, int32 securityZone) external pure returns (bytes)
+function random(uint8 utype, uint64, int32) external pure returns (bytes)
 ```
 
