@@ -8,3 +8,11 @@
 address Fheos
 ```
 
+## Precompiles
+
+### Fheos
+
+```solidity
+address Fheos
+```
+
