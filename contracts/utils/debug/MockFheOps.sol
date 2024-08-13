@@ -258,7 +258,7 @@ contract MockFheOps {
         return bytes(x);
     }
 
-    function random(uint8 utype, uint64 seed, int32 securityZone) external pure returns (bytes memory) {
+    function random(uint8 utype, uint64, int32) external pure returns (bytes memory) {
         return uint256ToBytes(maxValue(utype));
     }
 }
