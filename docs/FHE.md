@@ -397,6 +397,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 ### decrypt
 
 ```solidity
+function decrypt(ebool input1, bool defaultValue) internal pure returns (bool)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | ebool | the input ciphertext |
+| defaultValue | bool | default value to be returned on gas estimation |
+
+### decrypt
+
+```solidity
 function decrypt(euint8 input1) internal pure returns (uint8)
 ```
 
@@ -409,6 +426,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | euint8 | the input ciphertext |
+
+### decrypt
+
+```solidity
+function decrypt(euint8 input1, uint8 defaultValue) internal pure returns (uint8)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint8 | the input ciphertext |
+| defaultValue | uint8 | default value to be returned on gas estimation |
 
 ### decrypt
 
@@ -429,6 +463,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 ### decrypt
 
 ```solidity
+function decrypt(euint16 input1, uint16 defaultValue) internal pure returns (uint16)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint16 | the input ciphertext |
+| defaultValue | uint16 | default value to be returned on gas estimation |
+
+### decrypt
+
+```solidity
 function decrypt(euint32 input1) internal pure returns (uint32)
 ```
 
@@ -441,6 +492,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | euint32 | the input ciphertext |
+
+### decrypt
+
+```solidity
+function decrypt(euint32 input1, uint32 defaultValue) internal pure returns (uint32)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint32 | the input ciphertext |
+| defaultValue | uint32 | default value to be returned on gas estimation |
 
 ### decrypt
 
@@ -461,6 +529,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 ### decrypt
 
 ```solidity
+function decrypt(euint64 input1, uint64 defaultValue) internal pure returns (uint64)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint64 | the input ciphertext |
+| defaultValue | uint64 | default value to be returned on gas estimation |
+
+### decrypt
+
+```solidity
 function decrypt(euint128 input1) internal pure returns (uint128)
 ```
 
@@ -473,6 +558,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | euint128 | the input ciphertext |
+
+### decrypt
+
+```solidity
+function decrypt(euint128 input1, uint128 defaultValue) internal pure returns (uint128)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint128 | the input ciphertext |
+| defaultValue | uint128 | default value to be returned on gas estimation |
 
 ### decrypt
 
@@ -493,6 +595,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 ### decrypt
 
 ```solidity
+function decrypt(euint256 input1, uint256 defaultValue) internal pure returns (uint256)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | euint256 | the input ciphertext |
+| defaultValue | uint256 | default value to be returned on gas estimation |
+
+### decrypt
+
+```solidity
 function decrypt(eaddress input1) internal pure returns (address)
 ```
 
@@ -505,6 +624,23 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | input1 | eaddress | the input ciphertext |
+
+### decrypt
+
+```solidity
+function decrypt(eaddress input1, address defaultValue) internal pure returns (address)
+```
+
+Performs the decrypt operation on a ciphertext with default value for gas estimation
+
+_Verifies that the input value matches a valid ciphertext. Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| input1 | eaddress | the input ciphertext |
+| defaultValue | address | default value to be returned on gas estimation |
 
 ### lte
 

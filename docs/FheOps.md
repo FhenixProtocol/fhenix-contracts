@@ -29,7 +29,7 @@ function sealOutput(uint8 utype, bytes ctHash, bytes pk) external pure returns (
 ### decrypt
 
 ```solidity
-function decrypt(uint8 utype, bytes input) external pure returns (uint256)
+function decrypt(uint8 utype, bytes input, uint256 defaultValue) external pure returns (uint256)
 ```
 
 ### lte

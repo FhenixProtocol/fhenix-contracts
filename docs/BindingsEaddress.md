@@ -102,3 +102,9 @@ function seal(eaddress value, bytes32 publicKey) internal pure returns (string)
 function decrypt(eaddress value) internal pure returns (address)
 ```
 
+### decrypt
+
+```solidity
+function decrypt(eaddress value, address defaultValue) internal pure returns (address)
+```
+

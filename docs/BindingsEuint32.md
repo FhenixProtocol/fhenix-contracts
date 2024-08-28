@@ -464,3 +464,9 @@ function seal(euint32 value, bytes32 publicKey) internal pure returns (string)
 function decrypt(euint32 value) internal pure returns (uint32)
 ```
 
+### decrypt
+
+```solidity
+function decrypt(euint32 value, uint32 defaultValue) internal pure returns (uint32)
+```
+

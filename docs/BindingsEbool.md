@@ -165,3 +165,9 @@ function seal(ebool value, bytes32 publicKey) internal pure returns (string)
 function decrypt(ebool value) internal pure returns (bool)
 ```
 
+### decrypt
+
+```solidity
+function decrypt(ebool value, bool defaultValue) internal pure returns (bool)
+```
+
