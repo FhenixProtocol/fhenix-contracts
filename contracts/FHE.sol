@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BSD-3-Clause-Clear
 // solhint-disable one-contract-per-file
 
-pragma solidity >=0.8.19 <=0.8.25;
+pragma solidity >=0.8.19 <0.9.0;
 
 import {Precompiles, FheOps} from "./FheOS.sol";
 
@@ -2598,105 +2598,99 @@ library FHE {
         uint256 result = Impl.getValue(b);
         return euint128.wrap(result);
     }
-    /// @notice Generates a random value of a given type for the provided securityZone
+    /// @notice Generates a random value of a given type with the given seed, for the provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
     /// @param uintType the type of the random value to generate
-    /// @param seed the seed to use for the random value
+    /// @param seed the seed to use to create a random value from
     /// @param securityZone the security zone to use for the random value
     function random(uint8 uintType, uint64 seed, int32 securityZone) internal pure returns (uint256) {
         bytes memory b = FheOps(Precompiles.Fheos).random(uintType, seed, securityZone);
         return Impl.getValue(b);
     }
+    /// @notice Generates a random value of a given type with the given seed
+    /// @dev Calls the desired precompile and returns the hash of the ciphertext
+    /// @param uintType the type of the random value to generate
+    /// @param seed the seed to use to create a random value from
+    function random(uint8 uintType, uint32 seed) internal pure returns (uint256) {
+        return random(uintType, seed, 0);
+    }
     /// @notice Generates a random value of a given type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
     /// @param uintType the type of the random value to generate
-    /// @param seed the seed to use for the random value
-    function random(uint8 uintType, uint64 seed) internal pure returns (uint256) {
-        return random(uintType, seed, 0);
+    function random(uint8 uintType) internal pure returns (uint256) {
+        return random(uintType, 0, 0);
     }
     /// @notice Generates a random value of a euint8 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint8(uint64 seed, int32 securityZone) internal pure returns (euint8) {
-        uint256 result = random(Common.EUINT8_TFHE, seed, securityZone);
+    function randomEuint8(int32 securityZone) internal pure returns (euint8) {
+        uint256 result = random(Common.EUINT8_TFHE, 0, securityZone);
         return euint8.wrap(result);
     }
     /// @notice Generates a random value of a euint8 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint8(uint64 seed) internal pure returns (euint8) {
-        return randomEuint8(seed, 0);
+    function randomEuint8() internal pure returns (euint8) {
+        return randomEuint8(0);
     }
     /// @notice Generates a random value of a euint16 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint16(uint64 seed, int32 securityZone) internal pure returns (euint16) {
-        uint256 result = random(Common.EUINT16_TFHE, seed, securityZone);
+    function randomEuint16(int32 securityZone) internal pure returns (euint16) {
+        uint256 result = random(Common.EUINT16_TFHE, 0, securityZone);
         return euint16.wrap(result);
     }
     /// @notice Generates a random value of a euint16 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint16(uint64 seed) internal pure returns (euint16) {
-        return randomEuint16(seed, 0);
+    function randomEuint16() internal pure returns (euint16) {
+        return randomEuint16(0);
     }
     /// @notice Generates a random value of a euint32 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint32(uint64 seed, int32 securityZone) internal pure returns (euint32) {
-        uint256 result = random(Common.EUINT32_TFHE, seed, securityZone);
+    function randomEuint32(int32 securityZone) internal pure returns (euint32) {
+        uint256 result = random(Common.EUINT32_TFHE, 0, securityZone);
         return euint32.wrap(result);
     }
     /// @notice Generates a random value of a euint32 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint32(uint64 seed) internal pure returns (euint32) {
-        return randomEuint32(seed, 0);
+    function randomEuint32() internal pure returns (euint32) {
+        return randomEuint32(0);
     }
     /// @notice Generates a random value of a euint64 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint64(uint64 seed, int32 securityZone) internal pure returns (euint64) {
-        uint256 result = random(Common.EUINT64_TFHE, seed, securityZone);
+    function randomEuint64(int32 securityZone) internal pure returns (euint64) {
+        uint256 result = random(Common.EUINT64_TFHE, 0, securityZone);
         return euint64.wrap(result);
     }
     /// @notice Generates a random value of a euint64 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint64(uint64 seed) internal pure returns (euint64) {
-        return randomEuint64(seed, 0);
+    function randomEuint64() internal pure returns (euint64) {
+        return randomEuint64(0);
     }
     /// @notice Generates a random value of a euint128 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint128(uint64 seed, int32 securityZone) internal pure returns (euint128) {
-        uint256 result = random(Common.EUINT128_TFHE, seed, securityZone);
+    function randomEuint128(int32 securityZone) internal pure returns (euint128) {
+        uint256 result = random(Common.EUINT128_TFHE, 0, securityZone);
         return euint128.wrap(result);
     }
     /// @notice Generates a random value of a euint128 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint128(uint64 seed) internal pure returns (euint128) {
-        return randomEuint128(seed, 0);
+    function randomEuint128() internal pure returns (euint128) {
+        return randomEuint128(0);
     }
     /// @notice Generates a random value of a euint256 type for provided securityZone
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
     /// @param securityZone the security zone to use for the random value
-    function randomEuint256(uint64 seed, int32 securityZone) internal pure returns (euint256) {
-        uint256 result = random(Common.EUINT256_TFHE, seed, securityZone);
+    function randomEuint256(int32 securityZone) internal pure returns (euint256) {
+        uint256 result = random(Common.EUINT256_TFHE, 0, securityZone);
         return euint256.wrap(result);
     }
     /// @notice Generates a random value of a euint256 type
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
-    /// @param seed the seed to use for the random value
-    function randomEuint256(uint64 seed) internal pure returns (euint256) {
-        return randomEuint256(seed, 0);
+    function randomEuint256() internal pure returns (euint256) {
+        return randomEuint256(0);
     }
     
 
