@@ -3040,7 +3040,7 @@ _Verifies that the input value matches a valid ciphertext. Pure in this function
 function random(uint8 uintType, uint64 seed, int32 securityZone) internal pure returns (uint256)
 ```
 
-Generates a random value of a given type for the provided securityZone
+Generates a random value of a given type with the given seed, for the provided securityZone
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
@@ -3049,13 +3049,30 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | uintType | uint8 | the type of the random value to generate |
-| seed | uint64 | the seed to use for the random value |
+| seed | uint64 | the seed to use to create a random value from |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### random
 
 ```solidity
-function random(uint8 uintType, uint64 seed) internal pure returns (uint256)
+function random(uint8 uintType, uint32 seed) internal pure returns (uint256)
+```
+
+Generates a random value of a given type with the given seed
+
+_Calls the desired precompile and returns the hash of the ciphertext_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| uintType | uint8 | the type of the random value to generate |
+| seed | uint32 | the seed to use to create a random value from |
+
+### random
+
+```solidity
+function random(uint8 uintType) internal pure returns (uint256)
 ```
 
 Generates a random value of a given type
@@ -3067,12 +3084,11 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | uintType | uint8 | the type of the random value to generate |
-| seed | uint64 | the seed to use for the random value |
 
 ### randomEuint8
 
 ```solidity
-function randomEuint8(uint64 seed, int32 securityZone) internal pure returns (euint8)
+function randomEuint8(int32 securityZone) internal pure returns (euint8)
 ```
 
 Generates a random value of a euint8 type for provided securityZone
@@ -3083,29 +3099,22 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint8
 
 ```solidity
-function randomEuint8(uint64 seed) internal pure returns (euint8)
+function randomEuint8() internal pure returns (euint8)
 ```
 
 Generates a random value of a euint8 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
-
 ### randomEuint16
 
 ```solidity
-function randomEuint16(uint64 seed, int32 securityZone) internal pure returns (euint16)
+function randomEuint16(int32 securityZone) internal pure returns (euint16)
 ```
 
 Generates a random value of a euint16 type for provided securityZone
@@ -3116,29 +3125,22 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint16
 
 ```solidity
-function randomEuint16(uint64 seed) internal pure returns (euint16)
+function randomEuint16() internal pure returns (euint16)
 ```
 
 Generates a random value of a euint16 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
-
 ### randomEuint32
 
 ```solidity
-function randomEuint32(uint64 seed, int32 securityZone) internal pure returns (euint32)
+function randomEuint32(int32 securityZone) internal pure returns (euint32)
 ```
 
 Generates a random value of a euint32 type for provided securityZone
@@ -3149,29 +3151,22 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint32
 
 ```solidity
-function randomEuint32(uint64 seed) internal pure returns (euint32)
+function randomEuint32() internal pure returns (euint32)
 ```
 
 Generates a random value of a euint32 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
-
 ### randomEuint64
 
 ```solidity
-function randomEuint64(uint64 seed, int32 securityZone) internal pure returns (euint64)
+function randomEuint64(int32 securityZone) internal pure returns (euint64)
 ```
 
 Generates a random value of a euint64 type for provided securityZone
@@ -3182,29 +3177,22 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint64
 
 ```solidity
-function randomEuint64(uint64 seed) internal pure returns (euint64)
+function randomEuint64() internal pure returns (euint64)
 ```
 
 Generates a random value of a euint64 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
-
 ### randomEuint128
 
 ```solidity
-function randomEuint128(uint64 seed, int32 securityZone) internal pure returns (euint128)
+function randomEuint128(int32 securityZone) internal pure returns (euint128)
 ```
 
 Generates a random value of a euint128 type for provided securityZone
@@ -3215,29 +3203,22 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint128
 
 ```solidity
-function randomEuint128(uint64 seed) internal pure returns (euint128)
+function randomEuint128() internal pure returns (euint128)
 ```
 
 Generates a random value of a euint128 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
 
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
-
 ### randomEuint256
 
 ```solidity
-function randomEuint256(uint64 seed, int32 securityZone) internal pure returns (euint256)
+function randomEuint256(int32 securityZone) internal pure returns (euint256)
 ```
 
 Generates a random value of a euint256 type for provided securityZone
@@ -3248,24 +3229,17 @@ _Calls the desired precompile and returns the hash of the ciphertext_
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 | securityZone | int32 | the security zone to use for the random value |
 
 ### randomEuint256
 
 ```solidity
-function randomEuint256(uint64 seed) internal pure returns (euint256)
+function randomEuint256() internal pure returns (euint256)
 ```
 
 Generates a random value of a euint256 type
 
 _Calls the desired precompile and returns the hash of the ciphertext_
-
-#### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| seed | uint64 | the seed to use for the random value |
 
 ### asEbool
 
