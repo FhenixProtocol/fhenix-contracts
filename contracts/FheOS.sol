@@ -34,6 +34,8 @@ interface FheOps {
     function max(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function shl(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function shr(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function rol(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
+    function ror(uint8 utype, bytes memory lhsHash, bytes memory rhsHash) external pure returns (bytes memory);
     function not(uint8 utype, bytes memory value) external pure returns (bytes memory);
     function random(uint8 utype, uint64 seed, int32 securityZone) external pure returns (bytes memory);
     function getNetworkPublicKey(int32 securityZone) external pure returns (bytes memory);
