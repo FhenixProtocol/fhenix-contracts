@@ -11,7 +11,7 @@ function maxValue(uint8 utype) public pure returns (uint256)
 ### bytes32ToBytes
 
 ```solidity
-function bytes32ToBytes(bytes32 input, uint8 utype) internal pure returns (bytes)
+function bytes32ToBytes(bytes32 input, uint8) internal pure returns (bytes)
 ```
 
 ### uint256ToBytes
@@ -77,7 +77,7 @@ function log(string s) external pure
 ### decrypt
 
 ```solidity
-function decrypt(uint8, bytes input) external pure returns (uint256)
+function decrypt(uint8, bytes input, uint256) external pure returns (uint256)
 ```
 
 ### lte
@@ -209,6 +209,6 @@ function getNetworkPublicKey(int32) external pure returns (bytes)
 ### random
 
 ```solidity
-function random(uint8 utype, uint64, int32) external pure returns (bytes)
+function random(uint8 utype, uint64, int32) external view returns (bytes)
 ```
 
