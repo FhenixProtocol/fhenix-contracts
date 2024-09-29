@@ -206,6 +206,8 @@ contract MockFheOps {
         uint8,
         bytes memory input
     ) external pure returns (bytes memory) {
+        bool condition = (bytesToUint(input) != 0);
+        require(condition);
         return input;
     }
 
