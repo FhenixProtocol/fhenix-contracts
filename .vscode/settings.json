@@ -1,6 +1,0 @@
-{
-	"solidity.remappings": ["@openzeppelin/=node_modules/@openzeppelin/"],
-	"solidity.packageDefaultDependenciesDirectory": ["node_modules", "lib"],
-	"solidity.linter": "",
-	"solidity.formatter": "none"
-}
