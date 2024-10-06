@@ -40,13 +40,27 @@ contract MockFheOps {
         } else if (utype == 12) {
             result = uint256(type(uint160).max) + 1; //address
         } else if (utype == 13) {
-            result = 1; //bool (we want anything non-zero to be false)
+            result = 1; //bool (we want anything non-zero to be true)
         } else {
             revert("Unsupported type");
         }
 
         return result;
     }
+
+    function utypeToOffset(uint8 utype) internal pure returns (uint offset) {
+        if (utype == 0) offset = 31;  // uint8
+            else if (utype == 1) offset = 30;  // uint16
+            else if (utype == 2) offset = 28;  // uint32
+            else if (utype == 3) offset = 24;  // uint64
+            else if (utype == 4) offset = 16; // uint128
+            else if (utype == 5) offset = 0; //uint256
+            else if (utype > 5 && utype <= 11) revert("Unsupported type"); // uint256
+            else if (utype == 12) offset = 12; // uint160
+            else if (utype == 13) offset = 31; // bool (uint8)
+            else revert("Unsupported type");
+    }
+
 
     function bytes32ToBytes(
         bytes32 input,
@@ -101,7 +115,11 @@ contract MockFheOps {
         uint8 toType,
         int32
     ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(input);
+        uint offset = utypeToOffset(toType);
+        bytes32 result;
+        for (uint i = 0; i < 32 - offset; i++) {
+            result |= bytes32(input[offset + i] & 0xFF) >> (i * 8);
+        }
         return bytes32ToBytes(result, toType);
     }
 

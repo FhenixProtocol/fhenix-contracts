@@ -8,6 +8,12 @@
 function maxValue(uint8 utype) public pure returns (uint256)
 ```
 
+### utypeToOffset
+
+```solidity
+function utypeToOffset(uint8 utype) internal pure returns (uint256 offset)
+```
+
 ### bytes32ToBytes
 
 ```solidity
