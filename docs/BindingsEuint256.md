@@ -17,7 +17,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint256 | input of type euint256 |
-| rhs | euint256 |  |
+| rhs | euint256 | second input of type euint256 |
 
 #### Return Values
 
@@ -40,7 +40,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint256 | input of type euint256 |
-| rhs | euint256 |  |
+| rhs | euint256 | second input of type euint256 |
 
 #### Return Values
 

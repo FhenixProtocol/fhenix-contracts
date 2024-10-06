@@ -17,7 +17,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | eaddress | input of type eaddress |
-| rhs | eaddress |  |
+| rhs | eaddress | second input of type eaddress |
 
 #### Return Values
 
@@ -40,7 +40,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | eaddress | input of type eaddress |
-| rhs | eaddress |  |
+| rhs | eaddress | second input of type eaddress |
 
 #### Return Values
 

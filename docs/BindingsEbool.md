@@ -17,7 +17,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | ebool | input of type ebool |
-| rhs | ebool |  |
+| rhs | ebool | second input of type ebool |
 
 #### Return Values
 
@@ -40,13 +40,35 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | ebool | input of type ebool |
-| rhs | ebool |  |
+| rhs | ebool | second input of type ebool |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | ebool | the result of the ne |
+
+### not
+
+```solidity
+function not(ebool lhs) internal pure returns (ebool)
+```
+
+Performs the not operation
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | ebool | input of type ebool |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | ebool | the result of the not |
 
 ### and
 
@@ -63,7 +85,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | ebool | input of type ebool |
-| rhs | ebool |  |
+| rhs | ebool | second input of type ebool |
 
 #### Return Values
 
@@ -86,7 +108,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | ebool | input of type ebool |
-| rhs | ebool |  |
+| rhs | ebool | second input of type ebool |
 
 #### Return Values
 
@@ -109,7 +131,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | ebool | input of type ebool |
-| rhs | ebool |  |
+| rhs | ebool | second input of type ebool |
 
 #### Return Values
 

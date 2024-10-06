@@ -158,6 +158,18 @@ function shl(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (b
 function shr(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
 ```
 
+### rol
+
+```solidity
+function rol(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
+```
+
+### ror
+
+```solidity
+function ror(uint8 utype, bytes lhsHash, bytes rhsHash) external pure returns (bytes)
+```
+
 ### not
 
 ```solidity
@@ -174,5 +186,11 @@ function random(uint8 utype, uint64 seed, int32 securityZone) external pure retu
 
 ```solidity
 function getNetworkPublicKey(int32 securityZone) external pure returns (bytes)
+```
+
+### square
+
+```solidity
+function square(uint8 utype, bytes value) external pure returns (bytes)
 ```
 

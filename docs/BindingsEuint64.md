@@ -17,7 +17,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -40,7 +40,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -63,7 +63,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -86,7 +86,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -109,13 +109,35 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | ebool | the result of the ne |
+
+### not
+
+```solidity
+function not(euint64 lhs) internal pure returns (euint64)
+```
+
+Performs the not operation
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | euint64 | input of type euint64 |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | euint64 | the result of the not |
 
 ### and
 
@@ -132,7 +154,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -155,7 +177,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -178,7 +200,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -201,7 +223,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -224,7 +246,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -247,7 +269,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -270,7 +292,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -293,7 +315,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -316,7 +338,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -339,7 +361,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
@@ -362,13 +384,81 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | lhs | euint64 | input of type euint64 |
-| rhs | euint64 |  |
+| rhs | euint64 | second input of type euint64 |
 
 #### Return Values
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | [0] | euint64 | the result of the shr |
+
+### rol
+
+```solidity
+function rol(euint64 lhs, euint64 rhs) internal pure returns (euint64)
+```
+
+Performs the rol operation
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | euint64 | input of type euint64 |
+| rhs | euint64 | second input of type euint64 |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | euint64 | the result of the rol |
+
+### ror
+
+```solidity
+function ror(euint64 lhs, euint64 rhs) internal pure returns (euint64)
+```
+
+Performs the ror operation
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | euint64 | input of type euint64 |
+| rhs | euint64 | second input of type euint64 |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | euint64 | the result of the ror |
+
+### square
+
+```solidity
+function square(euint64 lhs) internal pure returns (euint64)
+```
+
+Performs the square operation
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| lhs | euint64 | input of type euint64 |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | euint64 | the result of the square |
 
 ### toBool
 
