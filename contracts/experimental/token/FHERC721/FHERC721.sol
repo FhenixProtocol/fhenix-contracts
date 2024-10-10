@@ -12,7 +12,7 @@ import { IFHERC721 } from "./IFHERC721.sol";
 contract FHERC721 is IFHERC721, Permissioned, ERC721 {
     using Strings for uint256;
 
-    mapping(uint256 tokenId => euint256) private _privateData;
+    mapping(uint256 => euint256) private _privateData;
 
     constructor(
         string memory name,
