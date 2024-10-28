@@ -12,7 +12,7 @@ import {JsonBuilder} from "./JsonBuilder.sol";
 struct PermissionV2 {
     address issuer;
     uint256 permitId;
-    bytes32 publicKey;
+    bytes32 sealingKey;
     bytes signature;
 }
 
@@ -23,7 +23,6 @@ struct PermitV2Info {
     uint64 createdAt;
     uint64 validityDur;
     uint64 expiresAt;
-    bool fineGrained;
     bool revoked;
 }
 
@@ -35,7 +34,6 @@ struct PermitV2FullInfo {
     uint64 createdAt;
     uint64 validityDur;
     uint64 expiresAt;
-    bool fineGrained;
     bool revoked;
     address[] contracts;
     string[] projectIds;
@@ -90,8 +88,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     error Unauthorized();
     error InvalidProjectId();
     error InvalidContractAddress();
-    error PermitIsFineGrained();
-    error PermitIsCoarseGrained();
 
     error UnauthorizedPermitUsage();
     error PermitRevoked();
@@ -110,14 +106,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (permitInfo[_permitId].revoked) revert PermitRevoked();
         if (permitInfo[_permitId].expiresAt < block.timestamp)
             revert PermitExpired();
-        _;
-    }
-    modifier permitIsFineGrained(uint256 _permitId) {
-        if (permitInfo[_permitId].fineGrained) revert PermitIsCoarseGrained();
-        _;
-    }
-    modifier permitIsCoarseGrained(uint256 _permitId) {
-        if (!permitInfo[_permitId].fineGrained) revert PermitIsFineGrained();
         _;
     }
     modifier projectIdIsValid(bytes32 _projectId) {
@@ -139,7 +127,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     function createNewPermit(
         string calldata _name,
         uint64 _validityDur,
-        bool _fineGrained,
         address[] calldata _contracts,
         string[] calldata _projects
     ) external {
@@ -152,25 +139,20 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
             createdAt: uint64(block.timestamp),
             validityDur: _validityDur,
             expiresAt: uint64(block.timestamp) + _validityDur,
-            fineGrained: _fineGrained,
             revoked: false
         });
 
-        // Add specific contracts to fine grained permit
-        if (_fineGrained) {
+        // Add specific contracts
             for (uint256 i = 0; i < _contracts.length; i++) {
                 permitContracts[_pid].add(_contracts[i]);
             }
-        }
 
-        // Add categories to coarse permit
-        if (!_fineGrained) {
+        // Add projects
             for (uint256 i = 0; i < _projects.length; i++) {
                 permitProjectIds[_pid].add(
                     bytes32(abi.encodePacked(_projects[i]))
                 );
             }
-        }
 
         _safeMint(msg.sender, _pid);
 
@@ -198,7 +180,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     )
         external
         permitIssuedBySender(_permitId)
-        permitIsCoarseGrained(_permitId)
     {
         for (uint256 i = 0; i < _projectsToAdd.length; i++) {
             permitProjectIds[_permitId].add(
@@ -217,7 +198,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         uint256 _permitId,
         address[] calldata _contractsToAdd,
         address[] calldata _contractsToRemove
-    ) external permitIssuedBySender(_permitId) permitIsFineGrained(_permitId) {
+    ) external permitIssuedBySender(_permitId) {
         for (uint256 i = 0; i < _contractsToAdd.length; i++) {
             if (_contractsToAdd[i] == address(0))
                 revert InvalidContractAddress();
@@ -235,22 +216,40 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (!projectIds.contains(_projectId)) revert InvalidProjectId();
     }
 
+    function _checkPermitSatisfies(
+        uint256 _permitId,
+        address _contract,
+        bytes32 _projectId
+    ) internal view returns (bool) {
+        if (permitContracts[_permitId].contains(_contract)) return true;
+        if (permitProjectIds[_permitId].contains(_projectId)) return true;
+        return false;
+    }
+
+    function _getContractProjectId(
+        address _contract
+    ) internal view returns (bytes32) {
+        (bool success, bytes memory result) = _contract.staticcall(
+            abi.encodeWithSelector(IFhenixPermissionedV2.PROJECT_ID.selector)
+        );
+        if (success && result.length > 0) return abi.decode(result, (bytes32));
+        return bytes32(0);
+    }
+
     function checkPermitSatisfies(
         uint256 _permitId,
         address _contract,
         bytes32 _projectId
-    ) external view returns (bool) {
-        if (permitInfo[_permitId].fineGrained) {
-            if (_contract == address(0)) return false;
-            if (!permitContracts[_permitId].contains(_contract)) return false;
-        }
+    ) external view returns (bool permitted) {
+        return _checkPermitSatisfies(_permitId, _contract, _projectId);
+    }
 
-        if (!permitInfo[_permitId].fineGrained) {
-            if (!projectIds.contains(_projectId)) return false;
-            if (!permitProjectIds[_permitId].contains(_projectId)) return false;
-        }
-
-        return true;
+    function checkPermitSatisfiesContract(
+        uint256 _permitId,
+        address _contract
+    ) external view returns (bool permitted) {
+        bytes32 _projectId = _getContractProjectId(_contract);
+        return _checkPermitSatisfies(_permitId, _contract, _projectId);
     }
 
     function validatePermission(
@@ -265,11 +264,11 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
             keccak256(
                 abi.encode(
                     keccak256(
-                        "PermissionedV2(address issuer,uint256 permitId,bytes32 publicKey)"
+                        "PermissionedV2(address issuer,uint256 permitId,bytes32 sealingKey)"
                     ),
                     _permission.issuer,
                     _permission.permitId,
-                    _permission.publicKey
+                    _permission.sealingKey
                 )
             )
         );
@@ -280,35 +279,10 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (permitInfo[permitId].issuer != _permission.issuer)
             revert Unauthorized();
 
-        if (permitInfo[permitId].fineGrained) {
-            if (!permitContracts[permitId].contains(_contract))
-                revert PermitContractUnauthorized();
-        } else {
-            if (!permitProjectIds[permitId].contains(_projectId))
-                revert PermitCategoryUnauthorized();
-        }
-    }
-
-    function permitSatisfiesContract(
-        uint256 _permitId,
-        address _contract
-    ) external view returns (bool) {
-        PermitV2Info memory _permit = permitInfo[_permitId];
-
-        // Fine grained
-        if (_permit.fineGrained) {
-            return permitContracts[_permitId].contains(_contract);
-        }
-
-        // Coarse grained
-        (bool success, bytes memory result) = _contract.staticcall(
-            abi.encodeWithSelector(IFhenixPermissionedV2.PROJECT_ID.selector)
-        );
-
-        if (!success || result.length == 0) return false;
-
-        bytes32 projectId = abi.decode(result, (bytes32));
-        return permitProjectIds[_permitId].contains(projectId);
+        bool permitted = false;
+        if (permitContracts[permitId].contains(_contract)) permitted = true;
+        if (permitProjectIds[permitId].contains(_projectId)) permitted = true;
+        if (!permitted) revert PermitContractUnauthorized();
     }
 
     function tokenURI(
@@ -324,7 +298,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         attributes = attributes.kv("createdAt", _permit.createdAt);
         attributes = attributes.kv("validityDur", _permit.validityDur);
         attributes = attributes.kv("expiresAt", _permit.expiresAt);
-        attributes = attributes.kv("fineGrained", _permit.fineGrained);
         attributes = attributes.kv("revoked", _permit.revoked);
         attributes = attributes.kv(
             "contracts",
@@ -346,15 +319,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
                 .toBase64();
     }
 
-    function _bytes32ArrToStringArr(
-        bytes32[] memory values
-    ) internal pure returns (string[] memory bytes32Strings) {
-        bytes32Strings = new string[](values.length);
-        for (uint256 i = 0; i < values.length; i++) {
-            bytes32Strings[i] = JsonBuilder.bytes32ToString(values[i]);
-        }
-    }
-
     function getPermitInfo(
         uint256 _permitId
     ) external view returns (PermitV2FullInfo memory) {
@@ -368,10 +332,9 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
                 createdAt: _permit.createdAt,
                 validityDur: _permit.validityDur,
                 expiresAt: _permit.expiresAt,
-                fineGrained: _permit.fineGrained,
                 revoked: _permit.revoked,
                 contracts: permitContracts[_permitId].values(),
-                projectIds: _bytes32ArrToStringArr(
+                projectIds: JsonBuilder.bytes32ArrToStringArr(
                     permitProjectIds[_permitId].values()
                 )
             });

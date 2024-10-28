@@ -83,6 +83,15 @@ library JsonBuilder {
         return string(bytesArray);
     }
 
+    function bytes32ArrToStringArr(
+        bytes32[] memory values
+    ) internal pure returns (string[] memory bytes32Strings) {
+        bytes32Strings = new string[](values.length);
+        for (uint256 i = 0; i < values.length; i++) {
+            bytes32Strings[i] = bytes32ToString(values[i]);
+        }
+    }
+
     function kv(
         string memory o,
         string memory key,
