@@ -53,6 +53,16 @@ interface IFhenixPermitV2 {
         address _contract,
         bytes32 _projectId
     ) external view;
+    function approve(
+        uint256 _permitId,
+        address _contract,
+        bytes32 _projectId
+    ) external;
+    function revokeApproval(
+        uint256 _permitId,
+        address _contract,
+        bytes32 _projectId
+    ) external;
 }
 
 interface IFhenixPermissionedV2 {

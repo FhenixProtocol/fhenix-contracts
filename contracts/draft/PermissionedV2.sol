@@ -9,6 +9,7 @@ abstract contract PermissionedV2 is IFhenixPermissionedV2 {
 
 	IFhenixPermitV2 public PERMIT_V2;
 	string public PROJECT_ID;
+	bytes32 public PROJECT_ID_BYTES;
 
 	error ProjectNameTooLong();
 
@@ -16,10 +17,10 @@ abstract contract PermissionedV2 is IFhenixPermissionedV2 {
 		if (bytes(_projectId).length > 32) revert ProjectNameTooLong();
 
 		PERMIT_V2 = IFhenixPermitV2(_permitV2);
-		projectId = bytes32(abi.encodePacked(_projectId));
+		PROJECT_ID_BYTES = bytes32(abi.encodePacked(_projectId));
 		PROJECT_ID = _projectId;
 
-		PERMIT_V2.validateProjectId(projectId);
+		PERMIT_V2.validateProjectId(PROJECT_ID_BYTES);
 	}
 
 	function checkPermitSatisfies(
@@ -42,5 +43,19 @@ abstract contract PermissionedV2 is IFhenixPermissionedV2 {
 			projectId
 		);
 		_;
+	}
+
+	// Utility functions to enable PermitV2 contract to be fully abstracted away
+	function approveContract(uint256 _permitId) external {
+		PERMIT_V2.approve(_permitId, address(this), bytes32(0));
+	}
+	function approveProject(uint256 _permitId) external {
+		PERMIT_V2.approve(_permitId, address(0), PROJECT_ID_BYTES);
+	}
+	function revokeContractApproval(uint256 _permitId) external {
+		PERMIT_V2.revokeApproval(_permitId, address(this), bytes32(0));
+	}
+	function revokeProjectApproval(uint256 _permitId) external {
+		PERMIT_V2.revokeApproval(_permitId, address(0), PROJECT_ID_BYTES);
 	}
 }
