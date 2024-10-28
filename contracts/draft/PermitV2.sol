@@ -90,6 +90,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
 
     error InvalidProjectId();
     error InvalidContractAddress();
+    error InvalidApprovalTarget();
 
     error PermitInvalid_Revoked();
     error PermitInvalid_Expired();
@@ -167,6 +168,30 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         uint256 _permitId
     ) external permitIssuedBySender(_permitId) {
         permitInfo[_permitId].revoked = true;
+    }
+
+    function approve(
+        uint256 _permitId,
+        address _contract,
+        bytes32 _projectId
+    ) external permitIssuedBySender(_permitId) {
+        if (_contract == address(0) && _projectId == bytes32(0)) revert InvalidApprovalTarget();
+        if (_contract != address(0) && _projectId != bytes32(0)) revert InvalidApprovalTarget();
+
+        if (_contract != address(0)) permitContracts[_permitId].add(_contract);
+        if (_projectId != bytes32(0)) permitProjectIds[_permitId].add(_projectId);
+    }
+
+    function revokeApproval(
+        uint256 _permitId,
+        address _contract,
+        bytes32 _projectId
+    ) external permitIssuedBySender(_permitId) {
+        if (_contract == address(0) && _projectId == bytes32(0)) revert InvalidApprovalTarget();
+        if (_contract != address(0) && _projectId != bytes32(0)) revert InvalidApprovalTarget();
+
+        if (_contract != address(0)) permitContracts[_permitId].remove(_contract);
+        if (_projectId != bytes32(0)) permitProjectIds[_permitId].remove(_projectId);
     }
 
     function updateProjectIds(
