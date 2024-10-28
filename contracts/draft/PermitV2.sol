@@ -4,9 +4,9 @@ pragma solidity >=0.8.19 <0.9.0;
 
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {ERC721Enumerable} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
-import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
+import {SignatureChecker} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import {JsonBuilder} from "./JsonBuilder.sol";
 
 struct PermissionV2 {
@@ -85,35 +85,28 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
 
     event PermitV2Created(address indexed user, uint256 indexed permitId);
 
-    error Unauthorized();
+    error Permit_NotIssuer();
+
     error InvalidProjectId();
     error InvalidContractAddress();
 
-    error UnauthorizedPermitUsage();
-    error PermitRevoked();
-    error PermitExpired();
-    error PermitOwnerUnauthorized();
-    error PermitCategoryUnauthorized();
-    error PermitContractUnauthorized();
+    error PermitInvalid_Revoked();
+    error PermitInvalid_Expired();
+    error PermitInvalid_Signature();
 
-    error SignerNotMessageSender();
+    error PermitUnauthorized_NotHolder();
+    error PermitUnauthorized_IssuerMismatch();
+    error PermitUnauthorized_ContractNotSatisfied();
+
 
     modifier permitIssuedBySender(uint256 _permitId) {
-        if (permitInfo[_permitId].issuer != msg.sender) revert Unauthorized();
+        if (permitInfo[_permitId].issuer != msg.sender) revert Permit_NotIssuer();
         _;
     }
     modifier permitIsActive(uint256 _permitId) {
-        if (permitInfo[_permitId].revoked) revert PermitRevoked();
+        if (permitInfo[_permitId].revoked) revert PermitInvalid_Revoked();
         if (permitInfo[_permitId].expiresAt < block.timestamp)
-            revert PermitExpired();
-        _;
-    }
-    modifier projectIdIsValid(bytes32 _projectId) {
-        if (!projectIds.contains(_projectId)) revert InvalidProjectId();
-        _;
-    }
-    modifier contractIsValid(address _contract) {
-        if (_contract == address(0)) revert InvalidContractAddress();
+            revert PermitInvalid_Expired();
         _;
     }
 
@@ -258,8 +251,6 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         address _contract,
         bytes32 _projectId
     ) external view permitIsActive(_permission.permitId) {
-        uint256 permitId = _permission.permitId;
-
         bytes32 digest = _hashTypedDataV4(
             keccak256(
                 abi.encode(
@@ -272,17 +263,17 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
                 )
             )
         );
-        address signer = ECDSA.recover(digest, _permission.signature);
-        if (signer != _sender) revert SignerNotMessageSender();
 
-        if (ownerOf(permitId) != signer) revert UnauthorizedPermitUsage();
-        if (permitInfo[permitId].issuer != _permission.issuer)
-            revert Unauthorized();
+        bool validSignature = SignatureChecker.isValidSignatureNow(_sender, digest, _permission.signature);
+        if (!validSignature) revert PermitInvalid_Signature();
 
-        bool permitted = false;
-        if (permitContracts[permitId].contains(_contract)) permitted = true;
-        if (permitProjectIds[permitId].contains(_projectId)) permitted = true;
-        if (!permitted) revert PermitContractUnauthorized();
+        // After this point, _sender and the contents of _permission can be trusted
+
+        uint256 permitId = _permission.permitId;
+
+        if (ownerOf(permitId) != _sender) revert PermitUnauthorized_NotHolder();
+        if (permitInfo[permitId].issuer != _permission.issuer) revert PermitUnauthorized_IssuerMismatch();
+        if (!_checkPermitSatisfies(permitId, _contract, _projectId)) revert PermitUnauthorized_ContractNotSatisfied();
     }
 
     function tokenURI(
