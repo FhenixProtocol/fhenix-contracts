@@ -13,6 +13,7 @@ struct PermissionV2 {
     address issuer;
     uint256 permitId;
     bytes32 sealingKey;
+    uint64 deadline;
     bytes signature;
 }
 
@@ -97,6 +98,8 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     error PermitUnauthorized_NotHolder();
     error PermitUnauthorized_IssuerMismatch();
     error PermitUnauthorized_ContractNotSatisfied();
+
+    error PermissionInvalid_DeadlinePassed();
 
 
     modifier permitIssuedBySender(uint256 _permitId) {
@@ -255,11 +258,12 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
             keccak256(
                 abi.encode(
                     keccak256(
-                        "PermissionedV2(address issuer,uint256 permitId,bytes32 sealingKey)"
+                        "PermissionedV2(address issuer,uint256 permitId,bytes32 sealingKey,uint64 deadline)"
                     ),
                     _permission.issuer,
                     _permission.permitId,
-                    _permission.sealingKey
+                    _permission.sealingKey,
+                    _permission.deadline
                 )
             )
         );
@@ -274,6 +278,8 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (ownerOf(permitId) != _sender) revert PermitUnauthorized_NotHolder();
         if (permitInfo[permitId].issuer != _permission.issuer) revert PermitUnauthorized_IssuerMismatch();
         if (!_checkPermitSatisfies(permitId, _contract, _projectId)) revert PermitUnauthorized_ContractNotSatisfied();
+
+        if (_permission.deadline < block.timestamp) revert PermissionInvalid_DeadlinePassed();
     }
 
     function tokenURI(
