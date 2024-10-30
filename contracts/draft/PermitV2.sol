@@ -54,10 +54,10 @@ interface IFhenixPermitV2 {
         address _contract,
         bytes32 _projectId
     ) external view;
-    function validateRouter(
-        PermissionV2 calldata _permission,
-        address _sender
-    ) external view;
+    function validatePermitRouter(
+        uint256 _permitId,
+        address _router
+    ) external view returns (address issuer);
     function approve(
         uint256 _permitId,
         address _contract,
@@ -330,8 +330,13 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (_permission.deadline < block.timestamp) revert PermissionInvalid_DeadlinePassed();
     }
 
-    function validateRouter(PermissionV2 calldata _permission, address _sender) external view {
-        if (!permitRouters[_permission.permitId].contains(_sender)) revert PermitUnauthorized_InvalidRouter();
+    function validatePermitRouter(uint256 _permitId, address _router) external view returns (address issuer) {
+        if (!permitRouters[_permitId].contains(_router)) revert PermitUnauthorized_InvalidRouter();
+
+        issuer = permitInfo[_permitId].issuer;
+
+        // Shared permits can not be used within a write tx
+        if (ownerOf(_permitId) != issuer) revert PermitUnauthorized_NotHolder();
     }
 
     function tokenURI(

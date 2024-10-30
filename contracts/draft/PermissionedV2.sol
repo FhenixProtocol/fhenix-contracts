@@ -45,14 +45,17 @@ abstract contract PermissionedV2 is IFhenixPermissionedV2 {
 		_;
 	}
 
-	modifier withPermissionRouter(PermissionV2 memory permission, address sender) {
-		PERMIT_V2.validatePermission(
-			permission,
-			sender,
-			address(this),
-			projectId
-		);
-		PERMIT_V2.validateRouter(permission, msg.sender);
+	/// @dev Populated in txs when `withPermitRouter` is added as a fn modifier */
+	address issuer = address(0);
+
+	/// @dev Ensures that the msg.sender is a router and user has granted router permissions
+	/// @dev Populates `issuer` with the owner of the permit
+	///
+	/// @dev ** Only return the data of `issuer`! **
+	modifier withPermitRouter(uint256 _permitId) {
+		issuer = PERMIT_V2.validatePermitRouter(_permitId, msg.sender);
+		_;
+		issuer = address(0);
 	}
 
 	// Utility functions to enable PermitV2 contract to be fully abstracted away
