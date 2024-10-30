@@ -45,17 +45,33 @@ abstract contract PermissionedV2 is IFhenixPermissionedV2 {
 		_;
 	}
 
+	modifier withPermissionRouter(PermissionV2 memory permission, address sender) {
+		PERMIT_V2.validatePermission(
+			permission,
+			sender,
+			address(this),
+			projectId
+		);
+		PERMIT_V2.validateRouter(permission, msg.sender);
+	}
+
 	// Utility functions to enable PermitV2 contract to be fully abstracted away
 	function approveContract(uint256 _permitId) external {
-		PERMIT_V2.approve(_permitId, address(this), bytes32(0));
+		PERMIT_V2.approve(_permitId, address(this), bytes32(0), address(0));
 	}
 	function approveProject(uint256 _permitId) external {
-		PERMIT_V2.approve(_permitId, address(0), PROJECT_ID_BYTES);
+		PERMIT_V2.approve(_permitId, address(0), PROJECT_ID_BYTES, address(0));
+	}
+	function approveRouter(uint256 _permitId) external {
+		PERMIT_V2.approve(_permitId, address(0), bytes32(0), address(this));
 	}
 	function revokeContractApproval(uint256 _permitId) external {
-		PERMIT_V2.revokeApproval(_permitId, address(this), bytes32(0));
+		PERMIT_V2.revokeApproval(_permitId, address(this), bytes32(0), address(0));
 	}
 	function revokeProjectApproval(uint256 _permitId) external {
-		PERMIT_V2.revokeApproval(_permitId, address(0), PROJECT_ID_BYTES);
+		PERMIT_V2.revokeApproval(_permitId, address(0), PROJECT_ID_BYTES, address(0));
+	}
+	function revokeRouterApproval(uint256 _permitId) external {
+		PERMIT_V2.revokeApproval(_permitId, address(0), bytes32(0), address(this));
 	}
 }

@@ -38,6 +38,7 @@ struct PermitV2FullInfo {
     bool revoked;
     address[] contracts;
     string[] projectIds;
+    address[] routers;
 }
 
 interface IFhenixPermitV2 {
@@ -53,15 +54,21 @@ interface IFhenixPermitV2 {
         address _contract,
         bytes32 _projectId
     ) external view;
+    function validateRouter(
+        PermissionV2 calldata _permission,
+        address _sender
+    ) external view;
     function approve(
         uint256 _permitId,
         address _contract,
-        bytes32 _projectId
+        bytes32 _projectId,
+        address _router
     ) external;
     function revokeApproval(
         uint256 _permitId,
         address _contract,
-        bytes32 _projectId
+        bytes32 _projectId,
+        address _router
     ) external;
 }
 
@@ -81,6 +88,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     mapping(uint256 => PermitV2Info) private permitInfo;
     mapping(uint256 => EnumerableSet.AddressSet) private permitContracts;
     mapping(uint256 => EnumerableSet.Bytes32Set) private permitProjectIds;
+    mapping(uint256 => EnumerableSet.AddressSet) private permitRouters;
 
     EnumerableSet.Bytes32Set private projectIds;
 
@@ -109,6 +117,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     error PermitUnauthorized_NotHolder();
     error PermitUnauthorized_IssuerMismatch();
     error PermitUnauthorized_ContractNotSatisfied();
+    error PermitUnauthorized_InvalidRouter();
 
     error PermissionInvalid_DeadlinePassed();
 
@@ -183,25 +192,29 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
     function approve(
         uint256 _permitId,
         address _contract,
-        bytes32 _projectId
+        bytes32 _projectId,
+        address _router
     ) external permitIssuedBySender(_permitId) {
-        if (_contract == address(0) && _projectId == bytes32(0)) revert InvalidApprovalTarget();
-        if (_contract != address(0) && _projectId != bytes32(0)) revert InvalidApprovalTarget();
+        // Check that only one of _contract _projectId _router is non-null
+        if (((_contract == address(0) ? 0 : 1) + (_projectId == bytes32(0) ? 0 : 1) + (_router == address(0) ? 0 : 1)) != 0) revert InvalidApprovalTarget();
 
         if (_contract != address(0)) permitContracts[_permitId].add(_contract);
         if (_projectId != bytes32(0)) permitProjectIds[_permitId].add(_projectId);
+        if (_router != address(0)) permitRouters[_permitId].add(_router);
     }
 
     function revokeApproval(
         uint256 _permitId,
         address _contract,
-        bytes32 _projectId
+        bytes32 _projectId,
+        address _router
     ) external permitIssuedBySender(_permitId) {
-        if (_contract == address(0) && _projectId == bytes32(0)) revert InvalidApprovalTarget();
-        if (_contract != address(0) && _projectId != bytes32(0)) revert InvalidApprovalTarget();
+        // Check that only one of _contract _projectId _router is non-null
+        if (((_contract == address(0) ? 0 : 1) + (_projectId == bytes32(0) ? 0 : 1) + (_router == address(0) ? 0 : 1)) != 0) revert InvalidApprovalTarget();
 
         if (_contract != address(0)) permitContracts[_permitId].remove(_contract);
         if (_projectId != bytes32(0)) permitProjectIds[_permitId].remove(_projectId);
+        if (_router != address(0)) permitRouters[_permitId].remove(_router);
     }
 
     function updateProjectIds(
@@ -317,6 +330,10 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         if (_permission.deadline < block.timestamp) revert PermissionInvalid_DeadlinePassed();
     }
 
+    function validateRouter(PermissionV2 calldata _permission, address _sender) external view {
+        if (!permitRouters[_permission.permitId].contains(_sender)) revert PermitUnauthorized_InvalidRouter();
+    }
+
     function tokenURI(
         uint256 _permitId
     ) public view override returns (string memory) {
@@ -338,6 +355,10 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         attributes = attributes.kv(
             "categories",
             permitProjectIds[_permitId].values()
+        );
+        attributes = attributes.kv(
+            "routers",
+            permitRouters[_permitId].values()
         );
         attributes = attributes.end();
 
@@ -368,7 +389,8 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
                 contracts: permitContracts[_permitId].values(),
                 projectIds: JsonBuilder.bytes32ArrToStringArr(
                     permitProjectIds[_permitId].values()
-                )
+                ),
+                routers: permitRouters[_permitId].values()
             });
     }
 }
