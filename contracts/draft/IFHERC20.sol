@@ -41,8 +41,11 @@ interface IFHERC20 {
 
     /**
      * @dev Returns the encrypted value of tokens in existence.
+     *
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
-    function encTotalSupply() external view returns (euint128);
+    function encTotalSupply(uint256 permitId) external returns (euint128);
 
     /**
      * @dev Returns the encrypted value of tokens in existence, sealed for the caller.
@@ -53,8 +56,11 @@ interface IFHERC20 {
 
     /**
      * @dev Returns the value of the encrypted tokens owned by `account`
+     *
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
-    function encBalanceOf(address account) external view returns (euint128);
+    function encBalanceOf(uint256 permitId) external returns (euint128);
 
     /**
      * @dev Returns the value of the encrypted tokens owned by the issuer of the PermitNft, sealed for the caller
@@ -80,11 +86,14 @@ interface IFHERC20 {
      * zero by default.
      *
      * This value changes when {approve} or {transferFrom} are called.
+     *
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
     function encAllowance(
-        address owner,
+        uint256 permitId,
         address spender
-    ) external view returns (euint128);
+    ) external returns (euint128);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be

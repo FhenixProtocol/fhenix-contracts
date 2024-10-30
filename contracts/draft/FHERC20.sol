@@ -22,8 +22,11 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
 
     /**
      * @dev Returns the encrypted value of tokens in existence.
+     *
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
-    function encTotalSupply() public view virtual override returns (euint128) {
+    function encTotalSupply(uint256 _permitId) public virtual override withPermitRouter(_permitId) returns (euint128) {
         return _encTotalSupply;
     }
 
@@ -40,16 +43,18 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
         withPermission(permission)
         returns (string memory)
     {
-        return _encTotalSupply.seal(permission.publicKey);
+        return _encTotalSupply.seal(permission.sealingKey);
     }
 
     /**
      * @dev Returns the value of the encrypted tokens owned by `account`
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
     function encBalanceOf(
-        address account
-    ) public view virtual override returns (euint128) {
-        return _encBalances[account];
+        uint256 permitId
+    ) public virtual override withPermitRouter(permitId) returns (euint128) {
+        return _encBalances[permitIssuer];
     }
 
     /**
@@ -65,7 +70,7 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
         withPermission(permission)
         returns (string memory)
     {
-        return _encBalances[permission.issuer].seal(permission.publicKey);
+        return _encBalances[permission.issuer].seal(permission.sealingKey);
     }
 
     /**
@@ -88,12 +93,15 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
      * zero by default.
      *
      * This value changes when {approve} or {transferFrom} are called.
+     *
+     * @dev Designed to be used as part of a write tx
+     * @dev Can only be called by an authorized router (see PermitV2 documentation)
      */
     function encAllowance(
-        address owner,
+        uint256 permitId,
         address spender
-    ) public view virtual override returns (euint128) {
-        return _encAllowances[owner][spender];
+    ) public virtual override withPermitRouter(permitId) returns (euint128) {
+        return _encAllowances[permitIssuer][spender];
     }
 
     /**
@@ -120,7 +128,7 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
         if (permission.issuer != owner && permission.issuer != spender) {
             revert FHERC20NotOwnerOrSpender();
         }
-        return _encAllowances[owner][spender].seal(permission.publicKey);
+        return _encAllowances[owner][spender].seal(permission.sealingKey);
     }
 
     /**
@@ -245,7 +253,7 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
      * Emits an {EncTransfer} event with `from` set to the zero address.
      */
     function _encMint(address to, euint128 eAmount) internal {
-        if (account == address(0)) {
+        if (to == address(0)) {
             revert ERC20InvalidReceiver(address(0));
         }
 
@@ -270,7 +278,7 @@ contract FHERC20 is IFHERC20, ERC20, PermissionedV2 {
         address from,
         euint128 eAmount
     ) internal returns (euint128) {
-        if (account == address(0)) {
+        if (from == address(0)) {
             revert ERC20InvalidSender(address(0));
         }
 
