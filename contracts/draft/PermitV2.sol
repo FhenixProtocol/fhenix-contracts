@@ -25,6 +25,7 @@ struct PermitV2Info {
     uint64 validityDur;
     uint64 expiresAt;
     bool revoked;
+    bool universal;
 }
 
 struct PermitV2FullInfo {
@@ -36,6 +37,7 @@ struct PermitV2FullInfo {
     uint64 validityDur;
     uint64 expiresAt;
     bool revoked;
+    bool universal;
     address[] contracts;
     string[] projectIds;
     address[] routers;
@@ -142,6 +144,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
 
     function createNewPermit(
         string calldata _name,
+        bool _universal,
         uint64 _validityDur,
         address[] calldata _contracts,
         string[] calldata _projects
@@ -155,7 +158,8 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
             createdAt: uint64(block.timestamp),
             validityDur: _validityDur,
             expiresAt: uint64(block.timestamp) + _validityDur,
-            revoked: false
+            revoked: false,
+            universal: _universal
         });
 
         // Add specific contracts
@@ -265,6 +269,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         address _contract,
         bytes32 _projectId
     ) internal view returns (bool) {
+        if (permitInfo[_permitId].universal) return true;
         if (permitContracts[_permitId].contains(_contract)) return true;
         if (permitProjectIds[_permitId].contains(_projectId)) return true;
         return false;
@@ -352,6 +357,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
         attributes = attributes.kv("createdAt", _permit.createdAt);
         attributes = attributes.kv("validityDur", _permit.validityDur);
         attributes = attributes.kv("expiresAt", _permit.expiresAt);
+        attributes = attributes.kv("universal", _permit.universal);
         attributes = attributes.kv("revoked", _permit.revoked);
         attributes = attributes.kv(
             "contracts",
@@ -391,6 +397,7 @@ contract PermitV2 is ERC721Enumerable, EIP712, IFhenixPermitV2 {
                 validityDur: _permit.validityDur,
                 expiresAt: _permit.expiresAt,
                 revoked: _permit.revoked,
+                universal: _permit.universal,
                 contracts: permitContracts[_permitId].values(),
                 projectIds: JsonBuilder.bytes32ArrToStringArr(
                     permitProjectIds[_permitId].values()
