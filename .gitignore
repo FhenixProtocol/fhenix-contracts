@@ -12,6 +12,7 @@ types
 deployments
 .idea
 contracts-exposed
+.vscode
 
 # files
 *.env
