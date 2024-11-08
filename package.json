@@ -1,39 +1,50 @@
 {
-  "name": "@fhenixprotocol/fhe",
-  "description": "",
-  "version": "0.0.1",
-  "author": {
-    "name": "Fhenix",
-    "url": "https://github.com/fhenixprotocol/fhenix-contracts"
-  },
-  "devDependencies": {
-    "@nomicfoundation/hardhat-ethers": "^3.0.5",
-    "@nomiclabs/hardhat-truffle5": "^2.0.5",
-    "@openzeppelin/contracts": "^5.0.2",
-    "@openzeppelin/test-helpers": "^0.5.13",
-    "chai": "^4.2.0",
-    "fhenix-hardhat-plugin": "^0.2.1",
-    "hardhat": "2.19.3",
-    "hardhat-exposed": "^0.3.13",
-    "solidity-docgen": "0.6.0-beta.36",
-    "typescript": "^5.5.4",
-    "ts-node": "^10.9.2"
-  },
-  "files": [
-    "contracts"
-  ],
-  "keywords": [
-    "blockchain",
-    "ethereum",
-    "smart-contracts",
-    "solidity"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "docgen": "hardhat docgen",
-    "compile": "hardhat compile",
-    "test": "hardhat test"
-  }
+	"name": "@fhenixprotocol/fhe",
+	"description": "",
+	"version": "0.0.1",
+	"author": {
+		"name": "Fhenix",
+		"url": "https://github.com/fhenixprotocol/fhenix-contracts"
+	},
+	"devDependencies": {
+		"@nomicfoundation/hardhat-ethers": "^3.0.5",
+		"@nomicfoundation/hardhat-network-helpers": "^1.0.10",
+		"@nomiclabs/hardhat-truffle5": "^2.0.5",
+		"@openzeppelin/contracts": "^5.0.2",
+		"@openzeppelin/test-helpers": "^0.5.13",
+		"fhenix-hardhat-docker": "0.3.0-alpha.2",
+		"fhenix-hardhat-plugin": "0.3.0-alpha.2",
+		"hardhat": "2.19.3",
+		"hardhat-exposed": "^0.3.13",
+		"solidity-docgen": "0.6.0-beta.36",
+		"typescript": "^5.5.4",
+		"ts-node": "^10.9.2",
+		"@types/chai": "^4.3.11",
+		"chai": "^4.3.7",
+		"@types/mocha": "^10.0.6",
+		"mocha": "^10.3.0",
+		"@typechain/ethers-v6": "^0.5.1",
+		"@typechain/hardhat": "^9.1.0",
+		"typechain": "^8.3.2",
+		"@nomicfoundation/hardhat-toolbox": "^4.0.0",
+		"ethers": "^6.11.1",
+		"fhenixjs": "0.4.0-alpha.6"
+	},
+	"files": [
+		"contracts"
+	],
+	"keywords": [
+		"blockchain",
+		"ethereum",
+		"smart-contracts",
+		"solidity"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"docgen": "hardhat docgen",
+		"compile": "hardhat compile",
+		"test": "hardhat test"
+	}
 }
