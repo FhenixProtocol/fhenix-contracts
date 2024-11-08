@@ -95,35 +95,49 @@ interface IPermissionValidator {
 contract PermissionedV2 is EIP712 {
     using PermissionV2Utils for PermissionV2;
 
+    /// @notice Version of the fhenix permission signature
     string public version = "v2.0.0";
+
+    /// @notice This contract's project identifier string. Used in permissions to grant access to all contracts with this identifier.
     string public project;
 
-    /// @dev Initialize the PermissionedV2 contract with a `project` identifier string.
-    /// Any Permission with this project identifier in the `projects` list will be granted
-    /// access to this contract's data when protected by the `withPermission` modifier.
+    /// @dev Constructor that initializes the EIP712 domain. The EIP712 implementation used has `verifyingContract` disabled
+    /// by replacing it with `address(0)`. Ensure that `verifyingContract` is the ZeroAddress when creating a user's signature.
     ///
-    /// NOTE: Ensure that view functions protected by `withPermission` return ONLY the sensitive data of `permission.issuer`.
-    /// !! Returning data of `msg.sender` will leak sensitive values - `msg.sender` cannot be trusted in view functions !!
+    /// @param proj The project identifier string to be associated with this contract. Any Permission with this project identifier
+    /// in `permission.projects` list will be granted access to this contract's data. Use an empty string for no project identifier.
     constructor(
         string memory proj
     ) EIP712(string.concat("Fhenix Permission ", version), version) {
         project = proj;
     }
 
+    /// @dev Emitted when `project` is not in `permission.projects` nor `address(this)` in `permission.contracts`
     error PermissionInvalid_ContractUnauthorized();
+
+    /// @dev Emitted when `permission.expiration` is in the past (< block.timestamp)
     error PermissionInvalid_Expired();
+
+    /// @dev Emitted when `issuerSignature` is malformed or was not signed by `permission.issuer`
     error PermissionInvalid_IssuerSignature();
+
+    /// @dev Emitted when `recipientSignature` is malformed or was not signed by `permission.recipient`
     error PermissionInvalid_RecipientSignature();
+
+    /// @dev Emitted when `validatorContract` returned `false` indicating that this permission has been externally disabled
     error PermissionInvalid_Disabled();
 
     /// @dev Validate's a `permissions` access of sensitive data.
     /// `permission` may be invalid or unauthorized for the following reasons:
-    ///
     ///    - Contract unauthorized:    `project` is not in `permission.projects` nor address(this) in `permission.contracts`
     ///    - Expired:                  `permission.expiration` is in the past (< block.timestamp)
     ///    - Issuer signature:         `issuerSignature` is malformed or was not signed by `permission.issuer`
     ///    - Recipient signature:      `recipientSignature` is malformed or was not signed by `permission.recipient`
     ///    - Disabled:                 `validatorContract` returned `false` indicating that this permission has been externally disabled
+    /// @param permission PermissionV2 struct containing data necessary to validate data access and seal for return.
+    ///
+    /// NOTE: Functions protected by `withPermission` should return ONLY the sensitive data of `permission.issuer`.
+    /// !! Returning data of `msg.sender` will leak sensitive values - `msg.sender` cannot be trusted in view functions !!
     modifier withPermission(PermissionV2 memory permission) {
         // Access
         if (!permission.satisfies(address(this), project))
