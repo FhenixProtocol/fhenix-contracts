@@ -6,29 +6,10 @@
 		"name": "Fhenix",
 		"url": "https://github.com/fhenixprotocol/fhenix-contracts"
 	},
-	"devDependencies": {
-		"@nomicfoundation/hardhat-ethers": "^3.0.5",
-		"@nomicfoundation/hardhat-network-helpers": "^1.0.10",
-		"@nomiclabs/hardhat-truffle5": "^2.0.5",
-		"@openzeppelin/contracts": "^5.0.2",
-		"@openzeppelin/test-helpers": "^0.5.13",
-		"fhenix-hardhat-docker": "0.3.0-alpha.2",
-		"fhenix-hardhat-plugin": "0.3.0-alpha.2",
-		"hardhat": "2.19.3",
-		"hardhat-exposed": "^0.3.13",
-		"solidity-docgen": "0.6.0-beta.36",
-		"typescript": "^5.5.4",
-		"ts-node": "^10.9.2",
-		"@types/chai": "^4.3.11",
-		"chai": "^4.3.7",
-		"@types/mocha": "^10.0.6",
-		"mocha": "^10.3.0",
-		"@typechain/ethers-v6": "^0.5.1",
-		"@typechain/hardhat": "^9.1.0",
-		"typechain": "^8.3.2",
-		"@nomicfoundation/hardhat-toolbox": "^4.0.0",
-		"ethers": "^6.11.1",
-		"fhenixjs": "0.4.0-alpha.6"
+	"scripts": {
+		"docgen": "hardhat docgen",
+		"compile": "hardhat compile",
+		"test": "hardhat test"
 	},
 	"files": [
 		"contracts"
@@ -42,9 +23,28 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"scripts": {
-		"docgen": "hardhat docgen",
-		"compile": "hardhat compile",
-		"test": "hardhat test"
+	"devDependencies": {
+		"@nomicfoundation/hardhat-ethers": "^3.0.5",
+		"@nomicfoundation/hardhat-network-helpers": "^1.0.10",
+		"@nomicfoundation/hardhat-toolbox": "^4.0.0",
+		"@nomiclabs/hardhat-truffle5": "^2.0.5",
+		"@openzeppelin/contracts": "^5.0.2",
+		"@openzeppelin/test-helpers": "^0.5.13",
+		"@typechain/ethers-v6": "^0.5.1",
+		"@typechain/hardhat": "^9.1.0",
+		"@types/chai": "^4.3.11",
+		"@types/mocha": "^10.0.6",
+		"chai": "^4.3.7",
+		"ethers": "^6.11.1",
+		"fhenix-hardhat-docker": "0.3.0-alpha.2",
+		"fhenix-hardhat-plugin": "0.3.0-alpha.2",
+		"fhenixjs": "0.4.0-alpha.6",
+		"hardhat-exposed": "^0.3.13",
+		"hardhat": "2.19.3",
+		"mocha": "^10.3.0",
+		"solidity-docgen": "0.6.0-beta.36",
+		"ts-node": "^10.9.2",
+		"typechain": "^8.3.2",
+		"typescript": "^5.5.4"
 	}
 }
