@@ -1,31 +1,31 @@
 {
-  "name": "@fhenixprotocol/contracts",
-  "description": "Smart Contract Library for the Fhenix Blockchain with FHE primitives",
-  "version": "0.3.0-alpha.4",
-  "author": {
-    "name": "FhenixProtocol",
-    "url": "https://github.com/fhenixprotocol/fhenix-contracts"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
-  },
-  "files": [
-    "FHE.sol",
-    "FheOS.sol",
-    "access/**",
-    "experimental/**",
-    "utils/**"
-  ],
-  "keywords": [
-    "blockchain",
-    "ethereum",
-    "smart-contracts",
-    "solidity",
-    "FHE",
-    "encryption",
-    "privacy"
-  ],
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@fhenixprotocol/contracts",
+	"description": "Smart Contract Library for the Fhenix Blockchain with FHE primitives",
+	"version": "0.3.0-alpha.4",
+	"author": {
+		"name": "FhenixProtocol",
+		"url": "https://github.com/fhenixprotocol/fhenix-contracts"
+	},
+	"files": [
+		"FHE.sol",
+		"FheOS.sol",
+		"access/**",
+		"experimental/**",
+		"utils/**"
+	],
+	"keywords": [
+		"blockchain",
+		"ethereum",
+		"smart-contracts",
+		"solidity",
+		"FHE",
+		"encryption",
+		"privacy"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@openzeppelin/contracts": "^5.0.0"
+	}
 }
