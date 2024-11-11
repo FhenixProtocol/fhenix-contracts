@@ -378,6 +378,190 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 | ---- | ---- | ----------- |
 | [0] | string | Plaintext input, sealed for the owner of `publicKey` |
 
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(ebool value, bytes32 publicKey) internal pure returns (struct SealedBool)
+```
+
+performs the sealoutput function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | ebool | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedBool | SealedBool({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EBOOL_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint8 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint8 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT8_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint16 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint16 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT16_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint32 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint32 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT32_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint64 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint64 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT64_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint128 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint128 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT128_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(euint256 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
+performs the sealoutput function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | euint256 | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedUint | SealedUint({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EUINT256_TFHE }) |
+
+### sealoutputTyped
+
+```solidity
+function sealoutputTyped(eaddress value, bytes32 publicKey) internal pure returns (struct SealedAddress)
+```
+
+performs the sealoutput function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided
+
+_Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | eaddress | Ciphertext to decrypt and seal |
+| publicKey | bytes32 | Public Key that will receive the sealed plaintext |
+
+#### Return Values
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| [0] | struct SealedAddress | SealedAddress({ data: Plaintext input, sealed for the owner of `publicKey`, utype: Common.EADDRESS_TFHE }) |
+
 ### decrypt
 
 ```solidity

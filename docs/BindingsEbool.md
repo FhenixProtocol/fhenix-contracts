@@ -181,6 +181,12 @@ function toU256(ebool value) internal pure returns (euint256)
 function seal(ebool value, bytes32 publicKey) internal pure returns (string)
 ```
 
+### sealTyped
+
+```solidity
+function sealTyped(ebool value, bytes32 publicKey) internal pure returns (struct SealedBool)
+```
+
 ### decrypt
 
 ```solidity

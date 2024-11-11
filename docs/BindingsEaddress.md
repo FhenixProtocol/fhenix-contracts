@@ -96,6 +96,12 @@ function toU256(eaddress value) internal pure returns (euint256)
 function seal(eaddress value, bytes32 publicKey) internal pure returns (string)
 ```
 
+### sealTyped
+
+```solidity
+function sealTyped(eaddress value, bytes32 publicKey) internal pure returns (struct SealedAddress)
+```
+
 ### decrypt
 
 ```solidity

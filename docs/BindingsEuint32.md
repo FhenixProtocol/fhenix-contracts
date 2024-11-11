@@ -548,6 +548,12 @@ function toU256(euint32 value) internal pure returns (euint256)
 function seal(euint32 value, bytes32 publicKey) internal pure returns (string)
 ```
 
+### sealTyped
+
+```solidity
+function sealTyped(euint32 value, bytes32 publicKey) internal pure returns (struct SealedUint)
+```
+
 ### decrypt
 
 ```solidity
