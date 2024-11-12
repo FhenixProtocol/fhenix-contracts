@@ -51,30 +51,32 @@ struct SealedArray {
     bytes[] data;
 }
 
+
 /// @dev Utility structure providing clients with type context of a sealed output string.
-/// Returned from `FHE.sealoutputTyped` and `sealTyped` within the bindings.
+/// Return type of `FHE.sealoutputTyped` and `sealTyped` within the binding libraries.
 /// `utype` representing Bool is 13. See `FHE.sol` for more.
 struct SealedBool {
-	string data;
-	uint8 utype;
+    string data;
+    uint8 utype;
 }
 
 /// @dev Utility structure providing clients with type context of a sealed output string.
-/// Returned from `FHE.sealoutputTyped` and `sealTyped` within the bindings.
+/// Return type of `FHE.sealoutputTyped` and `sealTyped` within the binding libraries.
 /// `utype` representing Uints is 0-5. See `FHE.sol` for more.
 /// `utype` map: {uint8: 0} {uint16: 1} {uint32: 2} {uint64: 3} {uint128: 4} {uint256: 5}.
 struct SealedUint {
-	string data;
-	uint8 utype;
+    string data;
+    uint8 utype;
 }
 
 /// @dev Utility structure providing clients with type context of a sealed output string.
-/// Returned from `FHE.sealoutputTyped` and `sealTyped` within the bindings.
+/// Return type of `FHE.sealoutputTyped` and `sealTyped` within the binding libraries.
 /// `utype` representing Address is 12. See `FHE.sol` for more.
 struct SealedAddress {
-	string data;
-	uint8 utype;
+    string data;
+    uint8 utype;
 }
+
 
 library Common {
     // Values used to communicate types to the runtime.
@@ -119,7 +121,7 @@ library Common {
     }
 
     function bigIntToAddress(uint256 i) internal pure returns (address) {
-      return address(uint160(i));
+        return address(uint160(i));
     }
     
     function toBytes(uint256 x) internal pure returns (bytes memory b) {
@@ -437,7 +439,7 @@ library FHE {
 
         return Impl.sealoutput(Common.EADDRESS_TFHE, unwrapped, publicKey);
     }
-    /// @notice performs the sealoutput function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -445,7 +447,7 @@ library FHE {
     function sealoutputTyped(ebool value, bytes32 publicKey) internal pure returns (SealedBool memory) {
         return SealedBool({ data: sealoutput(value, publicKey), utype: Common.EBOOL_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -453,7 +455,7 @@ library FHE {
     function sealoutputTyped(euint8 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT8_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -461,7 +463,7 @@ library FHE {
     function sealoutputTyped(euint16 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT16_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -469,7 +471,7 @@ library FHE {
     function sealoutputTyped(euint32 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT32_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -477,7 +479,7 @@ library FHE {
     function sealoutputTyped(euint64 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT64_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -485,7 +487,7 @@ library FHE {
     function sealoutputTyped(euint128 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT128_TFHE });
     }
-    /// @notice performs the sealoutput function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -493,7 +495,7 @@ library FHE {
     function sealoutputTyped(euint256 value, bytes32 publicKey) internal pure returns (SealedUint memory) {
         return SealedUint({ data: sealoutput(value, publicKey), utype: Common.EUINT256_TFHE });
     }
-    /// @notice performs the sealoutput function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided 
+    /// @notice performs the sealoutputTyped function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided 
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param value Ciphertext to decrypt and seal
     /// @param publicKey Public Key that will receive the sealed plaintext
@@ -518,9 +520,9 @@ library FHE {
         uint256 gasDefaultValue;
     
         if (defaultValue) {
-           gasDefaultValue = 1;
+            gasDefaultValue = 1;
         } else {
-           gasDefaultValue = 0;
+            gasDefaultValue = 0;
         }
         
         uint256 unwrappedInput1 = ebool.unwrap(input1);
@@ -545,7 +547,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint8.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT8_TFHE, inputAsBytes, gasDefaultValue);
@@ -568,7 +570,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint16.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT16_TFHE, inputAsBytes, gasDefaultValue);
@@ -591,7 +593,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint32.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT32_TFHE, inputAsBytes, gasDefaultValue);
@@ -614,7 +616,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint64.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT64_TFHE, inputAsBytes, gasDefaultValue);
@@ -637,7 +639,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint128.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT128_TFHE, inputAsBytes, gasDefaultValue);
@@ -660,7 +662,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(defaultValue);
-      
+
         uint256 unwrappedInput1 = euint256.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EUINT256_TFHE, inputAsBytes, gasDefaultValue);
@@ -683,7 +685,7 @@ library FHE {
         uint256 gasDefaultValue;
     
         gasDefaultValue = uint256(uint160(defaultValue));
-      
+
         uint256 unwrappedInput1 = eaddress.unwrap(input1);
         bytes memory inputAsBytes = Common.toBytes(unwrappedInput1);
         uint256 result = FheOps(Precompiles.Fheos).decrypt(Common.EADDRESS_TFHE, inputAsBytes, gasDefaultValue);
@@ -3435,11 +3437,11 @@ library FHE {
     /// @dev Privacy: The input value is public, therefore the resulting ciphertext should be considered public until involved in an fhe operation
     /// @return A ciphertext representation of the input
     function asEbool(bool value, int32 securityZone) internal pure returns (ebool) {
-      uint256 sVal = 0;
-      if (value) {
-        sVal = 1;
-      }
-      return asEbool(sVal, securityZone);
+        uint256 sVal = 0;
+        if (value) {
+            sVal = 1;
+        }
+        return asEbool(sVal, securityZone);
     }
 }
 
@@ -3682,7 +3684,7 @@ library BindingsEbool {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type ebool
     /// @param rhs second input of type ebool
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -3691,7 +3693,7 @@ library BindingsEbool {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type ebool
     /// @param rhs second input of type ebool
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -3708,7 +3710,7 @@ library BindingsEbool {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type ebool
     /// @param rhs second input of type ebool
-/// @return the result of the and
+    /// @return the result of the and
     function and(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return FHE.and(lhs, rhs);
     }
@@ -3717,7 +3719,7 @@ library BindingsEbool {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type ebool
     /// @param rhs second input of type ebool
-/// @return the result of the or
+    /// @return the result of the or
     function or(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return FHE.or(lhs, rhs);
     }
@@ -3726,7 +3728,7 @@ library BindingsEbool {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type ebool
     /// @param rhs second input of type ebool
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(ebool lhs, ebool rhs) internal pure returns (ebool) {
         return FHE.xor(lhs, rhs);
     }
@@ -3769,7 +3771,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the add
+    /// @return the result of the add
     function add(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.add(lhs, rhs);
     }
@@ -3778,7 +3780,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the mul
+    /// @return the result of the mul
     function mul(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.mul(lhs, rhs);
     }
@@ -3787,7 +3789,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the div
+    /// @return the result of the div
     function div(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.div(lhs, rhs);
     }
@@ -3796,7 +3798,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the sub
+    /// @return the result of the sub
     function sub(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.sub(lhs, rhs);
     }
@@ -3805,7 +3807,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -3814,7 +3816,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -3831,7 +3833,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the and
+    /// @return the result of the and
     function and(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.and(lhs, rhs);
     }
@@ -3840,7 +3842,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the or
+    /// @return the result of the or
     function or(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.or(lhs, rhs);
     }
@@ -3849,7 +3851,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.xor(lhs, rhs);
     }
@@ -3858,7 +3860,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the gt
+    /// @return the result of the gt
     function gt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.gt(lhs, rhs);
     }
@@ -3867,7 +3869,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the gte
+    /// @return the result of the gte
     function gte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.gte(lhs, rhs);
     }
@@ -3876,7 +3878,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the lt
+    /// @return the result of the lt
     function lt(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.lt(lhs, rhs);
     }
@@ -3885,7 +3887,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the lte
+    /// @return the result of the lte
     function lte(euint8 lhs, euint8 rhs) internal pure returns (ebool) {
         return FHE.lte(lhs, rhs);
     }
@@ -3894,7 +3896,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the rem
+    /// @return the result of the rem
     function rem(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.rem(lhs, rhs);
     }
@@ -3903,7 +3905,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the max
+    /// @return the result of the max
     function max(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.max(lhs, rhs);
     }
@@ -3912,7 +3914,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the min
+    /// @return the result of the min
     function min(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.min(lhs, rhs);
     }
@@ -3921,7 +3923,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the shl
+    /// @return the result of the shl
     function shl(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.shl(lhs, rhs);
     }
@@ -3930,7 +3932,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the shr
+    /// @return the result of the shr
     function shr(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.shr(lhs, rhs);
     }
@@ -3939,7 +3941,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the rol
+    /// @return the result of the rol
     function rol(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.rol(lhs, rhs);
     }
@@ -3948,7 +3950,7 @@ library BindingsEuint8 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint8
     /// @param rhs second input of type euint8
-/// @return the result of the ror
+    /// @return the result of the ror
     function ror(euint8 lhs, euint8 rhs) internal pure returns (euint8) {
         return FHE.ror(lhs, rhs);
     }
@@ -3999,7 +4001,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the add
+    /// @return the result of the add
     function add(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.add(lhs, rhs);
     }
@@ -4008,7 +4010,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the mul
+    /// @return the result of the mul
     function mul(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.mul(lhs, rhs);
     }
@@ -4017,7 +4019,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the div
+    /// @return the result of the div
     function div(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.div(lhs, rhs);
     }
@@ -4026,7 +4028,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the sub
+    /// @return the result of the sub
     function sub(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.sub(lhs, rhs);
     }
@@ -4035,7 +4037,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4044,7 +4046,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -4061,7 +4063,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the and
+    /// @return the result of the and
     function and(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.and(lhs, rhs);
     }
@@ -4070,7 +4072,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the or
+    /// @return the result of the or
     function or(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.or(lhs, rhs);
     }
@@ -4079,7 +4081,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.xor(lhs, rhs);
     }
@@ -4088,7 +4090,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the gt
+    /// @return the result of the gt
     function gt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.gt(lhs, rhs);
     }
@@ -4097,7 +4099,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the gte
+    /// @return the result of the gte
     function gte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.gte(lhs, rhs);
     }
@@ -4106,7 +4108,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the lt
+    /// @return the result of the lt
     function lt(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.lt(lhs, rhs);
     }
@@ -4115,7 +4117,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the lte
+    /// @return the result of the lte
     function lte(euint16 lhs, euint16 rhs) internal pure returns (ebool) {
         return FHE.lte(lhs, rhs);
     }
@@ -4124,7 +4126,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the rem
+    /// @return the result of the rem
     function rem(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.rem(lhs, rhs);
     }
@@ -4133,7 +4135,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the max
+    /// @return the result of the max
     function max(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.max(lhs, rhs);
     }
@@ -4142,7 +4144,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the min
+    /// @return the result of the min
     function min(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.min(lhs, rhs);
     }
@@ -4151,7 +4153,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the shl
+    /// @return the result of the shl
     function shl(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.shl(lhs, rhs);
     }
@@ -4160,7 +4162,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the shr
+    /// @return the result of the shr
     function shr(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.shr(lhs, rhs);
     }
@@ -4169,7 +4171,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the rol
+    /// @return the result of the rol
     function rol(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.rol(lhs, rhs);
     }
@@ -4178,7 +4180,7 @@ library BindingsEuint16 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint16
     /// @param rhs second input of type euint16
-/// @return the result of the ror
+    /// @return the result of the ror
     function ror(euint16 lhs, euint16 rhs) internal pure returns (euint16) {
         return FHE.ror(lhs, rhs);
     }
@@ -4229,7 +4231,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the add
+    /// @return the result of the add
     function add(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.add(lhs, rhs);
     }
@@ -4238,7 +4240,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the mul
+    /// @return the result of the mul
     function mul(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.mul(lhs, rhs);
     }
@@ -4247,7 +4249,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the div
+    /// @return the result of the div
     function div(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.div(lhs, rhs);
     }
@@ -4256,7 +4258,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the sub
+    /// @return the result of the sub
     function sub(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.sub(lhs, rhs);
     }
@@ -4265,7 +4267,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4274,7 +4276,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -4291,7 +4293,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the and
+    /// @return the result of the and
     function and(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.and(lhs, rhs);
     }
@@ -4300,7 +4302,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the or
+    /// @return the result of the or
     function or(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.or(lhs, rhs);
     }
@@ -4309,7 +4311,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.xor(lhs, rhs);
     }
@@ -4318,7 +4320,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the gt
+    /// @return the result of the gt
     function gt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.gt(lhs, rhs);
     }
@@ -4327,7 +4329,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the gte
+    /// @return the result of the gte
     function gte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.gte(lhs, rhs);
     }
@@ -4336,7 +4338,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the lt
+    /// @return the result of the lt
     function lt(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.lt(lhs, rhs);
     }
@@ -4345,7 +4347,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the lte
+    /// @return the result of the lte
     function lte(euint32 lhs, euint32 rhs) internal pure returns (ebool) {
         return FHE.lte(lhs, rhs);
     }
@@ -4354,7 +4356,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the rem
+    /// @return the result of the rem
     function rem(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.rem(lhs, rhs);
     }
@@ -4363,7 +4365,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the max
+    /// @return the result of the max
     function max(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.max(lhs, rhs);
     }
@@ -4372,7 +4374,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the min
+    /// @return the result of the min
     function min(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.min(lhs, rhs);
     }
@@ -4381,7 +4383,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the shl
+    /// @return the result of the shl
     function shl(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.shl(lhs, rhs);
     }
@@ -4390,7 +4392,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the shr
+    /// @return the result of the shr
     function shr(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.shr(lhs, rhs);
     }
@@ -4399,7 +4401,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the rol
+    /// @return the result of the rol
     function rol(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.rol(lhs, rhs);
     }
@@ -4408,7 +4410,7 @@ library BindingsEuint32 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint32
     /// @param rhs second input of type euint32
-/// @return the result of the ror
+    /// @return the result of the ror
     function ror(euint32 lhs, euint32 rhs) internal pure returns (euint32) {
         return FHE.ror(lhs, rhs);
     }
@@ -4459,7 +4461,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the add
+    /// @return the result of the add
     function add(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.add(lhs, rhs);
     }
@@ -4468,7 +4470,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the mul
+    /// @return the result of the mul
     function mul(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.mul(lhs, rhs);
     }
@@ -4477,7 +4479,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the sub
+    /// @return the result of the sub
     function sub(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.sub(lhs, rhs);
     }
@@ -4486,7 +4488,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4495,7 +4497,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -4512,7 +4514,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the and
+    /// @return the result of the and
     function and(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.and(lhs, rhs);
     }
@@ -4521,7 +4523,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the or
+    /// @return the result of the or
     function or(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.or(lhs, rhs);
     }
@@ -4530,7 +4532,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.xor(lhs, rhs);
     }
@@ -4539,7 +4541,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the gt
+    /// @return the result of the gt
     function gt(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.gt(lhs, rhs);
     }
@@ -4548,7 +4550,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the gte
+    /// @return the result of the gte
     function gte(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.gte(lhs, rhs);
     }
@@ -4557,7 +4559,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the lt
+    /// @return the result of the lt
     function lt(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.lt(lhs, rhs);
     }
@@ -4566,7 +4568,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the lte
+    /// @return the result of the lte
     function lte(euint64 lhs, euint64 rhs) internal pure returns (ebool) {
         return FHE.lte(lhs, rhs);
     }
@@ -4575,7 +4577,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the max
+    /// @return the result of the max
     function max(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.max(lhs, rhs);
     }
@@ -4584,7 +4586,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the min
+    /// @return the result of the min
     function min(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.min(lhs, rhs);
     }
@@ -4593,7 +4595,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the shl
+    /// @return the result of the shl
     function shl(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.shl(lhs, rhs);
     }
@@ -4602,7 +4604,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the shr
+    /// @return the result of the shr
     function shr(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.shr(lhs, rhs);
     }
@@ -4611,7 +4613,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the rol
+    /// @return the result of the rol
     function rol(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.rol(lhs, rhs);
     }
@@ -4620,7 +4622,7 @@ library BindingsEuint64 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint64
     /// @param rhs second input of type euint64
-/// @return the result of the ror
+    /// @return the result of the ror
     function ror(euint64 lhs, euint64 rhs) internal pure returns (euint64) {
         return FHE.ror(lhs, rhs);
     }
@@ -4671,7 +4673,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the add
+    /// @return the result of the add
     function add(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.add(lhs, rhs);
     }
@@ -4680,7 +4682,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the sub
+    /// @return the result of the sub
     function sub(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.sub(lhs, rhs);
     }
@@ -4689,7 +4691,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4698,7 +4700,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -4715,7 +4717,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the and
+    /// @return the result of the and
     function and(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.and(lhs, rhs);
     }
@@ -4724,7 +4726,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the or
+    /// @return the result of the or
     function or(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.or(lhs, rhs);
     }
@@ -4733,7 +4735,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the xor
+    /// @return the result of the xor
     function xor(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.xor(lhs, rhs);
     }
@@ -4742,7 +4744,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the gt
+    /// @return the result of the gt
     function gt(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.gt(lhs, rhs);
     }
@@ -4751,7 +4753,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the gte
+    /// @return the result of the gte
     function gte(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.gte(lhs, rhs);
     }
@@ -4760,7 +4762,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the lt
+    /// @return the result of the lt
     function lt(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.lt(lhs, rhs);
     }
@@ -4769,7 +4771,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the lte
+    /// @return the result of the lte
     function lte(euint128 lhs, euint128 rhs) internal pure returns (ebool) {
         return FHE.lte(lhs, rhs);
     }
@@ -4778,7 +4780,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the max
+    /// @return the result of the max
     function max(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.max(lhs, rhs);
     }
@@ -4787,7 +4789,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the min
+    /// @return the result of the min
     function min(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.min(lhs, rhs);
     }
@@ -4796,7 +4798,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the shl
+    /// @return the result of the shl
     function shl(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.shl(lhs, rhs);
     }
@@ -4805,7 +4807,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the shr
+    /// @return the result of the shr
     function shr(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.shr(lhs, rhs);
     }
@@ -4814,7 +4816,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the rol
+    /// @return the result of the rol
     function rol(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.rol(lhs, rhs);
     }
@@ -4823,7 +4825,7 @@ library BindingsEuint128 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint128
     /// @param rhs second input of type euint128
-/// @return the result of the ror
+    /// @return the result of the ror
     function ror(euint128 lhs, euint128 rhs) internal pure returns (euint128) {
         return FHE.ror(lhs, rhs);
     }
@@ -4866,7 +4868,7 @@ library BindingsEuint256 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint256
     /// @param rhs second input of type euint256
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(euint256 lhs, euint256 rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4875,7 +4877,7 @@ library BindingsEuint256 {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type euint256
     /// @param rhs second input of type euint256
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(euint256 lhs, euint256 rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
@@ -4921,7 +4923,7 @@ library BindingsEaddress {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type eaddress
     /// @param rhs second input of type eaddress
-/// @return the result of the eq
+    /// @return the result of the eq
     function eq(eaddress lhs, eaddress rhs) internal pure returns (ebool) {
         return FHE.eq(lhs, rhs);
     }
@@ -4930,7 +4932,7 @@ library BindingsEaddress {
     /// @dev Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access
     /// @param lhs input of type eaddress
     /// @param rhs second input of type eaddress
-/// @return the result of the ne
+    /// @return the result of the ne
     function ne(eaddress lhs, eaddress rhs) internal pure returns (ebool) {
         return FHE.ne(lhs, rhs);
     }
