@@ -3,7 +3,7 @@
 ## SealedBool
 
 _Utility structure providing clients with type context of a sealed output string.
-Returned from `FHE.sealoutputTyped` and `sealTyped` within the bindings.
+Return type of `FHE.sealoutputTyped` and `sealTyped` within the binding libraries.
 `utype` representing Bool is 13. See `FHE.sol` for more._
 
 ```solidity

@@ -384,7 +384,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(ebool value, bytes32 publicKey) internal pure returns (struct SealedBool)
 ```
 
-performs the sealoutput function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a ebool ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -407,7 +407,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint8 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint8 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -430,7 +430,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint16 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint16 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -453,7 +453,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint32 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint32 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -476,7 +476,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint64 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint64 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -499,7 +499,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint128 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint128 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -522,7 +522,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(euint256 value, bytes32 publicKey) internal pure returns (struct SealedUint)
 ```
 
-performs the sealoutput function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a euint256 ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
@@ -545,7 +545,7 @@ _Pure in this function is marked as a hack/workaround - note that this function 
 function sealoutputTyped(eaddress value, bytes32 publicKey) internal pure returns (struct SealedAddress)
 ```
 
-performs the sealoutput function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided
+performs the sealoutputTyped function on a eaddress ciphertext. This operation returns the plaintext value, sealed for the public key provided
 
 _Pure in this function is marked as a hack/workaround - note that this function is NOT pure as fetches of ciphertexts require state access_
 
