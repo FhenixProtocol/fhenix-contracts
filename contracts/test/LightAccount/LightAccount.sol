@@ -4,8 +4,8 @@ pragma solidity ^0.8.20;
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {MessageHashUtils} from "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 import {SignatureChecker} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
-import {EIP712} from "@openzeppelin/contracts/utils/cryptography/EIP712.sol";
 import { ERC1271 } from "./LA_EIP1271.sol";
+import "hardhat/console.sol";
 
 /// @title A simple ERC-4337 compatible smart contract account with a designated owner account.
 /// @dev Like eth-infinitism's SimpleAccount, but with the following changes:
@@ -28,8 +28,8 @@ contract LightAccount is ERC1271 {
         CONTRACT_WITH_ADDR
     }
 
-    constructor() {
-        owner = msg.sender;
+    constructor(address _owner) {
+        owner = _owner;
     }
 
     /// @notice Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current
@@ -58,6 +58,7 @@ contract LightAccount is ERC1271 {
     /// @return True if the signature is valid and by the owner, false otherwise.
     function _isValidEOAOwnerSignature(bytes32 digest, bytes memory signature) internal view returns (bool) {
         address recovered = digest.recover(signature);
+        console.log("Eoa sig recovered", recovered, owner);
         return recovered == owner;
     }
 
@@ -80,10 +81,14 @@ contract LightAccount is ERC1271 {
         override
         returns (bool)
     {
+        console.log("_isValidSignature");
+        console.logBytes32(replaySafeHash);
+        console.logBytes(signature);
         if (signature.length < 1) {
             revert InvalidSignatureType();
         }
         uint8 signatureType = uint8(signature[0]);
+        console.log("Sig type", signatureType);
         if (signatureType == uint8(SignatureType.EOA)) {
             // EOA signature
             return _isValidEOAOwnerSignature(replaySafeHash, signature[1:]);

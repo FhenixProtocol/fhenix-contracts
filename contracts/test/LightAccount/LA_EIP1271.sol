@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 
 import { EIP712 } from "./LA_EIP712.sol";
+import "hardhat/console.sol";
 
 /// Inlined ERC1271 library for testing
 abstract contract ERC1271 is EIP712 {
@@ -24,6 +25,8 @@ abstract contract ERC1271 is EIP712 {
     /// @param signature Signature byte array associated with the data.
     /// @return Magic value `0x1626ba7e` if validation succeeded, else `0xffffffff`.
     function isValidSignature(bytes32 hash, bytes calldata signature) public view virtual returns (bytes4) {
+        console.log("Original hash");
+        console.logBytes32(hash);
         if (_isValidSignature(getMessageHash(abi.encode(hash)), signature)) {
             return _1271_MAGIC_VALUE_SUCCESS;
         }

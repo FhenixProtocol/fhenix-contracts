@@ -36,15 +36,16 @@
 		"@types/mocha": "^10.0.6",
 		"chai": "^4.3.7",
 		"ethers": "^6.11.1",
-		"fhenix-hardhat-docker": "0.3.0-alpha.2",
-		"fhenix-hardhat-plugin": "0.3.0-alpha.2",
+		"fhenix-hardhat-docker": "0.3.2",
+		"fhenix-hardhat-plugin": "0.3.2",
 		"fhenixjs": "0.4.0-alpha.6",
-		"hardhat-exposed": "^0.3.13",
 		"hardhat": "2.19.3",
+		"hardhat-exposed": "^0.3.13",
 		"mocha": "^10.3.0",
 		"solidity-docgen": "0.6.0-beta.36",
 		"ts-node": "^10.9.2",
 		"typechain": "^8.3.2",
-		"typescript": "^5.5.4"
+		"typescript": "^5.5.4",
+		"viem": "^2.21.50"
 	}
 }

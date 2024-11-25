@@ -96,7 +96,7 @@ abstract contract EIP712 is IERC5267 {
                     _hashedName,
                     _hashedVersion,
                     block.chainid,
-                    address(0)
+                    address(0) // FHENIX PermitV2 :: Replaced with zero address
                 )
             );
     }
@@ -145,7 +145,7 @@ abstract contract EIP712 is IERC5267 {
             _EIP712Name(),
             _EIP712Version(),
             block.chainid,
-            address(0),
+            address(0), // FHENIX PermitV2 :: Replaced with zero address
             bytes32(0),
             new uint256[](0)
         );

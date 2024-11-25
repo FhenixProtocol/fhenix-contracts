@@ -17,6 +17,11 @@ contract PermissionedV2Counter is PermissionedV2 {
         userCounter[msg.sender] = userCounter[msg.sender] + value;
     }
 
+    function addTo(address to, inEuint32 calldata encryptedValue) public {
+        euint32 value = FHE.asEuint32(encryptedValue);
+        userCounter[to] = userCounter[to] + value;
+    }
+
     function getCounter(address user) public view returns (uint256) {
         return FHE.decrypt(userCounter[user]);
     }

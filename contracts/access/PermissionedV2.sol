@@ -2,8 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.8.19 <0.9.0;
 
-import {SignatureChecker} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
+import {SignatureChecker, ECDSA} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import {EIP712} from "./EIP712.sol";
+import "hardhat/console.sol";
 
 /**
  * @dev Permission body that must be passed to a contract to allow access to sensitive data.
@@ -146,6 +147,11 @@ contract PermissionedV2 is EIP712 {
         // Expiration
         if (permission.expiration < block.timestamp)
             revert PermissionInvalid_Expired();
+
+        // address recovered = ECDSA.recover(_hashTypedDataV4(permission.issuerHash()), permission.issuerSignature);
+        // console.log("Recovered", recovered);
+        console.log("Issuer Hash");
+        console.logBytes32(_hashTypedDataV4(permission.issuerHash()));
 
         // Issuer signature
         if (

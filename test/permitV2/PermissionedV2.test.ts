@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 import { ethers, fhenixjs } from 'hardhat'
-import { time } from '@nomicfoundation/hardhat-network-helpers'
 
 import { createExpiration, getLastBlockTimestamp, getTokensFromFaucet } from './chain-utils'
 import { hours } from '@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time/duration'

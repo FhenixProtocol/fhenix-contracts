@@ -6,6 +6,9 @@ require('@nomiclabs/hardhat-truffle5')
 require('hardhat-exposed')
 import '@nomicfoundation/hardhat-ethers'
 import 'fhenix-hardhat-plugin'
+import 'fhenix-hardhat-docker'
+
+import './injectFheMocks'
 
 const config = {
 	defaultNetwork: 'localfhenix',
