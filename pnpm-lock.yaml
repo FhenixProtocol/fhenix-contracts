@@ -41,15 +41,18 @@ importers:
       chai:
         specifier: ^4.3.7
         version: 4.4.1
+      chalk:
+        specifier: ^4.1.2
+        version: 4.1.2
       ethers:
         specifier: ^6.11.1
         version: 6.13.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       fhenix-hardhat-docker:
-        specifier: 0.3.0-alpha.2
-        version: 0.3.0-alpha.2(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))
+        specifier: 0.3.2
+        version: 0.3.2(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))
       fhenix-hardhat-plugin:
-        specifier: 0.3.0-alpha.2
-        version: 0.3.0-alpha.2(bufferutil@4.0.8)(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
+        specifier: 0.3.2
+        version: 0.3.2(bufferutil@4.0.8)(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       fhenixjs:
         specifier: 0.4.0-alpha.6
         version: 0.4.0-alpha.6
@@ -1558,18 +1561,22 @@ packages:
   fastq@1.17.1:
     resolution: {integrity: sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==}
 
-  fhenix-hardhat-docker@0.3.0-alpha.2:
-    resolution: {integrity: sha512-mAV15OcYJEjDpOCufZurNv7y/0LMsGA6IOhcSlH/77NIl6ZBT6mUyWKlZNyXpuh+/el/i5xCUQfRnRAh55FVTg==}
+  fhenix-hardhat-docker@0.3.2:
+    resolution: {integrity: sha512-fqPzwt0EqxvVg5hr1LVJ8BKyvQeOFITWv+ieyQMtd0o4DYobKUw6g3t4o9OKMs4eT+V8/lAyGFjDLxD2BBRKhA==}
     peerDependencies:
-      hardhat: ^2.0.0
+      hardhat: ^2.11.0
 
-  fhenix-hardhat-plugin@0.3.0-alpha.2:
-    resolution: {integrity: sha512-/9tmEfZab2G65kQvitR1shH9KUzmMNXN+sXtX9jDSI8QiIzrb2d7jRJP7B5B0ps8/arfPsegO3jm4mDj6CpOEg==}
+  fhenix-hardhat-plugin@0.3.2:
+    resolution: {integrity: sha512-cH1rONJv8OKE+nKu/iViLyLsGHfAKuE1z+rMPFdPuDkFjzmeWEMF6qsQgjjrzrG9PuksRU3rAzuhsadCKp4Fmw==}
     peerDependencies:
-      hardhat: ^2.0.0
+      hardhat: ^2.11.0
 
   fhenixjs@0.4.0-alpha.6:
     resolution: {integrity: sha512-pFXw0nEsK9nf3dMUz+N2fMbHiknDlllEiKJpTqNKNwBuJSmkw3aBOGJ6zVZcWfKxL0/5Pv+nfDfcAmyRwUQNnA==}
+    engines: {node: '>=20.0.0'}
+
+  fhenixjs@0.4.1:
+    resolution: {integrity: sha512-q+IgMHFhTrXpsdrDox67Qw4InffCPYiNnXpn8cUThmfKMLGOhVzp4TgMc4xG5yajVroIw+Fle1C8SJILxG+BVQ==}
     engines: {node: '>=20.0.0'}
 
   fill-range@7.0.1:
@@ -5848,17 +5855,17 @@ snapshots:
     dependencies:
       reusify: 1.0.4
 
-  fhenix-hardhat-docker@0.3.0-alpha.2(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10)):
+  fhenix-hardhat-docker@0.3.2(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10)):
     dependencies:
       chalk: 4.1.2
       hardhat: 2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10)
 
-  fhenix-hardhat-plugin@0.3.0-alpha.2(bufferutil@4.0.8)(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10):
+  fhenix-hardhat-plugin@0.3.2(bufferutil@4.0.8)(hardhat@2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10):
     dependencies:
       axios: 1.7.2
       chalk: 4.1.2
       ethers: 6.13.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-      fhenixjs: 0.4.0-alpha.6
+      fhenixjs: 0.4.1
       hardhat: 2.19.3(bufferutil@4.0.8)(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.5.4))(typescript@5.5.4)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
@@ -5866,6 +5873,12 @@ snapshots:
       - utf-8-validate
 
   fhenixjs@0.4.0-alpha.6:
+    dependencies:
+      '@types/node': 20.17.6
+      tweetnacl: 1.0.3
+      tweetnacl-util: 0.15.1
+
+  fhenixjs@0.4.1:
     dependencies:
       '@types/node': 20.17.6
       tweetnacl: 1.0.3

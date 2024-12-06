@@ -6,24 +6,265 @@ library Precompiles {
 }
 
 contract MockFheOps {
-    /*
-    FheUint8 = 0
-    FheUint16 = 1
-    FheUint32 = 2
-    FheUint64 = 3
-    FheUint128 = 4
-    FheUint256 = 5
-    FheInt8 = 6
-    FheInt16 = 7
-    FheInt32 = 8
-    FheInt64 = 9
-    FheInt128 = 10
-    FheInt256 = 11
-    FheAddress = 12
-    FheBool = 13
-    */
+    using CTR for uint8;
+    using CTR for uint256;
+    using CTR for bool;
+    using CTR for bytes;
+    using CTR for bytes32;
 
-    function maxValue(uint8 utype) public pure returns (uint256) {
+    function trivialEncrypt(
+        bytes memory input,
+        uint8 toType,
+        int32
+    ) external pure returns (bytes memory) {
+        uint256 result = input.bytesToUint() % toType.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function add(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = (lhsHash.ctrDecrypt() + rhsHash.ctrDecrypt()) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function sealOutput(
+        uint8,
+        bytes memory ctHash,
+        bytes memory pk
+    ) external pure returns (string memory) {
+        string memory result = ctHash.ctrSeal(pk);
+        return result;
+    }
+
+    function verify(
+        uint8,
+        bytes memory input,
+        int32
+    ) external pure returns (bytes memory) {
+        return input;
+    }
+
+    function cast(
+        uint8,
+        bytes memory input,
+        uint8 toType
+    ) external pure returns (bytes memory) {
+        uint256 result = input.ctrDecrypt() % toType.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function log(string memory s) external pure {}
+
+    function decrypt(
+        uint8,
+        bytes memory input,
+        uint256
+    ) external pure returns (uint256) {
+        return input.ctrDecrypt();
+    }
+
+    function lte(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) <= rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function sub(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = (lhsHash.ctrDecrypt() - rhsHash.ctrDecrypt()) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function mul(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = (lhsHash.ctrDecrypt() * rhsHash.ctrDecrypt()) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function lt(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) < rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function select(
+        uint8 utype,
+        bytes memory controlHash,
+        bytes memory ifTrueHash,
+        bytes memory ifFalseHash
+    ) external pure returns (bytes memory) {
+        bool control = controlHash.ctrDecrypt(utype) == 1 ? true : false;
+        return control ? ifTrueHash : ifFalseHash;
+    }
+
+    function req(
+        uint8 utype,
+        bytes memory input
+    ) external pure returns (bytes memory) {
+        require(input.ctrDecrypt(utype) != 0);
+        return input;
+    }
+
+    function div(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = (lhsHash.ctrDecrypt() / rhsHash.ctrDecrypt()) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function gt(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) > rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function gte(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) >= rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function rem(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = (lhsHash.ctrDecrypt() % rhsHash.ctrDecrypt()) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+
+    function and(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bytes32 result = bytes32(lhsHash.ctrDecrypt(utype)) & bytes32(rhsHash.ctrDecrypt(utype));
+        return result.ctrEncrypt();
+    }
+
+    function or(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bytes32 result = bytes32(lhsHash.ctrDecrypt(utype)) | bytes32(rhsHash.ctrDecrypt(utype));
+        return result.ctrEncrypt();
+    }
+
+    function xor(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bytes32 result = bytes32(lhsHash.ctrDecrypt(utype)) ^ bytes32(rhsHash.ctrDecrypt(utype));
+        return result.ctrEncrypt();
+    }
+
+    function eq(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) == rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function ne(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) != rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function min(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) >= rhsHash.ctrDecrypt(utype);
+        return result ? rhsHash : lhsHash;
+    }
+
+    function max(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        bool result = lhsHash.ctrDecrypt(utype) >= rhsHash.ctrDecrypt(utype);
+        return result ? lhsHash : rhsHash;
+    }
+
+    function shl(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = lhsHash.ctrDecrypt(utype) << rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function shr(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 result = lhsHash.ctrDecrypt(utype) >> rhsHash.ctrDecrypt(utype);
+        return result.ctrEncrypt();
+    }
+
+    function not(
+        uint8 utype,
+        bytes memory value
+    ) external pure returns (bytes memory) {
+        bytes32 result = ~bytes32(value.ctrDecrypt(utype));
+        return result.ctrEncrypt();
+    }
+
+    function getNetworkPublicKey(int32) external pure returns (bytes memory) {
+        return CTR.key();
+    }
+
+    function random(
+        uint8 utype,
+        uint64,
+        int32
+    ) external view returns (bytes memory) {
+        uint256 result = uint256(keccak256(abi.encode(block.timestamp))) % utype.maxValue();
+        return result.ctrEncrypt();
+    }
+}
+
+library CTR {
+    function key() internal pure returns (bytes memory) {
+        return abi.encodePacked("deadbeef");
+    }
+
+    function maxValue(uint8 utype) internal pure returns (uint256) {
         uint256 result = 0;
         if (utype == 0) {
             result = uint256(type(uint8).max) + 1;
@@ -48,15 +289,104 @@ contract MockFheOps {
         return result;
     }
 
+    // CTR ENCRYPTION
+
+    // Mock encryption using CTR Encryption
+    // https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)
+    // ctrSymmetricEncrypt(ctrSymmetricEncrypt(5, key), key) = 5
+    function ctrSymmetricEncrypt(
+        bytes memory data,
+        bytes memory _key
+    ) internal pure returns (bytes memory result) {
+        // Store data length on stack for later use
+        uint256 length = data.length;
+
+        assembly {
+            // Set result to free memory pointer
+            result := mload(0x40)
+            // Increase free memory pointer by length + 32
+            mstore(0x40, add(add(result, length), 32))
+            // Set result length
+            mstore(result, length)
+        }
+
+        // Iterate over the data stepping by 32 bytes
+        for (uint256 i = 0; i < length; i += 32) {
+
+        // Generate hash of the key and offset
+        bytes memory packed = abi.encodePacked(_key, i);
+        bytes32 hash = keccak256(packed);
+
+        bytes32 chunk;
+        assembly {
+            // Read 32-bytes data chunk
+            chunk := mload(add(data, add(i, 32)))
+        }
+        // XOR the chunk with hash
+        chunk ^= hash;
+        assembly {
+            // Write 32-byte encrypted chunk
+            mstore(add(result, add(i, 32)), chunk)
+        }
+        }
+    }
+    
+    function ctrEncrypt(
+        uint256 data
+    ) internal pure returns (bytes memory) {
+        return ctrSymmetricEncrypt(uint256ToBytes(data), key());
+    }
+
+    function ctrEncrypt(
+        bool data
+    ) internal pure returns (bytes memory) {
+        return ctrEncrypt(data ? 1 : 0);
+    }
+
+    function ctrEncrypt(
+        bytes memory data
+    ) internal pure returns (bytes memory) {
+        return ctrSymmetricEncrypt(data, key());
+    }
+
+    function ctrEncrypt(
+        bytes32 data
+    ) internal pure returns (bytes memory) {
+        return ctrSymmetricEncrypt(bytes32ToBytes(data), key());
+    }
+    
+    function ctrDecrypt(
+        bytes memory data
+    ) internal pure returns (uint256) {
+        return bytesToUint(ctrSymmetricEncrypt(data, key()));
+    }
+
+    function ctrDecrypt(
+        bytes memory data,
+        uint8 utype
+    ) internal pure returns (uint256) {
+        return ctrDecrypt(data) % maxValue(utype);
+    }
+
+    function ctrSeal(
+        bytes memory data,
+        bytes memory pk
+    ) internal pure returns (string memory) {
+        bytes memory decrypted = ctrSymmetricEncrypt(data, key());
+        bytes memory reencrypted = ctrSymmetricEncrypt(decrypted, pk);
+        return bytesToHexString(reencrypted);
+    }
+
+    // Conversion utils
+
     function bytes32ToBytes(
-        bytes32 input,
-        uint8
+        bytes32 input
     ) internal pure returns (bytes memory) {
         return bytes.concat(input);
     }
 
     //For converting back to bytes
-    function uint256ToBytes(uint256 value) public pure returns (bytes memory) {
+    function uint256ToBytes(uint256 value) internal pure returns (bytes memory) {
         bytes memory result = new bytes(32);
 
         assembly {
@@ -66,312 +396,27 @@ contract MockFheOps {
         return result;
     }
 
-    function boolToBytes(bool value) public pure returns (bytes memory) {
-        bytes memory result = new bytes(1);
-
-        if (value) {
-            result[0] = 0x01;
-        } else {
-            result[0] = 0x00;
-        }
-
-        return result;
-    }
-
     //for unknown size of bytes - we could instead just encode it as bytes32 because it's always uint256 but for now lets keep it like this
     function bytesToUint(
         bytes memory b
-    ) internal pure virtual returns (uint256) {
+    ) internal pure returns (uint256) {
         require(b.length <= 32, "Bytes length exceeds 32.");
-        return
-            abi.decode(
-                abi.encodePacked(new bytes(32 - b.length), b),
-                (uint256)
-            );
+        return abi.decode(
+            abi.encodePacked(new bytes(32 - b.length), b),
+            (uint256)
+        );
     }
 
-    function bytesToBool(bytes memory b) internal pure virtual returns (bool) {
-        require(b.length <= 32, "Bytes length exceeds 32.");
-        uint8 value = uint8(b[0]);
-        return value != 0;
-    }
+    function bytesToHexString(bytes memory data) public pure returns (string memory) {
+        bytes memory converted = new bytes(data.length * 2);
 
-    function trivialEncrypt(
-        bytes memory input,
-        uint8 toType,
-        int32
-    ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(input);
-        return bytes32ToBytes(result, toType);
-    }
+        bytes memory _base = "0123456789abcdef";
 
-    function add(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) + bytesToUint(rhsHash)) %
-            maxValue(utype);
-        return uint256ToBytes(result);
-    }
-
-    function sealOutput(
-        uint8,
-        bytes memory ctHash,
-        bytes memory
-    ) external pure returns (string memory) {
-        return string(ctHash);
-    }
-
-    function verify(
-        uint8,
-        bytes memory input,
-        int32
-    ) external pure returns (bytes memory) {
-        return input;
-    }
-
-    function cast(
-        uint8,
-        bytes memory input,
-        uint8 toType
-    ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(input);
-        return bytes32ToBytes(result, toType);
-    }
-
-    function log(string memory s) external pure {}
-
-    function decrypt(
-        uint8,
-        bytes memory input,
-        uint256
-    ) external pure returns (uint256) {
-        uint256 result = bytesToUint(input);
-        return result;
-    }
-
-    function lte(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) <=
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function sub(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) - bytesToUint(rhsHash)) %
-            maxValue(utype);
-        return uint256ToBytes(result);
-    }
-
-    function mul(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) * bytesToUint(rhsHash)) %
-            maxValue(utype);
-        return uint256ToBytes(result);
-    }
-
-    function lt(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) <
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function select(
-        uint8,
-        bytes memory controlHash,
-        bytes memory ifTrueHash,
-        bytes memory ifFalseHash
-    ) external pure returns (bytes memory) {
-        bool control = bytesToBool(controlHash);
-        if (control) return ifTrueHash;
-        return ifFalseHash;
-    }
-
-    function req(
-        uint8,
-        bytes memory input
-    ) external pure returns (bytes memory) {
-        bool condition = (bytesToUint(input) != 0);
-        require(condition);
-        return input;
-    }
-
-    function div(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) / bytesToUint(rhsHash)) %
-            maxValue(utype);
-        return uint256ToBytes(result);
-    }
-
-    function gt(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) >
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function gte(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) >=
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function rem(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) % bytesToUint(rhsHash)) %
-            maxValue(utype);
-        return uint256ToBytes(result);
-    }
-
-    function and(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(lhsHash) & bytes32(rhsHash);
-        return bytes32ToBytes(result, utype);
-    }
-
-    function or(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(lhsHash) | bytes32(rhsHash);
-        return bytes32ToBytes(result, utype);
-    }
-
-    function xor(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bytes32 result = bytes32(lhsHash) ^ bytes32(rhsHash);
-        return bytes32ToBytes(result, utype);
-    }
-
-    function eq(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) ==
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function ne(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) !=
-            (bytesToUint(rhsHash) % maxValue(utype));
-        return boolToBytes(result);
-    }
-
-    function min(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) >=
-            (bytesToUint(rhsHash) % maxValue(utype));
-        if (result == true) {
-            return rhsHash;
+        for (uint256 i = 0; i < data.length; i++) {
+            converted[i * 2] = _base[uint8(data[i]) / _base.length];
+            converted[i * 2 + 1] = _base[uint8(data[i]) % _base.length];
         }
-        return lhsHash;
-    }
 
-    function max(
-        uint8 utype,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        bool result = (bytesToUint(lhsHash) % maxValue(utype)) >=
-            (bytesToUint(rhsHash) % maxValue(utype));
-        if (result == true) {
-            return lhsHash;
-        }
-        return rhsHash;
-    }
-
-    function shl(
-        uint8,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 lhs = bytesToUint(lhsHash);
-        uint256 rhs = bytesToUint(rhsHash);
-
-        uint256 result = lhs << rhs;
-
-        return uint256ToBytes(result);
-    }
-
-    function shr(
-        uint8,
-        bytes memory lhsHash,
-        bytes memory rhsHash
-    ) external pure returns (bytes memory) {
-        uint256 lhs = bytesToUint(lhsHash);
-        uint256 rhs = bytesToUint(rhsHash);
-
-        uint256 result = lhs >> rhs;
-
-        return uint256ToBytes(result);
-    }
-
-    function not(
-        uint8 utype,
-        bytes memory value
-    ) external pure returns (bytes memory) {
-        bytes32 result = ~bytes32(value);
-        return bytes32ToBytes(result, utype);
-    }
-
-    function getNetworkPublicKey(int32) external pure returns (bytes memory) {
-        string
-            memory x = "((-(-_(-_-)_-)-)) You've stepped into the wrong neighborhood pal.";
-        return bytes(x);
-    }
-
-    function random(
-        uint8 utype,
-        uint64,
-        int32
-    ) external view returns (bytes memory) {
-        return
-            uint256ToBytes(
-                uint(keccak256(abi.encode(block.timestamp))) % maxValue(utype)
-            );
+        return string(abi.encodePacked("0x", converted));
     }
 }
