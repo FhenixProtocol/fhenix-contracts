@@ -437,11 +437,13 @@ describe('PermissionedV2', function () {
 	// =================================
 
 	describe('Misc', async () => {
-		it('`msg.sender` irrelevant to returned data', async () => {
+		it.only('`msg.sender` irrelevant to returned data', async () => {
 			const { signer, bob, ada, counter1, counter1Address } = await permissionedV2Fixture()
 
-			await counter1.connect(bob).add(await fhenixjs.encrypt_uint32(5))
-			await counter1.connect(ada).add(await fhenixjs.encrypt_uint32(3))
+			const bobData = ctrSymmetricEncrypt(solidityPacked(['uint'], [5]), ctrKey())
+			console.log({ bobData })
+			await counter1.connect(bob).add({ data: bobData, securityZone: 0 })
+			await counter1.connect(ada).add({ data: ctrSymmetricEncrypt(solidityPacked(['uint'], [3]), ctrKey()), securityZone: 0 })
 
 			// Bob permission - accesses bob's data
 			const permit = await generatePermitV2(
@@ -455,6 +457,10 @@ describe('PermissionedV2', function () {
 			const permission = extractPermissionV2(permit)
 
 			const sealedNoSigner = await counter1.getCounterPermitSealed(permission)
+
+			const unsealedTest = ctrSymmetricEncrypt(sealedNoSigner, `0x${permit.sealingPair.publicKey}`)
+			console.log('bob unsealed', unsealedTest)
+
 			expect(permit.sealingPair.unseal(sealedNoSigner)).to.eq(5, "No signer - Returns Bob's data")
 
 			const sealedBobSigner = await counter1.connect(bob).getCounterPermitSealed(permission)
