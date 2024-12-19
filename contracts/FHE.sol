@@ -180,10 +180,6 @@ library Impl {
 }
 
 library FHE {
-    euint8 public constant NIL8 = euint8.wrap(0);
-    euint16 public constant NIL16 = euint16.wrap(0);
-    euint32 public constant NIL32 = euint32.wrap(0);
-
     // Return true if the encrypted integer is initialized and false otherwise.
     function isInitialized(ebool v) internal pure returns (bool) {
         return ebool.unwrap(v) != 0;
