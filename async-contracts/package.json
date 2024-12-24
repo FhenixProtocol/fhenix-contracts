@@ -1,0 +1,28 @@
+{
+	"name": "@fhenixprotocol/async-contracts",
+	"description": "Smart Contract Library for the Async Fhenix CoFHE with FHE primitives",
+	"version": "0.0.1",
+	"author": {
+		"name": "FhenixProtocol",
+		"url": "https://github.com/fhenixprotocol/fhenix-contracts"
+	},
+	"files": [
+		"AsyncFHE.sol",
+		"ICofhe.sol"
+	],
+	"keywords": [
+		"blockchain",
+		"ethereum",
+		"smart-contracts",
+		"solidity",
+		"FHE",
+		"encryption",
+		"privacy"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@openzeppelin/contracts": "^5.0.0"
+	}
+}
