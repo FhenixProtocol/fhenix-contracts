@@ -1,8 +1,9 @@
 name: Publish Cofhe Contracts Package to npmjs
 on:
   pull_request:
+  push:
     branches:
-      - async_contracts 
+      - async_contracts    
     types: [published]
     paths:
       - "cofhe-contracts/**"
