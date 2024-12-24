@@ -1,9 +1,9 @@
-name: Publish Package to npmjs
+name: Publish Async Contracts Package to npmjs
 on:
   release:
     types: [published]
     paths:
-      - "contracts/**"
+      - "cofhe-contracts/**"
 
 jobs:
   publish:
@@ -21,14 +21,13 @@ jobs:
       - name: Install deps
         run: pnpm install --frozen-lockfile
       - name: Set publishing config
-        run: cd contracts && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
+        run: cd cofhe-contracts && pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-      - run: cp README.md contracts/README.md
       
       - name: Read package version
         id: package_version
-        run: echo "VERSION=$(jq -r .version < ./contracts/package.json)" >> $GITHUB_ENV
+        run: echo "VERSION=$(jq -r .version < ./cofhe-contracts/package.json)" >> $GITHUB_ENV
 
       - name: Determine prerelease tag
         id: prerelease_check
@@ -38,4 +37,4 @@ jobs:
           else
             echo "PRERELEASE=" >> $GITHUB_ENV
           fi
-      - run: cd contracts && pnpm publish --no-git-checks ${{ env.PRERELEASE }}
+      - run: cd cofhe-contracts && pnpm publish --no-git-checks ${{ env.PRERELEASE }}
