@@ -1,4 +1,4 @@
-name: Publish Async Contracts Package to npmjs
+name: Publish Cofhe Contracts Package to npmjs
 on:
   release:
     types: [published]
