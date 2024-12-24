@@ -1,5 +1,5 @@
 {
-	"name": "@fhenixprotocol/async-contracts",
+	"name": "@fhenixprotocol/cofhe-contracts",
 	"description": "Smart Contract Library for the CoFHE with FHE primitives",
 	"version": "0.0.1",
 	"author": {
@@ -7,7 +7,7 @@
 		"url": "https://github.com/fhenixprotocol/fhenix-contracts"
 	},
 	"files": [
-		"AsyncFHE.sol",
+		"FHE.sol",
 		"ICofhe.sol"
 	],
 	"keywords": [
