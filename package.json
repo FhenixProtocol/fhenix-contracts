@@ -12,7 +12,8 @@
 		"test": "hardhat test"
 	},
 	"files": [
-		"contracts"
+		"contracts",
+		"cofhe-contracts"
 	],
 	"keywords": [
 		"blockchain",
