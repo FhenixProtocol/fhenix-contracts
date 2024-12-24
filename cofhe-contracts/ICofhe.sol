@@ -1,13 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.25 <0.9.0;
 
-struct CiphertextKey {
-    bool     isTriviallyEncrypted;
-    uint8   uintType;
-    int32    securityZone;
-    uint256  hash;
-}
-
 // Order is set as in fheos/precompiles/types/types.go
 enum FunctionId {
     _0,             // 0 - GetNetworkKey
@@ -67,7 +60,6 @@ library Utils {
     uint8 internal constant EUINT128_TFHE = 4;
     uint8 internal constant EUINT256_TFHE = 5;
     uint8 internal constant EADDRESS_TFHE = 12;
-    // uint8 internal constant INT_BGV = 12;
     uint8 internal constant EBOOL_TFHE = 13;
 
     function functionIdToString(FunctionId _functionId) internal pure returns (string memory) {
