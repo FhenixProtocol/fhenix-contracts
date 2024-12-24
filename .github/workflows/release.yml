@@ -2,9 +2,6 @@ name: Publish Package to npmjs
 on:
   release:
     types: [published]
-    paths:
-      - "contracts/**"
-
 jobs:
   publish:
     runs-on: ubuntu-latest
