@@ -11,7 +11,7 @@ Solidity contracts for working with FHE smart contract on Fhenix.
 
 Need help getting started? Check out the [fhenix documentation](https://docs.fhenix.io)!
 
-These contracts are still under heavy constructions and will be changing frequently. Consider binding your contracts to a specific version, and keep an eye on the [changelog](https://github.com/FhenixProtocol/fhenix-contracts/CHANGELOG.md)
+These contracts are still under heavy constructions and will be changing frequently. Consider binding your contracts to a specific version, and keep an eye on the [changelog](CHANGELOG.md)
 
 ## Install
 
