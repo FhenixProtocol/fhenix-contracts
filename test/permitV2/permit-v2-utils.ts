@@ -82,7 +82,7 @@ export const generatePermitV2 = async (
 		signer = customSigner
 	}
 
-	const chainId = await requestMethod(provider, 'eth_chainId', [])
+	const chainId = parseInt(await requestMethod(provider, 'eth_chainId', []))
 
 	const keypair = await GenerateSealingKey()
 
@@ -105,7 +105,7 @@ export const generatePermitV2 = async (
 		contracts,
 		projects,
 		recipient,
-		validatorId,
+		validatorId: `${validatorId}`,
 		validatorContract,
 	}
 

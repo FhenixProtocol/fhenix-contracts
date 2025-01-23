@@ -3,6 +3,7 @@ pragma solidity >=0.8.13 <0.9.0;
 
 import "../FHE.sol";
 import {PermissionedV2, PermissionV2} from "../access/PermissionedV2.sol";
+import "hardhat/console.sol";
 
 contract PermissionedV2Counter is PermissionedV2 {
     mapping(address => euint32) private userCounter;
@@ -30,6 +31,7 @@ contract PermissionedV2Counter is PermissionedV2 {
     function getCounterPermitSealed(
         PermissionV2 memory permission
     ) public view withPermission(permission) returns (string memory) {
+        console.log("trigger permit sealed");
         return
             FHE.sealoutput(
                 userCounter[permission.issuer],
