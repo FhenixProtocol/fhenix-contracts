@@ -2,8 +2,8 @@
 
 [npm]: https://www.npmjs.org/package/@fhenixprotcol/contracts
 [npm-badge]: https://img.shields.io/npm/v/@fhenixprotocol/contracts.svg
-[gha]: https://github.com/fhenixprotocol/fheos/actions
-[gha-badge]: https://github.com/fhenixprotocol/fheos/actions/workflows/Test.yml/badge.svg
+[gha]: https://github.com/FhenixProtocol/fhenix-contracts/actions
+[gha-badge]: https://github.com/FhenixProtocol/fhenix-contracts/actions/workflows/docgen.yml/badge.svg
 [license]: https://opensource.org/licenses/MIT
 [license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
 
