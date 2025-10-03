@@ -1,4 +1,4 @@
-# Fhenix Contracts [![NPM Package][npm-badge]][npm] [![Github Actions][gha-badge]][gha] [![License: MIT][license-badge]][license]
+# Fhenix Contracts [![NPM Package][npm-badge]][npm] [![Github Actions][gha-badge]][gha] [![License: MIT][license-badge]][license] ![Twitter Follow](https://img.shields.io/twitter/follow/FhenixIO?style=social)
 
 [npm]: https://www.npmjs.org/package/@fhenixprotcol/contracts
 [npm-badge]: https://img.shields.io/npm/v/@fhenixprotocol/contracts.svg
