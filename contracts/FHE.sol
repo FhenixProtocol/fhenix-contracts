@@ -79,6 +79,8 @@ struct SealedAddress {
 
 
 library Common {
+    error InvalidPrecompileOutput();
+
     // Values used to communicate types to the runtime.
     // Must match values defined in warp-drive protobufs for everything to 
     // make sense
@@ -128,6 +130,16 @@ library Common {
         b = new bytes(32);
         assembly { mstore(add(b, 32), x) }
     }
+
+    function getValue(bytes memory a) internal pure returns (uint256 value) {
+        if (a.length < 32) {
+            revert InvalidPrecompileOutput();
+        }
+
+        assembly {
+            value := mload(add(a, 0x20))
+        }
+    }
 }
 
 library Impl {
@@ -155,9 +167,7 @@ library Impl {
     }
 
     function getValue(bytes memory a) internal pure returns (uint256 value) {
-        assembly {
-            value := mload(add(a, 0x20))
-        }
+        return Common.getValue(a);
     }
 
     function trivialEncrypt(uint256 value, uint8 toType, int32 securityZone) internal pure returns (uint256 result) {
@@ -224,9 +234,7 @@ library FHE {
     }
 
     function getValue(bytes memory a) private pure returns (uint256 value) {
-        assembly {
-            value := mload(add(a, 0x20))
-        }
+        return Common.getValue(a);
     }
     
     function mathHelper(
