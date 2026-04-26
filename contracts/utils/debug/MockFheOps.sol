@@ -40,7 +40,7 @@ contract MockFheOps {
         } else if (utype == 12) {
             result = uint256(type(uint160).max) + 1; //address
         } else if (utype == 13) {
-            result = 1; //bool (we want anything non-zero to be true)
+            result = 2; //bool (values 0 or 1; modulo 2 ensures non-zero results are possible)
         } else {
             revert("Unsupported type");
         }
