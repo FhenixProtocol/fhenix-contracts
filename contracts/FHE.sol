@@ -155,6 +155,7 @@ library Impl {
     }
 
     function getValue(bytes memory a) internal pure returns (uint256 value) {
+        require(a.length >= 32, "FHE: precompile returned insufficient bytes");
         assembly {
             value := mload(add(a, 0x20))
         }
@@ -224,6 +225,7 @@ library FHE {
     }
 
     function getValue(bytes memory a) private pure returns (uint256 value) {
+        require(a.length >= 32, "FHE: precompile returned insufficient bytes");
         assembly {
             value := mload(add(a, 0x20))
         }
