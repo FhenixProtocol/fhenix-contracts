@@ -96,7 +96,7 @@ contract PermissionedV2 is EIP712 {
     using PermissionV2Utils for PermissionV2;
 
     /// @notice Version of the fhenix permission signature
-    string public version = "v2.0.0";
+    string public constant version = "v2.0.0";
 
     /// @notice This contract's project identifier string. Used in permissions to grant access to all contracts with this identifier.
     string public project;
