@@ -38,7 +38,7 @@ contract FHERC721 is IFHERC721, Permissioned, ERC721 {
     function tokenPrivateData(
         uint256 tokenId,
         Permission memory auth
-    ) external view onlyPermitted(auth, _ownerOf(tokenId)) returns (string memory) {
+    ) external view onlyPermitted(auth, ownerOf(tokenId)) returns (string memory) {
         return FHE.sealoutput(_privateData[tokenId], auth.publicKey);
     }
 
