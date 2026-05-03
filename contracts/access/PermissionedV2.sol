@@ -260,11 +260,18 @@ library PermissionV2Utils {
         address addr,
         string memory proj
     ) internal pure returns (bool) {
-        for (uint256 i = 0; i < permission.projects.length; i++) {
-            if (
-                keccak256(abi.encodePacked(proj)) ==
-                keccak256(abi.encodePacked(permission.projects[i]))
-            ) return true;
+        // Only match by project identifier when the contract has a non-empty project string.
+        // An empty project means the contract opts out of project-based access control;
+        // matching "" would allow any permission that includes "" in its projects list to
+        // gain unintended access to every such contract.
+        bool hasProject = bytes(proj).length > 0;
+        if (hasProject) {
+            for (uint256 i = 0; i < permission.projects.length; i++) {
+                if (
+                    keccak256(abi.encodePacked(proj)) ==
+                    keccak256(abi.encodePacked(permission.projects[i]))
+                ) return true;
+            }
         }
         for (uint256 i = 0; i < permission.contracts.length; i++) {
             if (addr == permission.contracts[i]) return true;
