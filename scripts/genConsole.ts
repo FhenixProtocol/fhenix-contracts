@@ -164,7 +164,7 @@ library Console {
         _logAddress(p0);
     }
 `;
-// Generate and print the log functions for 2 to 4 parameters
+// Generate and print the log functions for 2 to 3 parameters
 for (let i = 2; i <= 3; i++) {
   output += generateLogFunctions(i);
 }
