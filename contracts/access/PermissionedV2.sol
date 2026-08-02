@@ -275,7 +275,12 @@ library PermissionV2Utils {
     function encodeArray(
         address[] memory items
     ) internal pure returns (bytes32) {
-        return keccak256(abi.encodePacked(items));
+        // FIX: EIP-712 requires 32-byte padded encoding for address (not encodePacked/20-byte)
+        bytes32[] memory result = new bytes32[](items.length);
+        for (uint256 i = 0; i < items.length; i++) {
+            result[i] = bytes32(uint256(uint160(items[i])));
+        }
+        return keccak256(abi.encodePacked(result));
     }
 
     function encodeArray(

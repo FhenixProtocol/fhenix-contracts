@@ -86,7 +86,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 
             it("doesn't transfer the requested value", async function () {
               const valueEnc = await fhenixjs.encrypt_uint128(value);
-              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+              await this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
 
               const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
               const balance = fhenixjs.unseal(this.token.address, balanceEnc);
@@ -112,7 +112,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 
             it("doesn't transfer the requested value", async function () {
               const valueEnc = await fhenixjs.encrypt_uint128(value);
-              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+              await this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
 
               const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
               const balance = fhenixjs.unseal(this.token.address, balanceEnc);
@@ -134,7 +134,7 @@ function shouldBehaveLikeFHERC20(initialSupply, accounts, opts = {}) {
 
             it("doesn't transfer the requested value", async function () {
               const valueEnc = await fhenixjs.encrypt_uint128(value);
-              this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
+              await this.token.transferFromEncrypted(tokenOwner, to, valueEnc, { from: spender });
 
               const balanceEnc = await this.token.balanceOfEncrypted(tokenOwner, await this.getPermission(tokenOwner))
               const balance = fhenixjs.unseal(this.token.address, balanceEnc);
