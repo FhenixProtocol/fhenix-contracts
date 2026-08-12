@@ -4,7 +4,7 @@ install:
 
 .PHONY: gen_console
 gen_console: install
-	npx tsc ./scripts/genConsole.ts
+	npx ts-node ./scripts/genConsole.ts
 
 
 .PHONY: gen

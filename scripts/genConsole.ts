@@ -51,9 +51,9 @@ const generateLogFunctions = (n: number): string => {
       .join(", ");
     const methodName = `log(${params})`;
 
-    // Generating external pure function strings
+    // Generating internal pure function strings
     output +=
-      `\tfunction ${methodName} external pure {\n` +
+      `\tfunction ${methodName} internal pure {\n` +
       `    \t_logImpl${n}Params(${conversion});\n` +
       `\t}\n\n`;
   });
@@ -80,7 +80,7 @@ function generateCombinations(types: string[], n: number): string[][] {
 let output = `// SPDX-License-Identifier: MIT
 pragma solidity >=0.8.19 <0.9.0;
 
-import {FheOps, Precompiles} from "./FheOS.sol";
+import {FheOps, Precompiles} from "../../FheOS.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
 library Console {
@@ -140,27 +140,27 @@ library Console {
         _logImpl(_addressToString(p0));
     }
 
-    function logBytes(bytes memory p0) external pure {
+    function logBytes(bytes memory p0) internal pure {
         _logImpl(string(p0));
     }
 
-    function log(int256 p0) external pure {
+    function log(int256 p0) internal pure {
         _logInt(p0);
     }
 
-    function log(uint256 p0) external pure {
+    function log(uint256 p0) internal pure {
         _logUint(p0);
     }
 
-    function log(string memory p0) external pure {
+    function log(string memory p0) internal pure {
        _logImpl(p0);
     }
 
-    function log(bool p0) external pure {
+    function log(bool p0) internal pure {
         _logBool(p0);
     }
 
-    function log(address p0) external pure {
+    function log(address p0) internal pure {
         _logAddress(p0);
     }
 `;
@@ -168,6 +168,6 @@ library Console {
 for (let i = 2; i <= 3; i++) {
   output += generateLogFunctions(i);
 }
-output += "}";
+output += "}\n";
 
-writeFileSync("./contracts/Console.sol", output);
+writeFileSync("./contracts/utils/debug/Console.sol", output);
