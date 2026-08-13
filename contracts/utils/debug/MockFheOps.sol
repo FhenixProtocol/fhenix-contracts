@@ -48,6 +48,26 @@ contract MockFheOps {
         return result;
     }
 
+    /// @dev Bit width of `utype`, needed by the rotate ops. Kept in sync with {maxValue},
+    /// which returns `2 ** bitWidth(utype)` for these types.
+    function bitWidth(uint8 utype) public pure returns (uint256) {
+        if (utype == 0) {
+            return 8;
+        } else if (utype == 1) {
+            return 16;
+        } else if (utype == 2) {
+            return 32;
+        } else if (utype == 3) {
+            return 64;
+        } else if (utype == 4) {
+            return 128;
+        } else if (utype == 12) {
+            return 160; //address
+        } else {
+            revert("Unsupported type");
+        }
+    }
+
     function bytes32ToBytes(
         bytes32 input,
         uint8
@@ -350,6 +370,46 @@ contract MockFheOps {
         return uint256ToBytes(result);
     }
 
+    function rol(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 width = bitWidth(utype);
+        uint256 lhs = bytesToUint(lhsHash) % maxValue(utype);
+        uint256 shift = bytesToUint(rhsHash) % width;
+
+        if (shift == 0) {
+            return uint256ToBytes(lhs);
+        }
+
+        // Masking the bits that move left keeps the shift inside `width`, so nothing is
+        // truncated at 256 bits before the wrapped bits are OR'd back in.
+        uint256 low = lhs % (1 << (width - shift));
+        uint256 result = (low << shift) | (lhs >> (width - shift));
+
+        return uint256ToBytes(result);
+    }
+
+    function ror(
+        uint8 utype,
+        bytes memory lhsHash,
+        bytes memory rhsHash
+    ) external pure returns (bytes memory) {
+        uint256 width = bitWidth(utype);
+        uint256 lhs = bytesToUint(lhsHash) % maxValue(utype);
+        uint256 shift = bytesToUint(rhsHash) % width;
+
+        if (shift == 0) {
+            return uint256ToBytes(lhs);
+        }
+
+        uint256 high = lhs % (1 << shift);
+        uint256 result = (lhs >> shift) | (high << (width - shift));
+
+        return uint256ToBytes(result);
+    }
+
     function not(
         uint8 utype,
         bytes memory value
@@ -373,5 +433,14 @@ contract MockFheOps {
             uint256ToBytes(
                 uint(keccak256(abi.encode(block.timestamp))) % maxValue(utype)
             );
+    }
+
+    function square(
+        uint8 utype,
+        bytes memory value
+    ) external pure returns (bytes memory) {
+        uint256 input = bytesToUint(value) % maxValue(utype);
+        uint256 result = (input * input) % maxValue(utype);
+        return uint256ToBytes(result);
     }
 }
