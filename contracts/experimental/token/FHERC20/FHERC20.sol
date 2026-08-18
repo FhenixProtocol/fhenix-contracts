@@ -53,7 +53,7 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
 
     function _spendAllowance(address owner, address spender, euint128 value) internal virtual returns (euint128) {
         euint128 currentAllowance = _allowanceEncrypted(owner, spender);
-        euint128 spent = FHE.min(currentAllowance, value);
+        euint128 spent = FHE.min(FHE.min(currentAllowance, value), _encBalances[owner]);
         _approve(owner, spender, (currentAllowance - spent));
 
         return spent;
