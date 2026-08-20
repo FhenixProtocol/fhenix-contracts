@@ -2944,7 +2944,7 @@ library FHE {
     /// @dev Calls the desired precompile and returns the hash of the ciphertext
     /// @param uintType the type of the random value to generate
     /// @param seed the seed to use to create a random value from
-    function random(uint8 uintType, uint32 seed) internal pure returns (uint256) {
+    function random(uint8 uintType, uint64 seed) internal pure returns (uint256) {
         return random(uintType, seed, 0);
     }
     /// @notice Generates a random value of a given type
