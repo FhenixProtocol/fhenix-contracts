@@ -260,11 +260,22 @@ library PermissionV2Utils {
         address addr,
         string memory proj
     ) internal pure returns (bool) {
-        for (uint256 i = 0; i < permission.projects.length; i++) {
-            if (
-                keccak256(abi.encodePacked(proj)) ==
-                keccak256(abi.encodePacked(permission.projects[i]))
-            ) return true;
+        // An empty project string means "no project identifier" (see PermissionedV2's
+        // constructor docs: "Use an empty string for no project identifier"). Without this
+        // guard, a contract configured with project == "" would match ANY permission that
+        // happens to include an empty string in `projects` -- whether that entry was put
+        // there deliberately or by a client-side bug/oversight -- silently granting access
+        // the issuer never intended to scope to that contract. Skipping empty strings on
+        // both sides restores the documented meaning: project-less contracts are only
+        // reachable via an explicit `contracts` entry.
+        if (bytes(proj).length > 0) {
+            for (uint256 i = 0; i < permission.projects.length; i++) {
+                if (
+                    bytes(permission.projects[i]).length > 0 &&
+                    keccak256(abi.encodePacked(proj)) ==
+                    keccak256(abi.encodePacked(permission.projects[i]))
+                ) return true;
+            }
         }
         for (uint256 i = 0; i < permission.contracts.length; i++) {
             if (addr == permission.contracts[i]) return true;
