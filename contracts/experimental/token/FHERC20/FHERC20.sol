@@ -41,6 +41,32 @@ contract FHERC20 is IFHERC20, ERC20, Permissioned {
         return true;
     }
 
+    /// @dev Atomically increase `spender`'s allowance by `addedValue`.
+    /// Prefer this (or {decreaseAllowanceEncrypted}) over {approveEncrypted} when changing a
+    /// non-zero allowance, to avoid the classic ERC-20 approve race.
+    function increaseAllowanceEncrypted(
+        address spender,
+        inEuint128 calldata addedValue
+    ) public virtual returns (bool) {
+        euint128 current = _allowanceEncrypted(msg.sender, spender);
+        _approve(msg.sender, spender, current + FHE.asEuint128(addedValue));
+        return true;
+    }
+
+    /// @dev Atomically decrease `spender`'s allowance by `subtractedValue`.
+    /// Prefer this (or {increaseAllowanceEncrypted}) over {approveEncrypted} when changing a
+    /// non-zero allowance, to avoid the classic ERC-20 approve race.
+    function decreaseAllowanceEncrypted(
+        address spender,
+        inEuint128 calldata subtractedValue
+    ) public virtual returns (bool) {
+        euint128 current = _allowanceEncrypted(msg.sender, spender);
+        euint128 toSubtract = FHE.asEuint128(subtractedValue);
+        euint128 spent = FHE.min(current, toSubtract);
+        _approve(msg.sender, spender, current - spent);
+        return true;
+    }
+
     function _approve(address owner, address spender, euint128 value) internal {
         if (owner == address(0)) {
             revert ERC20InvalidApprover(address(0));

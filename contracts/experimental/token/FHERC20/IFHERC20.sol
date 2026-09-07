@@ -78,6 +78,27 @@ interface IFHERC20 {
     function approveEncrypted(address spender, inEuint128 calldata value) external returns (bool);
 
     /**
+     * @dev Atomically increases the allowance granted to `spender` by the caller by `addedValue`.
+     *
+     * This is an alternative to {approveEncrypted} that can be used as a mitigation for the
+     * problems described there (front-running an allowance change).
+     *
+     * Emits an {ApprovalEncrypted} event.
+     */
+    function increaseAllowanceEncrypted(address spender, inEuint128 calldata addedValue) external returns (bool);
+
+    /**
+     * @dev Atomically decreases the allowance granted to `spender` by the caller by `subtractedValue`.
+     * If `subtractedValue` exceeds the current allowance, the allowance is set to zero.
+     *
+     * This is an alternative to {approveEncrypted} that can be used as a mitigation for the
+     * problems described there (front-running an allowance change).
+     *
+     * Emits an {ApprovalEncrypted} event.
+     */
+    function decreaseAllowanceEncrypted(address spender, inEuint128 calldata subtractedValue) external returns (bool);
+
+    /**
      * @dev Moves a `value` amount of tokens from `from` to `to` using the
      * allowance mechanism. `value` is then deducted from the caller's
      * allowance. Accepts the value as inEuint128, more convenient for calls from EOAs.
