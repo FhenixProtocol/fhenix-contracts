@@ -12,16 +12,17 @@ jobs:
       contents: write
 
     steps:
-    - uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
-    - uses: actions/setup-node@v4
+    # No `ref:` is set on purpose: this workflow only runs on `push` to main, where
+    # `github.event.pull_request.head.ref` is always empty. Keeping the expression
+    # would make checkout depend on an untrusted branch name if the trigger changed.
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020  # v4
       with:
         node-version: '20.x'
         registry-url: 'https://registry.npmjs.org'
     
     - name: Install pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa  # v4
       with:
         version: 9
         run_install: false
@@ -32,7 +33,7 @@ jobs:
       run: |
         pnpm compile && pnpm docgen
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@4a2e02b36f31d8974a0d09d3bb9f3172aa2d0d0d  # v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: .
