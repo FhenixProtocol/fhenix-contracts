@@ -36,7 +36,9 @@ contract MockFheOps {
         } else if (utype == 4) {
             result = uint256(type(uint128).max) + 1;
         } else if (utype == 5) {
-            result = 1;
+            // euint256: 2^256 cannot be represented in uint256, so we use 0 as a sentinel
+            // meaning "no modulo" — callers must special-case utype == 5.
+            result = 0;
         } else if (utype == 12) {
             result = uint256(type(uint160).max) + 1; //address
         } else if (utype == 13) {
@@ -110,8 +112,11 @@ contract MockFheOps {
         bytes memory lhsHash,
         bytes memory rhsHash
     ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) + bytesToUint(rhsHash)) %
-            maxValue(utype);
+        uint256 lhs = bytesToUint(lhsHash);
+        uint256 rhs = bytesToUint(rhsHash);
+        uint256 mv  = maxValue(utype);
+        // [C-3 fix] euint256 uses sentinel 0 — skip modulo to preserve full uint256 range
+        uint256 result = (mv == 0) ? (lhs + rhs) : ((lhs + rhs) % mv);
         return uint256ToBytes(result);
     }
 
@@ -166,8 +171,14 @@ contract MockFheOps {
         bytes memory lhsHash,
         bytes memory rhsHash
     ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) - bytesToUint(rhsHash)) %
-            maxValue(utype);
+        uint256 lhs = bytesToUint(lhsHash);
+        uint256 rhs = bytesToUint(rhsHash);
+        uint256 mv  = maxValue(utype);
+        // [C-2 fix] Guard against underflow: mock uses modular (wrapping) semantics to
+        // match production FHE behaviour where subtraction wraps within the type's range.
+        uint256 raw = (lhs >= rhs) ? (lhs - rhs) : (mv - (rhs - lhs) % mv);
+        // [C-3 fix] euint256 sentinel 0 — skip modulo
+        uint256 result = (mv == 0) ? (lhs - rhs) : (raw % mv);
         return uint256ToBytes(result);
     }
 
@@ -176,8 +187,11 @@ contract MockFheOps {
         bytes memory lhsHash,
         bytes memory rhsHash
     ) external pure returns (bytes memory) {
-        uint256 result = (bytesToUint(lhsHash) * bytesToUint(rhsHash)) %
-            maxValue(utype);
+        uint256 lhs = bytesToUint(lhsHash);
+        uint256 rhs = bytesToUint(rhsHash);
+        uint256 mv  = maxValue(utype);
+        // [C-3 fix] euint256 sentinel 0 — skip modulo
+        uint256 result = (mv == 0) ? (lhs * rhs) : ((lhs * rhs) % mv);
         return uint256ToBytes(result);
     }
 
@@ -366,12 +380,18 @@ contract MockFheOps {
 
     function random(
         uint8 utype,
-        uint64,
+        uint64 seed,
         int32
     ) external view returns (bytes memory) {
-        return
-            uint256ToBytes(
-                uint(keccak256(abi.encode(block.timestamp))) % maxValue(utype)
-            );
+        // [C-1 fix] Incorporate seed and additional entropy sources so the output
+        // cannot be trivially predicted from block.timestamp alone.
+        // NOTE: This is a debug/mock implementation. For production use, employ a
+        // verifiable random function (VRF) rather than any onchain hash-based approach.
+        uint256 mv = maxValue(utype);
+        uint256 raw = uint(
+            keccak256(abi.encode(block.timestamp, block.prevrandao, seed, msg.sender))
+        );
+        // [C-3 fix] euint256 sentinel 0 — skip modulo
+        return uint256ToBytes(mv == 0 ? raw : raw % mv);
     }
 }
